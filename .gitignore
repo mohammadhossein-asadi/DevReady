@@ -23,6 +23,15 @@ node_modules
 # misc
 .DS_Store
 *.pem
+Thumbs.db
+*.log
+*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
 
 # debug
 npm-debug.log*
