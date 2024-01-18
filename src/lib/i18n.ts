@@ -20,6 +20,7 @@ export const dict = {
     "hero.title3": "ready.",
     "hero.subtitle":
       "A curated, bilingual library of {count}+ high-quality resources across 32 categories — from Frontend, Backend and System Design to AI & ML, Cyber Security, Game Dev, Blockchain, Soft Skills and every interview essential — in English and فارسی.",
+    "hero.persianDigits": "Persian digits (۰-۹) shown in FA locale.",
     "hero.cta1": "Explore resources",
     "hero.cta2": "View roadmap",
 
@@ -452,6 +453,7 @@ export const dict = {
     "hero.title3": "آماده برو.",
     "hero.subtitle":
       "کتابخانه‌ای منتخب و دوزبانه از بیش از {count} منبع باکیفیت در ۳۲ دسته — از فرانت‌اند، بک‌اند و طراحی سیستم تا هوش مصنوعی، امنیت سایبری، توسعه بازی، بلاکچین، مهارت‌های نرم و اصول مصاحبه — به انگلیسی و فارسی.",
+    "hero.persianDigits": "ارقام فارسی (۰-۹) در محیط فارسی نمایش داده می‌شوند.",
     "hero.cta1": "مشاهده منابع",
     "hero.cta2": "نقشه راه",
 
