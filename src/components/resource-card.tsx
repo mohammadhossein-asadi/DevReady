@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Info, Languages } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { SpotlightCard } from "@/components/aceternity/spotlight-card";
@@ -168,3 +169,7 @@ export function ResourceCard({
     </SpotlightCard>
   );
 }
+
+ResourceCard.displayName = "ResourceCard";
+
+export default memo(ResourceCard);
