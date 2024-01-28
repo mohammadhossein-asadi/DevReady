@@ -6,6 +6,7 @@ import {
   CircleUserRound,
   Flame,
   House,
+  Keyboard,
   LibraryBig,
   Map,
   Menu,
@@ -165,6 +166,16 @@ export function Header({ view, onNavigate }: HeaderProps) {
             </Button>
             <LanguageSwitcher />
             <ThemeToggle />
+            {/* Keyboard shortcuts hint */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-9 sm:size-10 hidden lg:flex"
+              aria-label={t("a11y.shortcuts")}
+              onClick={() => window.dispatchEvent(new CustomEvent("devready:shortcuts"))}
+            >
+              <Keyboard className="size-5" aria-hidden="true" />
+            </Button>
             {/* Mobile menu */}
             <Sheet>
               <SheetTrigger asChild>

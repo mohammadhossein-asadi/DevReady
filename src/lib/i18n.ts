@@ -434,6 +434,7 @@ export const dict = {
     "a11y.external": "(opens in a new tab)",
     "a11y.details": "View details",
     "a11y.breadcrumb": "Breadcrumb",
+    "a11y.shortcuts": "Keyboard shortcuts",
   },
 
   fa: {
@@ -865,6 +866,7 @@ export const dict = {
     "a11y.external": "(در تب جدید باز می‌شود)",
     "a11y.details": "مشاهده جزئیات",
     "a11y.breadcrumb": "مسیر صفحه",
+    "a11y.shortcuts": "کلیدهای میانبر",
   },
 } as const;
 
