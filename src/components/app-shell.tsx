@@ -17,7 +17,7 @@ import { ContributeView } from "@/components/views/contribute-view";
 import CommunityView from "@/components/views/community-view";
 import { AccountView } from "@/components/views/account-view";
 import { ResourceDetailView } from "@/components/views/resource-detail-view";
-import { getCategory } from "@/lib/data/resources";
+import { ShortcutsDialog } from "@/components/shortcuts-dialog";
 
 export type View =
   | "home"
@@ -166,6 +166,7 @@ export function AppShell() {
       </main>
 
       <Footer onNavigate={navigate} />
+      <ShortcutsDialog />
     </div>
   );
 }
