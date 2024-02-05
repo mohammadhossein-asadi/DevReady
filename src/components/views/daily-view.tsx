@@ -32,10 +32,15 @@ import { cn } from "@/lib/utils";
 /** Locale-aware long date (Gregorian in EN, Jalali in FA). */
 function formatDay(key: string, isFa: boolean): string {
   try {
+    const date = new Date(`${key}T12:00:00Z`);
+    // Guard against invalid dates (e.g. "0000-00-00" or malformed keys).
+    if (Number.isNaN(date.getTime()) || date.getFullYear() < 1970) {
+      return key;
+    }
     return new Intl.DateTimeFormat(isFa ? "fa-IR" : "en-US", {
       dateStyle: "full",
       timeZone: "UTC",
-    }).format(new Date(`${key}T12:00:00Z`));
+    }).format(date);
   } catch {
     return key;
   }
