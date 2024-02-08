@@ -447,6 +447,11 @@ export const dict = {
     "nav.shortcuts.showHelp": "Show this help",
     "nav.shortcuts.focusSearch": "Focus search",
     "nav.shortcuts.closeModal": "Close modal / dialog",
+    "error.title": "Something went wrong",
+    "error.message": "An unexpected error occurred. Please try again or go back home.",
+    "error.details": "Error details",
+    "error.retry": "Try again",
+    "error.goHome": "Go home",
   },
 
   fa: {
@@ -891,6 +896,11 @@ export const dict = {
     "nav.shortcuts.showHelp": "نمایش این راهنما",
     "nav.shortcuts.focusSearch": "تمرکز بر جستجو",
     "nav.shortcuts.closeModal": "بستن مودال / دیالوگ",
+    "error.title": "مشکلی پیش آمد",
+    "error.message": "یک خطای غیرمنتظره رخ داد. لطفاً دوباره تلاش کنید یا به خانه برگردید.",
+    "error.details": "جزئیات خطا",
+    "error.retry": "دوباره تلاش کنید",
+    "error.goHome": "برو به خانه",
   },
 } as const;
 

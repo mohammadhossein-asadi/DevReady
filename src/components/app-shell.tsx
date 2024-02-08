@@ -17,6 +17,8 @@ import { ContributeView } from "@/components/views/contribute-view";
 import CommunityView from "@/components/views/community-view";
 import { AccountView } from "@/components/views/account-view";
 import { ResourceDetailView } from "@/components/views/resource-detail-view";
+import { useLanguage } from "@/lib/language-context";
+import { ErrorBoundary } from "@/components/error-boundary";
 import { ShortcutsDialog } from "@/components/shortcuts-dialog";
 
 export type View =
@@ -96,6 +98,7 @@ function getServerHashSnapshot(): HashState {
 }
 
 export function AppShell() {
+  const { t } = useLanguage();
   const { view, category, name } = useSyncExternalStore(
     subscribeHash,
     getHashSnapshot,
@@ -145,24 +148,32 @@ export function AppShell() {
     <div className="flex min-h-screen flex-col">
       <Header view={view} onNavigate={navigate} />
 
-      <main id="main" className="flex-1">
-        {view === "home" && <HomeView onNavigate={navigate} />}
-        {view === "resources" && (
-          <ResourcesView
-            activeCategory={category}
-            onCategoryChange={setCategory}
-          />
-        )}
-        {view === "roadmap" && <RoadmapView />}
-        {view === "library" && <LibraryView onNavigate={navigate} />}
-        {view === "daily" && <DailyView />}
-        {view === "review" && <ReviewView />}
-        {view === "contribute" && <ContributeView />}
-{view === "community" && <CommunityView />}
-        {view === "account" && <AccountView />}
-        {view === "resource" && (
-          <ResourceDetailView categoryId={category} name={name} />
-        )}
+<main id="main" className="flex-1">
+        <ErrorBoundary
+          fallbackTitle={t("error.title")}
+          fallbackMessage={t("error.message")}
+          fallbackDetails={t("error.details")}
+          fallbackRetry={t("error.retry")}
+          fallbackGoHome={t("error.goHome")}
+        >
+          {view === "home" && <HomeView onNavigate={navigate} />}
+          {view === "resources" && (
+            <ResourcesView
+              activeCategory={category}
+              onCategoryChange={setCategory}
+            />
+          )}
+          {view === "roadmap" && <RoadmapView />}
+          {view === "library" && <LibraryView onNavigate={navigate} />}
+          {view === "daily" && <DailyView />}
+          {view === "review" && <ReviewView />}
+          {view === "contribute" && <ContributeView />}
+          {view === "community" && <CommunityView />}
+          {view === "account" && <AccountView />}
+          {view === "resource" && (
+            <ResourceDetailView categoryId={category} name={name} />
+          )}
+        </ErrorBoundary>
       </main>
 
       <Footer onNavigate={navigate} />
