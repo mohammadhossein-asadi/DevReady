@@ -1,5 +1,6 @@
 "use client";
 
+import { lazy, Suspense } from "react";
 import {
   ArrowRight,
   BookOpenCheck,
@@ -18,10 +19,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { BackgroundBeams } from "@/components/aceternity/background-beams";
-import { TextGenerate } from "@/components/aceternity/text-generate";
-import { MovingBorderButton } from "@/components/aceternity/moving-border";
-import { InfiniteMovingCards } from "@/components/aceternity/infinite-moving-cards";
 import { SpotlightCard } from "@/components/aceternity/spotlight-card";
 import { HUE_CHIP } from "@/components/views/resources-view";
 import { useLanguage } from "@/lib/language-context";
@@ -36,6 +33,11 @@ import {
 import { studyStages } from "@/lib/data/roadmap";
 import type { View } from "@/components/app-shell";
 import { cn } from "@/lib/utils";
+
+const BackgroundBeams = lazy(() => import("@/components/aceternity/background-beams").then((m) => ({ default: m.BackgroundBeams })));
+const TextGenerate = lazy(() => import("@/components/aceternity/text-generate").then((m) => ({ default: m.TextGenerate })));
+const MovingBorderButton = lazy(() => import("@/components/aceternity/moving-border").then((m) => ({ default: m.MovingBorderButton })));
+const InfiniteMovingCards = lazy(() => import("@/components/aceternity/infinite-moving-cards").then((m) => ({ default: m.InfiniteMovingCards })));
 
 import {
   Atom,
@@ -327,7 +329,9 @@ export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: s
     <>
       {/* ============ Hero ============ */}
       <section className="relative overflow-hidden border-b">
-        <BackgroundBeams />
+        <Suspense fallback={<div className="absolute inset-0" />}>
+          <BackgroundBeams />
+        </Suspense>
         <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
           <Badge
             variant="outline"
@@ -341,7 +345,9 @@ export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: s
           </Badge>
 
           <h1 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-            <TextGenerate text={headline} />
+            <Suspense fallback={<span className="inline-block w-72 h-8 animate-pulse rounded bg-muted" />}>
+              <TextGenerate text={headline} />
+            </Suspense>
           </h1>
 
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -349,10 +355,12 @@ export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: s
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <MovingBorderButton onClick={() => onNavigate("resources")}>
-              <LibraryBig className="size-4" aria-hidden="true" />
-              {t("hero.cta1")}
-            </MovingBorderButton>
+            <Suspense fallback={<Button size="lg" disabled className="min-h-11 gap-2" aria-busy="true"><LibraryBig className="size-4 animate-pulse" aria-hidden="true" /></Button>}>
+              <MovingBorderButton onClick={() => onNavigate("resources")}>
+                <LibraryBig className="size-4" aria-hidden="true" />
+                {t("hero.cta1")}
+              </MovingBorderButton>
+            </Suspense>
             <Button
               variant="outline"
               size="lg"
@@ -403,7 +411,9 @@ export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: s
               {t("home.featured.subtitle")}
             </p>
           </div>
-          <InfiniteMovingCards items={FEATURED} className="mt-5" />
+          <Suspense fallback={<div className="mt-5 h-16 animate-pulse rounded bg-muted" />}>
+            <InfiniteMovingCards items={FEATURED} className="mt-5" />
+          </Suspense>
         </div>
       </section>
 
