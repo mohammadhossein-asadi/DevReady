@@ -6,11 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ResourceCard } from "@/components/resource-card";
+import { ResourcesViewSkeleton } from "@/components/resource-card-skeleton";
 import { categories } from "@/lib/data/resources";
 import type { Resource } from "@/lib/data/types";
 import { useLanguage } from "@/lib/language-context";
 import type { Hue } from "@/lib/data/types";
 import { cn } from "@/lib/utils";
+import { useDebouncedSearch } from "@/lib/hooks/use-debounce";
 
 /** Static Tailwind classes per hue (kept literal so Tailwind can see them). */
 const HUE_CHIP: Record<Hue, string> = {
@@ -47,7 +49,7 @@ export function ResourcesView({
   onCategoryChange,
 }: ResourcesViewProps) {
   const { t, num, isFa } = useLanguage();
-  const [query, setQuery] = useState("");
+  const { debouncedQuery, isSearching, setQuery } = useDebouncedSearch("", 300);
   const [faOnly, setFaOnly] = useState(false);
 
   const active = categories.find((c) => c.id === activeCategory);
@@ -55,7 +57,7 @@ export function ResourcesView({
   /** Decorated results carry a category-scoped key so cross-category
    * duplicates (e.g. SQLBolt in Databases AND Question Banks) stay unique. */
   const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = debouncedQuery.trim().toLowerCase();
     const decorate = (
       resource: Resource,
       catId: string
@@ -110,7 +112,7 @@ export function ResourcesView({
     return list;
   }, [query, faOnly, active]);
 
-  const hasFilters = Boolean(query) || faOnly || Boolean(active);
+  const hasFilters = Boolean(debouncedQuery) || faOnly || Boolean(active);
 
   return (
     <section aria-labelledby="res-title" className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -139,12 +141,20 @@ export function ResourcesView({
             />
             <Input
               type="search"
-              value={query}
+              value={debouncedQuery}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t("res.search")}
               aria-label={t("a11y.search")}
               className="h-11 bg-card ps-9"
             />
+            {isSearching && (
+              <span className="pointer-events-none absolute end-3 top-1/2 -translate-y-1/2" aria-hidden="true">
+                <svg className="animate-spin size-4 text-muted-foreground" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+              </span>
+            )}
           </div>
           <Button
             type="button"
