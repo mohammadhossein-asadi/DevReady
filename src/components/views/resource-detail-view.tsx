@@ -8,6 +8,7 @@ import {
   LibraryBig as LibraryIcon,
   SearchX,
 } from "lucide-react";
+import { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ResourceCard } from "@/components/resource-card";
@@ -21,6 +22,7 @@ import { useLanguage } from "@/lib/language-context";
 import {
   domainOf,
   resolveResource,
+  resourceHref,
 } from "@/lib/data/resources";
 
 /**
@@ -75,6 +77,9 @@ export function ResourceDetailView({
     .filter((r) => r !== resource)
     .sort((a, b) => Number(Boolean(b.url)) - Number(Boolean(a.url)))
     .slice(0, 4);
+
+  const canonicalUrl = resourceHref(categoryId, resource);
+  const description = resource.note ?? category.desc[lang] ?? t("detail.seo.defaultDesc");
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
@@ -248,4 +253,33 @@ export function ResourceDetailView({
       ) : null}
     </section>
   );
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ categoryId: string; name: string }> }): Promise<Metadata> {
+  const { categoryId, name } = await params;
+  const ref = resolveResource(categoryId, decodeURIComponent(name));
+  if (!ref) {
+    return { title: "Resource not found | DevReady" };
+  }
+  const { category, resource } = ref;
+  const canonicalUrl = resourceHref(categoryId, resource);
+  const description = resource.note ?? category.desc.en ?? "DevReady resource";
+  return {
+    title: `${resource.name} | ${category.name.en} | DevReady`,
+    description,
+    openGraph: {
+      title: resource.name,
+      description,
+      url: canonicalUrl,
+      type: "website",
+      siteName: "DevReady",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: resource.name,
+      description,
+    },
+    robots: { index: true, follow: true },
+    alternates: { canonical: canonicalUrl },
+  };
 }

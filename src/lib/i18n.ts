@@ -452,6 +452,7 @@ export const dict = {
     "error.details": "Error details",
     "error.retry": "Try again",
     "error.goHome": "Go home",
+    "detail.seo.defaultDesc": "A curated developer resource on DevReady.",
   },
 
   fa: {
@@ -901,6 +902,7 @@ export const dict = {
     "error.details": "جزئیات خطا",
     "error.retry": "دوباره تلاش کنید",
     "error.goHome": "برو به خانه",
+    "detail.seo.defaultDesc": "یک منبع توسعه‌دهنده منتخب در DevReady.",
   },
 } as const;
 
