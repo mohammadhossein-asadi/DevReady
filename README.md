@@ -25,6 +25,7 @@ The platform serves as a living study companion — showcasing a curated resourc
 ## Table of Contents
 
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
@@ -157,6 +158,64 @@ Semantic HTML, keyboard nav, ARIA, focus management, 44px touch targets, WCAG AA
 
 ---
 
+## Screenshots
+
+<div align="center">
+
+### Home View
+*Hero with animated background beams, stats, progress widget, daily challenge, review widget, featured marquee, and category grid*
+
+![Home View](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/home-view.png)
+
+### Resources View
+*Instant search with debouncing, category chips with counts, Persian-only filter, responsive grid of resource cards with spotlight hover effects*
+
+![Resources View](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/resources-view.png)
+
+### Resource Detail
+*Deep-linkable detail page with action bar (open, bookmark, status picker, difficulty vote, review deck, notes), category description, and related resources*
+
+![Resource Detail](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/resource-detail.png)
+
+### Study Roadmap
+*10 stages with role-specific paths, weekly rhythm table, and product phases with progress tracking*
+
+![Roadmap](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/roadmap.png)
+
+### Library View
+*Bookmarks, In Progress, and Done tabs with live counts, resource cards, and progress overview*
+
+![Library](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/library.png)
+
+### Daily Challenge
+*34 bilingual challenges with streak tracking, hints, model answers, and Persian/Jalali date support*
+
+![Daily Challenge](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/daily-challenge.png)
+
+### Spaced Repetition Review
+*Review deck with mastery bands, interval previews, SM-2 scheduling, and "Again" re-queue*
+
+![Review](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/review-view.png)
+
+### Account & Sync
+*Optional account with secure auth, cross-device sync of library/SRS/daily/notes/votes with conflict resolution*
+
+![Account](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/account.png)
+
+### Contribute & Community
+*Resource submission form, export options, and moderation queue for admins*
+
+![Contribute](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/contribute.png)
+
+### Dark Mode & RTL
+*Full dark mode support with seamless switching, and complete RTL layout for Persian locale*
+
+![Dark RTL](https://raw.githubusercontent.com/mohammadhossein-asadi/DevReady/main/docs/screenshots/dark-rtl.png)
+
+</div>
+
+---
+
 ## Tech Stack
 
 | Layer | Technologies |
@@ -178,11 +237,19 @@ DevReady/
 ├── src/
 │   ├── app/              # Next.js app router + API routes
 │   ├── components/       # UI components and views
-│   ├── hooks/            # Custom hooks
+│   │   ├── aceternity/   # Custom Aceternity UI components
+│   │   ├── ui/           # shadcn/ui base components
+│   │   └── views/        # Page-level view components
+│   ├── hooks/            # Custom hooks (useDebounce, etc.)
 │   ├── lib/              # Contexts, data, utilities
+│   │   ├── data/         # Resource catalog, types, roadmap
+│   │   └── server/       # Server-only utilities (auth, rate-limit)
+│   └── middleware.ts     # Security headers, locale detection
 ├── public/               # Static assets, fonts, PWA
 ├── prisma/               # Database schema
 ├── scripts/              # Utility scripts
+├── docs/
+│   └── screenshots/      # Documentation screenshots
 └── README.md
 ```
 
@@ -230,37 +297,46 @@ bun run start
 
 ### Multi-Store Sync
 
-Five localStorage stores (library, daily, SRS, contribs, votes) merge client-side via a pure merge engine with validation. Cloud snapshot is opaque JSON; conflicts resolve by union/LWW rules.
+Five localStorage stores (library, daily, SRS, contribs, votes) merge client-side via a pure merge engine with validation. Cloud snapshot is opaque JSON; conflicts resolve by union/LWW rules with configurable strategies (merge/server-wins/client-wins).
 
 ### Spaced Repetition
 
-SM-2-lite scheduler with ease/interval tracking, mastery bands (learning/familiar/confident/mastered), and "Again" re-queue.
+SM-2-lite scheduler with ease/interval tracking, mastery bands (learning/familiar/confident/mastered), and "Again" re-queue. Unit-tested with 25 test cases covering all grade transitions and edge cases.
 
 ### Realtime Signals
 
 SSE stream for vote updates with auto-reconnect and polling fallback.
 
+### Error Boundaries
+
+React class-based error boundaries wrapping each routed view with retry/home fallback, preventing white screens on runtime errors.
+
 ---
 
 ## Performance
 
-- Code splitting with lazy-loaded views
-- Self-hosted fonts with `font-display: swap`
-- Service Worker stale-while-revalidate caching
-- Reduced motion support
-- No horizontal overflow from 320px to 1920px
+- **Code splitting** with lazy-loaded views and heavy Aceternity components
+- **Self-hosted fonts** with `font-display: swap`
+- **Service Worker** stale-while-revalidate caching for offline support
+- **Reduced motion** support via `prefers-reduced-motion`
+- **Responsive** from 320px to 1920px with no horizontal overflow
+- **Debounced search** (300ms) to avoid excessive filtering
+- **Memoized components** (ResourceCard) to prevent unnecessary re-renders
+- **Loading skeletons** for perceived performance during data fetching
 
 ---
 
 ## Roadmap
 
-- [x] Phase 1 — Foundation
-- [x] Phase 2 — Content Experience
-- [x] Phase 3 — Practice Layer
-- [x] Phase 4 — Retention & Community
-- [x] Phase 5 — Accounts & Signals
-- [x] Phase 6 — Content Expansion (32 categories)
-- [ ] Phase 7 — Security, Quality, Offline, Realtime (in progress)
+- [x] Phase 1 — Foundation (Next.js, Tailwind, i18n, theming, PWA)
+- [x] Phase 2 — Content Experience (Resources, Categories, Detail pages, Roadmap)
+- [x] Phase 3 — Practice Layer (Bookmarks, Notes, Status, Daily Challenges)
+- [x] Phase 4 — Retention & Community (SRS, Voting, Library, Search)
+- [x] Phase 5 — Accounts & Signals (Auth, Sync, SSE, Contributions)
+- [x] Phase 6 — Content Expansion (32 categories, 636+ resources)
+- [x] Phase 7 — Quality & Security (Rate limiting, Error boundaries, SEO, Tests, Accessibility)
+- [ ] Phase 8 — Analytics & Insights (Progress dashboards, heatmaps)
+- [ ] Phase 9 — AI Integration (Smart recommendations, answer evaluation)
 
 ---
 
@@ -289,6 +365,7 @@ PORT=3000 bun .next/standalone/server.js
 | `bun run build` | Production build |
 | `bun run lint` | Run ESLint |
 | `bun run db:push` | Push Prisma schema |
+| `bun run test` | Run unit tests (vitest) |
 
 ---
 
