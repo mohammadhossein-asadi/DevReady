@@ -42,3 +42,22 @@ Work Log:
 Stage Summary:
 - Persian typography is now the Vazir font family (self-hosted, no external CDN dependency at runtime beyond Google-hosted Inter).
 - One uncovered nuance: html[lang=fa] body font-family (base layer) is overridden by the .font-sans utility, but the outcome is spec-correct because Vazir sits in --font-sans right after Inter — Persian glyphs always fall through to Vazir, Latin stays Inter in both locales.
+
+---
+Task ID: 3
+Agent: Main agent (Z.ai)
+Task: Persian typography upgrades (Farsi-digits Vazir variant replacing programmatic digit conversion, heavier Persian headings, Persian line-height) + full responsive audit + language/theme switch verification.
+
+Work Log:
+- Downloaded Vazir FD Without-Latin woff2 (Regular/Medium/Bold/Black, dist/Farsi-Digits-Without-Latin, ~26KB each) to public/fonts/vazir/ and registered family "Vazir FD" (400/500/600–700/800–900, font-display: swap).
+- globals.css: --font-fa is now "Vazir FD", "Inter", "Vazir", … ; extended the unlayered fa overrides block: winning font-family rule, letter-spacing 0, h1/h2 font-weight 900 (Vazir Black contrast), p/li line-height 1.9.
+- language-context.tsx: num() is now a pass-through (digit localization happens visually in the FD typeface; DOM keeps ASCII digits for copy-paste/search/screen-readers). Removed FA_DIGITS.
+- Responsive audit (agent-browser, overflow = scrollWidth - clientWidth): found 12–16px horizontal overflow at 375px on all views (header controls) + 15px from non-shrinking category chips (shadcn Button base shrink-0 + whitespace-nowrap). Fixed: header compact on mobile (tagline hidden <sm, container gap-2 px-3, brand text-base/icon size-8 <sm, theme+menu buttons size-9 <sm, switcher min-w-9 + Globe hidden <sm), chips get whitespace-normal + shrink + min-h-9 + py-1.5. Verified 0 overflow at 320/375/390/768/1280/1920 × EN/FA × home/resources/roadmap.
+- Verified language switch (EN↔FA, lang/dir flip, localStorage persistence across reload), theme switch (light/dark via Persian-localized menu, html.dark + persistence, System option), mobile Sheet menu navigation at 375px, Vazir FD loaded via document.fonts.check (400/900), FA h1/h2 weight 900, FA p line-height 1.9 (34.2px/18px), EN typography unchanged (800, -0.9px tracking @36px, Latin digits).
+- Screenshots confirmed: FA mobile home/resources/roadmap show Persian digits rendered by the FD font from ASCII DOM text, wrapped chips, compact RTL header; desktop EN unchanged. Clean loads (EN and FA × light/dark) have 0 console errors — the one hydration warning observed was a mid-hot-reload artifact (stale server chunk vs new client), not reproducible on clean loads.
+- bun run lint passes.
+
+Stage Summary:
+- Persian typography now: Vazir FD (Persian digits for ALL numbers incl. inside Latin text), Vazir Black h1/h2, 1.9 paragraph line-height, neutral letter-spacing; Latin stays Inter in both locales.
+- Fully responsive: no horizontal overflow from 320px to 1920px in either language.
+- Files touched: src/app/globals.css, src/lib/language-context.tsx, src/components/{header,theme-toggle,language-switcher}.tsx, src/components/views/resources-view.tsx, public/fonts/vazir/Vazir-FD-*.woff2 (4 files).

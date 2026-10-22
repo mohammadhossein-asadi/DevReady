@@ -24,7 +24,7 @@ export function LanguageSwitcher() {
         aria-label={t("a11y.langToggle")}
         className="flex items-center rounded-lg border bg-muted/40 p-0.5"
       >
-        <Globe aria-hidden="true" className="mx-1.5 size-4 text-muted-foreground" />
+        <Globe aria-hidden="true" className="hidden size-4 text-muted-foreground sm:mx-1.5 sm:block" />
         {(["en", "fa"] as const).map((code) => {
           const active = lang === code;
           return (
@@ -37,8 +37,8 @@ export function LanguageSwitcher() {
                   aria-pressed={active}
                   className={
                     active
-                      ? "h-9 min-w-11 rounded-md bg-background px-2 font-semibold shadow-sm"
-                      : "h-9 min-w-11 rounded-md px-2 text-muted-foreground hover:text-foreground"
+                      ? "h-9 min-w-9 rounded-md bg-background px-2 font-semibold shadow-sm sm:min-w-11"
+                      : "h-9 min-w-9 rounded-md px-2 text-muted-foreground hover:text-foreground sm:min-w-11"
                   }
                 >
                   {code === "en" ? "EN" : "فا"}

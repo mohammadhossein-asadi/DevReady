@@ -27,7 +27,7 @@ export function ThemeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="size-10"
+          className="size-9 sm:size-10"
           aria-label={t("a11y.themeToggle")}
         >
           <Sun className="size-5 scale-100 rotate-0 transition-transform dark:scale-0 dark:-rotate-90" />

@@ -154,7 +154,7 @@ export function ResourcesView({
             size="sm"
             onClick={() => onCategoryChange("")}
             aria-pressed={!active}
-            className="h-9 rounded-full"
+            className="min-h-9 whitespace-normal shrink rounded-full py-1.5 leading-snug"
           >
             {t("res.all")}
           </Button>
@@ -167,7 +167,7 @@ export function ResourcesView({
                 size="sm"
                 onClick={() => onCategoryChange(isActive ? "" : cat.id)}
                 aria-pressed={isActive}
-                className="h-9 rounded-full"
+                className="min-h-9 whitespace-normal shrink rounded-full py-1.5 leading-snug text-start"
               >
                 {cat.name[isFa ? "fa" : "en"]}
                 <span

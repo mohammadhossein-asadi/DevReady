@@ -40,19 +40,19 @@ export function Header({ view, onNavigate }: HeaderProps) {
         {t("a11y.skip")}
       </a>
 
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-3 sm:gap-3 sm:px-6">
         {/* Brand */}
         <button
           type="button"
           onClick={go("home")}
           className="flex min-h-11 items-center gap-2.5 rounded-lg px-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
-          <span className="grid size-9 place-items-center rounded-lg bg-primary text-primary-foreground shadow-sm">
+          <span className="grid size-8 place-items-center rounded-lg bg-primary text-primary-foreground shadow-sm sm:size-9">
             <Zap className="size-5" aria-hidden="true" />
           </span>
           <span className="flex flex-col items-start leading-none">
-            <span className="text-lg font-extrabold tracking-tight">DevReady</span>
-            <span className="mt-0.5 text-[11px] font-medium text-muted-foreground">
+            <span className="text-base font-extrabold tracking-tight sm:text-lg">DevReady</span>
+            <span className="mt-0.5 hidden text-[11px] font-medium text-muted-foreground sm:block">
               {t("brand.tagline")}
             </span>
           </span>
@@ -96,7 +96,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="size-10 md:hidden"
+                  className="size-9 sm:size-10 md:hidden"
                   aria-label={t("a11y.menu")}
                 >
                   <Menu className="size-5" />

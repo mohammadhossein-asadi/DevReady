@@ -19,7 +19,12 @@ interface LanguageContextValue {
   toggle: () => void;
   /** Translate a key, optionally replacing {placeholders}. */
   t: (key: DictKey, vars?: Record<string, string | number>) => string;
-  /** Localize digits (Persian digits in fa locale). */
+  /**
+   * Digit localization is handled visually by the Vazir FD typeface in the fa
+   * locale (ASCII digits map to Persian glyphs), so values pass through
+   * unchanged — the DOM keeps ASCII digits for copy-paste, in-page search and
+   * screen readers.
+   */
   num: (value: number | string) => string;
 }
 
@@ -27,7 +32,6 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 const STORAGE_KEY = "devready:lang";
 const LANG_EVENT = "devready:lang-change";
-const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
 
 /**
  * The active language lives in localStorage — an external store — so it is
@@ -90,10 +94,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         }
         return text;
       },
-      num: (v) =>
-        isFa
-          ? String(v).replace(/[0-9]/g, (d) => FA_DIGITS[Number(d)])
-          : String(v),
+      num: (v) => String(v),
     };
   }, [lang, setLang]);
 
