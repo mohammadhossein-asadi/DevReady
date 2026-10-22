@@ -26,3 +26,19 @@ Stage Summary:
 - Single-route architecture (sandbox constraint) with hash-based views preserving back/forward and deep-linking.
 - All spec content preserved: 16 categories, 272 resources, both roadmaps, bilingual UI.
 - Key files: src/app/{layout,page,globals.css}, src/components/{providers,app-shell,header,footer,theme-toggle,language-switcher,resource-card}.tsx, src/components/views/{home,resources,roadmap}-view.tsx, src/components/aceternity/*, src/lib/{i18n.ts,language-context.tsx,data/*}.
+
+---
+Task ID: 2
+Agent: Main agent (Z.ai)
+Task: Switch Persian typography from Vazirmatn to the Vazir font (user instruction: "use vazir font for persian").
+
+Work Log:
+- Downloaded Vazir woff2 (Regular/Medium/Bold/Black, v30.1.0 from rastikerdar/vazir-font via jsDelivr) and self-hosted under public/fonts/vazir/ (~43KB each, wOF2 signatures verified).
+- globals.css: removed Vazirmatn from the Google Fonts import; added 4 @font-face rules for "Vazir" (400, 500, 600–700 mapped to Bold, 800–900 mapped to Black) with font-display: swap; --font-fa now "Vazir", "Inter", …; added "Vazir" to --font-sans after Inter so Persian snippets in EN locale (فارسی badges) also render Vazir while Latin stays Inter.
+- Fixed Persian tracking bug: the letter-spacing reset for fa locale lived in @layer base and was beaten by tracking-tight utilities; added an unlayered `html[lang="fa"] body, html[lang="fa"] body * { letter-spacing: 0 }` (unlayered wins over utilities). Persian cursive joins now keep natural spacing; EN tracking preserved (-1.5px on h1).
+- Resolved stale dev-server state: killed the previous-session next dev holding port 3000 (EADDRINUSE), cleared .next, relaunched .zscripts/dev.sh (nohup + dev.pid). Learned sandbox reaps setsid/detached processes between tool sessions — server must be relaunched with `nohup bash .zscripts/dev.sh` and verified inline.
+- Verified: `bun run lint` clean; compiled CSS contains 0 "vazirmatn" refs and all 4 woff2 URLs; /fonts/vazir/*.woff2 served HTTP 200; Agent Browser EN mode (lang=en, Inter-first stack, h1 -1.5px) and FA mode (lang=fa, dir=rtl, Vazir 400/500/700 loaded via document.fonts.check, h1 letter-spacing neutralized); FA home + FA resources screenshots show clean Vazir glyphs, Persian digits (۲۷۲ منبع), RTL mirroring; 0 console errors; dev.log all 200s.
+
+Stage Summary:
+- Persian typography is now the Vazir font family (self-hosted, no external CDN dependency at runtime beyond Google-hosted Inter).
+- One uncovered nuance: html[lang=fa] body font-family (base layer) is overridden by the .font-sans utility, but the outcome is spec-correct because Vazir sits in --font-sans right after Inter — Persian glyphs always fall through to Vazir, Latin stays Inter in both locales.
