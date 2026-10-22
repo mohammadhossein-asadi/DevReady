@@ -1,0 +1,905 @@
+     1→# Web Development Interview Prep
+     2→
+     3→project name : DevReady
+     4→
+     5→A modern, bilingual (English / فارسی) platform for preparing for Web Development interviews — Frontend, Backend, Full-Stack, System Design, Algorithms, Security, and Behavioral rounds.
+     6→Built with **Next.js**, **shadcn/ui**, Tailwind CSS, and designed for excellent accessibility, dark/light mode, and a clean yet engaging user experience.
+     7→
+     8→> Recommended visual enhancement: **[Aceternity UI](https://ui.aceternity.com)** — free React & Next.js UI components for beautiful backgrounds, cards, timelines, and interactive elements that keep the interface simple while making it visually memorable.
+     9→
+    10→---
+    11→
+    12→## Table of Contents
+    13→
+    14→- [Overview](#overview)
+    15→- [Features](#features)
+    16→- [Tech Stack](#tech-stack)
+    17→- [Aceternity UI Integration](#aceternity-ui-integration)
+    18→- [Getting Started](#getting-started)
+    19→- [Project Structure](#project-structure)
+    20→- [Content Organization](#content-organization)
+    21→- [Complete Resource Catalog](#complete-resource-catalog)
+    22→- [Detailed Project & Study Roadmap](#detailed-project--study-roadmap)
+    23→- [Accessibility & Design Principles](#accessibility--design-principles)
+    24→- [Contributing](#contributing)
+    25→- [License](#license)
+    26→
+    27→---
+    28→
+    29→## Overview
+    30→
+    31→This project is a curated, searchable, and well-organized collection of the best free and high-quality resources for Web Development interview preparation. It covers every major area that appears in real interviews at companies of all sizes — from junior frontend roles to senior full-stack and system design positions.
+    32→
+    33→The application is fully bilingual. Users can switch between English and Persian at any time. The interface respects right-to-left layout for Persian, uses proper typography, and keeps navigation, search, and filtering intuitive in both languages.
+    34→
+    35→All resources listed in the source material have been included without omission. They are grouped by topic, annotated with short descriptions where useful, and presented in a clean, scannable format so candidates can quickly find the most relevant material for their current focus.
+    36→
+    37→---
+    38→
+    39→## Features
+    40→
+    41→- **Bilingual interface** — English and Persian with seamless language switching and correct RTL support for Persian.
+    42→- **Dark mode / Light mode** — System preference detection + manual toggle. Smooth transitions and carefully chosen contrast ratios in both themes.
+    43→- **High accessibility** — Semantic HTML, proper heading hierarchy, full keyboard navigation, focus management, ARIA where needed, and WCAG AA+ color contrast.
+    44→- **Clean yet attractive design** — Minimal visual noise, generous spacing, excellent typography hierarchy, subtle micro-interactions, and a calm color system that works equally well in light and dark mode.
+    45→- **Categorized resource library** — Every major interview topic has its own dedicated section with clear visual grouping.
+    46→- **Powerful search & filtering** — Instantly find resources by technology, difficulty level, content type (handbook, question bank, official docs, practice platform), or language.
+    47→- **Progress-friendly layout** — Built-in study roadmap, suggested order of topics, and space for future progress tracking.
+    48→- **Mobile-first responsive design** — Excellent experience on phones, tablets, and large desktop screens.
+    49→- **Fast and modern architecture** — Next.js App Router, Server Components where beneficial, and optimized client components for interactive parts.
+    50→- **Aceternity UI ready** — Designed from the start to accept beautiful free components from Aceternity UI without fighting the base design system.
+    51→
+    52→---
+    53→
+    54→## Tech Stack
+    55→
+    56→| Layer              | Technology                                 |
+    57→| ------------------ | ------------------------------------------ |
+    58→| Framework          | Next.js (App Router)                       |
+    59→| Language           | TypeScript                                 |
+    60→| Styling            | Tailwind CSS + shadcn/ui                   |
+    61→| Theming            | next-themes (dark / light / system)        |
+    62→| UI Components      | shadcn/ui                                  |
+    63→| Visual Enhancement | [Aceternity UI](https://ui.aceternity.com) |
+    64→| Icons              | Lucide React                               |
+    65→| Fonts              | Inter (Latin) + Vazirmatn (Persian)        |
+    66→| Deployment         | Vercel (recommended)                       |
+    67→
+    68→### Why shadcn/ui + Aceternity UI?
+    69→
+    70→**shadcn/ui** provides accessible, high-quality primitives that you fully own. You get excellent defaults for buttons, cards, dialogs, tabs, forms, and navigation while keeping complete control over styling.
+    71→
+    72→**Aceternity UI** adds the delightful layer on top: animated backgrounds, spotlight cards, infinite moving cards, timelines, floating navbars, 3D card effects, and other free components that make a learning platform feel modern and engaging without adding complexity or heavy dependencies.
+    73→
+    74→Together they create a design that is simple, fast, accessible, and visually memorable.
+    75→
+    76→---
+    77→
+    78→## Aceternity UI Integration
+    79→
+    80→[Aceternity UI](https://ui.aceternity.com) is a collection of free, high-quality React and Next.js components built with Tailwind CSS and Framer Motion. It is the recommended way to elevate the visual quality of this project while staying true to the “simple yet attractive” design philosophy.
+    81→
+    82→### Why Aceternity UI fits this project
+    83→
+    84→- Completely free components
+    85→- Built for Next.js and React
+    86→- Uses the same Tailwind CSS foundation as shadcn/ui
+    87→- Excellent dark mode support
+    88→- Lightweight and performance-conscious when used selectively
+    89→- Perfect for creating memorable learning experiences without overwhelming the user
+    90→
+    91→### Recommended components for this project
+    92→
+    93→| Component                              | Suggested Use Case                                |
+    94→| -------------------------------------- | ------------------------------------------------- |
+    95→| Background Beams / Background Gradient | Hero section and category landing pages           |
+    96→| Spotlight Card / 3D Card Effect        | Individual resource cards                         |
+    97→| Infinite Moving Cards                  | Featured resources or “popular this week” section |
+    98→| Timeline                               | Study roadmap visualization                       |
+    99→| Floating Navbar / Dock                 | Main navigation                                   |
+   100→| Text Generate Effect / Typewriter      | Hero headline animation                           |
+   101→| Bento Grid                             | Overview of main topic categories                 |
+   102→| Hover Effect Cards                     | Technology or difficulty level filters            |
+   103→| Moving Border / Border Beam            | Call-to-action buttons and featured items         |
+   104→| Sticky Scroll / Reveal Animations      | Long content sections and roadmap steps           |
+   105→
+   106→### Integration guidelines
+   107→
+   108→1. Install only the components you actually use.
+   109→2. Keep the base design system (colors, spacing, typography) driven by shadcn/ui and Tailwind config.
+   110→3. Prefer subtle animations. Avoid motion that distracts from reading content.
+   111→4. Always test components in both light and dark mode and with reduced-motion preferences.
+   112→5. Place Aceternity components under `components/aceternity/` so they stay clearly separated from core shadcn primitives.
+   113→6. For Persian (RTL) layout, verify that animated elements and cards still align correctly.
+   114→
+   115→### Quick start with Aceternity UI
+   116→
+   117→```bash
+   118→# Most Aceternity components can be copied directly.
+   119→# Some require framer-motion:
+   120→pnpm add framer-motion
+   121→# or
+   122→npm install framer-motion
+   123→```
+   124→
+   125→Then visit [ui.aceternity.com](https://ui.aceternity.com), choose a free component, and follow the installation instructions shown on the component page. Most components are copy-paste friendly and work immediately with a standard Next.js + Tailwind setup.
+   126→
+   127→---
+   128→
+   129→## Getting Started
+   130→
+   131→### Prerequisites
+   132→
+   133→- Node.js 18.17 or later
+   134→- pnpm / npm / yarn / bun
+   135→
+   136→### Installation
+   137→
+   138→```bash
+   139→# Clone the repository
+   140→git clone https://github.com/your-username/web-dev-interview-prep.git
+   141→cd web-dev-interview-prep
+   142→
+   143→# Install dependencies
+   144→pnpm install
+   145→# or
+   146→npm install
+   147→
+   148→# Start the development server
+   149→pnpm dev
+   150→# or
+   151→npm run dev
+   152→```
+   153→
+   154→Open [http://localhost:3000](http://localhost:3000) in your browser.
+   155→
+   156→---
+   157→
+   158→## Project Structure
+   159→
+   160→```
+   161→web-dev-interview-prep/
+   162→├── app/
+   163→│   ├── [locale]/                 # en / fa
+   164→│   │   ├── page.tsx               # Home / dashboard
+   165→│   │   ├── resources/
+   166→│   │   │   └── [category]/
+   167→│   │   ├── roadmap/
+   168→│   │   └── layout.tsx
+   169→│   ├── globals.css
+   170→│   └── layout.tsx
+   171→├── components/
+   172→│   ├── ui/                        # shadcn components
+   173→│   ├── aceternity/                # optional Aceternity components
+   174→│   ├── language-switcher.tsx
+   175→│   ├── theme-toggle.tsx
+   176→│   ├── resource-card.tsx
+   177→│   ├── search.tsx
+   178→│   └── ...
+   179→├── content/
+   180→│   ├── resources/                 # Markdown or JSON data for all resources
+   181→│   └── roadmap/
+   182→├── lib/
+   183→│   ├── i18n.ts
+   184→│   └── utils.ts
+   185→├── public/
+   186→└── ...
+   187→```
+   188→
+   189→Content is stored in a structured, easy-to-extend format so new resources can be added without touching the UI layer.
+   190→
+   191→---
+   192→
+   193→## Content Organization
+   194→
+   195→Resources are grouped into the following top-level categories. Every item from the original source lists has been preserved and placed in the most logical section.
+   196→
+   197→1. Comprehensive Interview Preparation
+   198→2. HTML, CSS & Web Fundamentals
+   199→3. JavaScript & TypeScript
+   200→4. React, Next.js & Frontend Frameworks
+   201→5. Frontend System Design & UI Practice
+   202→6. Backend, Node.js & APIs
+   203→7. Databases & SQL
+   204→8. Algorithms & Data Structures
+   205→9. System Design & Software Architecture
+   206→10. Web Security
+   207→11. Testing, Debugging & Code Quality
+   208→12. Performance, Accessibility & SEO
+   209→13. DevOps, Cloud & CI/CD
+   210→14. Behavioral Interview & Company-Specific Prep
+   211→15. Additional Learning Paths & Practice Platforms
+   212→16. Question Banks with Answers (English & Persian)
+   213→
+   214→---
+   215→
+   216→## Complete Resource Catalog
+   217→
+   218→### 1. Comprehensive Interview Preparation
+   219→
+   220→| Resource                                                 | Link / Notes                                                                  |
+   221→| -------------------------------------------------------- | ----------------------------------------------------------------------------- |
+   222→| Front End Interview Handbook                             | frontendinterviewhandbook.com / GitHub: yangshun/front-end-interview-handbook |
+   223→| Frontend Interview Prep                                  | frontend-interview.com                                                        |
+   224→| GreatFrontEnd                                            | greatfrontend.com                                                             |
+   225→| FrontPrep                                                | frontprep.com                                                                 |
+   226→| Tech Interview Handbook                                  | techinterviewhandbook.org                                                     |
+   227→| Frontend Learning Kit                                    | GitHub                                                                        |
+   228→| Frontend Interview Questions (open source)               | GitHub                                                                        |
+   229→| Real-World Frontend Interview Handbook                   | Leanpub                                                                       |
+   230→| Roadmap.sh                                               | roadmap.sh                                                                    |
+   231→| freeCodeCamp                                             | freecodecamp.org                                                              |
+   232→| Best Resources to Learn Frontend Development             | greatfrontend.com/blog/best-resources-to-learn-frontend-development           |
+   233→| The Web Developer Interview Prep Guide (Coursera)        | coursera.org/resources/web-development-interview-prep-guide                   |
+   234→| Guide To Clear Front-End Developer Interview             | Goodreads                                                                     |
+   235→| Top 5 Courses to Crack Frontend Web Developer Interviews | javarevisited.blogspot.com                                                    |
+   236→| Web Development Interview Questions & Resources          | GitHub: wowgeekyboy/Web-Development-Interview                                 |
+   237→| Interview Questions for Developers                       | GitHub: valakhosravi/Interview-Questions-Answers                              |
+   238→| Frontend Interview Questions — 100+                      | GitHub: readytodev-pro/frontend-interview-questions                           |
+   239→| Frontend Interview Handbook — 3000+                      | GitHub: sumitsingh4411/frontend-interview-questions                           |
+   240→| Frontend Interview Mastery                               | GitHub: goswamikaushik/frontend-interview-mastery                             |
+   241→| Top 200+ Frontend Interview Questions                    | GitHub: Devtools-Tech-Team/front-end-interview-questions                      |
+   242→| h5bp — Front-end Developer Interview Questions           | GitHub: h5bp/Front-end-Developer-Interview-Questions                          |
+   243→| Frontend JavaScript Interview Questions — Answers        | GitHub: bcherny/frontend-interview-questions                                  |
+   244→| Frontend Developer Interview Preparation                 | GitHub (company & startup questions)                                          |
+   245→| Frontend Interview Questions — Yauhen Kavalchuk          | GitHub (multi-technology)                                                     |
+   246→
+   247→### 2. HTML, CSS & Web Fundamentals
+   248→
+   249→| Resource                                   | Link / Notes                                           |
+   250→| ------------------------------------------ | ------------------------------------------------------ |
+   251→| MDN Web Docs                               | developer.mozilla.org                                  |
+   252→| MDN — HTML Reference                       | developer.mozilla.org                                  |
+   253→| MDN — CSS Reference                        | developer.mozilla.org                                  |
+   254→| MDN — Web APIs                             | developer.mozilla.org                                  |
+   255→| web.dev                                    | web.dev                                                |
+   256→| Learn HTML — web.dev                       | web.dev/learn/html                                     |
+   257→| Learn CSS — web.dev                        | web.dev/learn/css                                      |
+   258→| CSS-Tricks                                 | css-tricks.com                                         |
+   259→| Flexbox Froggy                             | flexboxfroggy.com                                      |
+   260→| Grid Garden                                | cssgridgarden.com                                      |
+   261→| HTML Living Standard                       | html.spec.whatwg.org                                   |
+   262→| CSS Specifications — W3C                   | w3.org/Style/CSS                                       |
+   263→| CSS Interview Questions and Answers        | golinuxcloud.com/css-interview-questions               |
+   264→| 400+ CSS Interview Questions Practice Test | Udemy (paid)                                           |
+   265→| MDN Learn web development                  | developer.mozilla.org/en-US/docs/Learn_web_development |
+   266→
+   267→### 3. JavaScript & TypeScript
+   268→
+   269→| Resource                                                 | Link / Notes                             |
+   270→| -------------------------------------------------------- | ---------------------------------------- |
+   271→| JavaScript.info                                          | javascript.info                          |
+   272→| MDN — JavaScript Guide                                   | developer.mozilla.org                    |
+   273→| MDN — JavaScript Reference                               | developer.mozilla.org                    |
+   274→| You Don't Know JS Yet                                    | GitHub: getify/You-Dont-Know-JS          |
+   275→| Eloquent JavaScript                                      | eloquentjavascript.net                   |
+   276→| TypeScript Handbook                                      | typescriptlang.org                       |
+   277→| TypeScript Playground                                    | typescriptlang.org/play                  |
+   278→| Type Challenges                                          | GitHub                                   |
+   279→| 33 JS Concepts                                           | GitHub: leonardomso/33-js-concepts       |
+   280→| JavaScript Questions                                     | GitHub: lydiahallie/javascript-questions |
+   281→| JavaScript Algorithms and Data Structures                | GitHub                                   |
+   282→| javascript-interview-questions (sudheerj)                | GitHub — ~1000 questions                 |
+   283→| JavaScript Quiz Interview Questions (GreatFrontEnd)      | greatfrontend.com                        |
+   284→| Awesome-JavaScript-Interviews                            | GitHub: rohan-paul                       |
+   285→| fe-interview                                             | GitHub: haizlin                          |
+   286→| ۲۰۰ سوال مصاحبه جاوااسکریپت (فارسی)                      | virgool.io                               |
+   287→| javascript-persian-interview-questions                   | GitHub: Mariotek                         |
+   288→| JavaScript Interview Resources and Practice (NamasteDev) | namastedev.com                           |
+   289→| 10 GitHub Repositories to Achieve JavaScript Mastery     | dev.to                                   |
+   290→
+   291→### 4. React, Next.js & Frontend Frameworks
+   292→
+   293→| Resource                                  | Link / Notes            |
+   294→| ----------------------------------------- | ----------------------- |
+   295→| React — Official Docs                     | react.dev               |
+   296→| React — Learn                             | react.dev/learn         |
+   297→| React — Reference                         | react.dev/reference     |
+   298→| React TypeScript Cheatsheets              | GitHub                  |
+   299→| Next.js Documentation                     | nextjs.org/docs         |
+   300→| Next.js Learn                             | nextjs.org/learn        |
+   301→| Vue.js Documentation                      | vuejs.org               |
+   302→| Angular Documentation                     | angular.dev             |
+   303→| Svelte Documentation                      | svelte.dev              |
+   304→| Redux Toolkit                             | redux-toolkit.js.org    |
+   305→| Zustand                                   | GitHub                  |
+   306→| TanStack Query                            | tanstack.com/query      |
+   307→| React Interview Playbook                  | greatfrontend.com       |
+   308→| 100+ React Interview Questions            | greatfrontend.com       |
+   309→| React Quiz Interview Questions            | greatfrontend.com       |
+   310→| reactjs-interview-questions (sudheerj)    | GitHub — 500+ questions |
+   311→| بزرگ‌ترین لیست سوالات مصاحبه ریکت (فارسی) | virgool.io              |
+   312→| reactjs-persian-interview-questions       | GitHub: Mariotek        |
+   313→| vuejs-interview-questions                 | GitHub: sudheerj        |
+   314→| angular-persian-interview-questions       | GitHub: Mariotek        |
+   315→| vuejs-persian-interview-questions         | GitHub: Mariotek        |
+   316→
+   317→### 5. Frontend System Design & UI Practice
+   318→
+   319→| Resource                                       | Link / Notes                    |
+   320→| ---------------------------------------------- | ------------------------------- |
+   321→| GreatFrontEnd — Frontend System Design         | greatfrontend.com               |
+   322→| Frontend Interview Handbook — System Design    | frontendinterviewhandbook.com   |
+   323→| Frontend Interview Prep — System Design        | frontend-interview.com          |
+   324→| FrontendAtlas                                  | frontendatlas.com               |
+   325→| DOM Challenge                                  | GitHub                          |
+   326→| Frontend Mentor                                | frontendmentor.io               |
+   327→| Frontend Mini Challenges                       | GitHub                          |
+   328→| UI.dev                                         | ui.dev                          |
+   329→| Frontend Interview Prep — Machine Coding       | frontend-interview.com / GitHub |
+   330→| GreatFrontEnd — JavaScript DSA & UI Challenges | greatfrontend.com               |
+   331→
+   332→**Recommended practice topics:**
+   333→Autocomplete, data tables with sorting/filtering, pagination, infinite scroll, accessible modals & dialogs, complex multi-step forms, notification systems, loading/error/empty states, virtualized lists, drag-and-drop interfaces, and real-time collaborative UI patterns.
+   334→
+   335→### 6. Backend, Node.js & APIs
+   336→
+   337→| Resource                                                  | Link / Notes                                  |
+   338→| --------------------------------------------------------- | --------------------------------------------- |
+   339→| Node.js Documentation                                     | nodejs.org/docs                               |
+   340→| Node.js Learn                                             | nodejs.org/en/learn                           |
+   341→| Express.js                                                | expressjs.com                                 |
+   342→| NestJS                                                    | docs.nestjs.com                               |
+   343→| Fastify                                                   | fastify.dev                                   |
+   344→| HTTP — MDN                                                | developer.mozilla.org                         |
+   345→| HTTP Semantics — RFC 9110                                 | RFC Editor                                    |
+   346→| REST API Tutorial                                         | restfulapi.net                                |
+   347→| OpenAPI Specification                                     | spec.openapis.org                             |
+   348→| GraphQL Documentation                                     | graphql.org                                   |
+   349→| Apollo GraphQL                                            | apollographql.com/docs                        |
+   350→| WebSockets — MDN                                          | developer.mozilla.org                         |
+   351→| Postman Learning Center                                   | learning.postman.com                          |
+   352→| Backend Interview Prep Beyond LeetCode                    | dev.to                                        |
+   353→| How to prepare for a Node.js developer interview          | educative.io                                  |
+   354→| Backend Developer Interview Questions & Preparation Guide | hackajob.com                                  |
+   355→| 1500 Back End Web Developer Interview Questions           | Udemy (paid)                                  |
+   356→| nodejs-interview-questions (sudheerj)                     | GitHub                                        |
+   357→| Backend Interview Questions & Answers                     | GitHub: AS-Backend-Institute                  |
+   358→| 100 Backend Interview Questions                           | GitHub                                        |
+   359→| Senior Node.js Backend Interview Guide                    | GitHub                                        |
+   360→| roadmap.sh — Backend Questions                            | roadmap.sh/questions/backend                  |
+   361→| Web Development Interview (Full-Stack)                    | GitHub: wowgeekyboy/Web-Development-Interview |
+   362→| Node.js & SQL Interview Roadmap                           | GitHub Gist                                   |
+   363→
+   364→### 7. Databases & SQL
+   365→
+   366→| Resource                               | Link / Notes                      |
+   367→| -------------------------------------- | --------------------------------- |
+   368→| PostgreSQL Documentation               | postgresql.org/docs               |
+   369→| SQLBolt                                | sqlbolt.com                       |
+   370→| Use The Index, Luke!                   | use-the-index-luke.com            |
+   371→| MySQL Documentation                    | dev.mysql.com/doc                 |
+   372→| MongoDB University                     | learn.mongodb.com                 |
+   373→| MongoDB Documentation                  | mongodb.com/docs                  |
+   374→| Redis Documentation                    | redis.io/docs                     |
+   375→| Prisma Documentation                   | prisma.io/docs                    |
+   376→| Neon Documentation                     | neon.tech/docs                    |
+   377→| Supabase Documentation                 | supabase.com/docs                 |
+   378→| LeetCode SQL 50                        | leetcode.com/studyplan/top-sql-50 |
+   379→| SQL Interview Questions — InterviewBit | InterviewBit                      |
+   380→| PostgreSQL Interview Questions         | InterviewBit                      |
+   381→| MongoDB Interview Questions            | GeeksforGeeks                     |
+   382→| SQL for Interviews                     | GitHub                            |
+   383→
+   384→### 8. Algorithms & Data Structures
+   385→
+   386→| Resource                         | Link / Notes              |
+   387→| -------------------------------- | ------------------------- |
+   388→| LeetCode                         | leetcode.com              |
+   389→| NeetCode                         | neetcode.io               |
+   390→| NeetCode Roadmap                 | neetcode.io/roadmap       |
+   391→| Tech Interview Handbook — Coding | techinterviewhandbook.org |
+   392→| Blind 75                         | Tech Interview Handbook   |
+   393→| Grind 75                         | grind75.com               |
+   394→| HackerRank                       | hackerrank.com            |
+   395→| CodeSignal                       | codesignal.com            |
+   396→| Codewars                         | codewars.com              |
+   397→| Exercism                         | exercism.org              |
+   398→| VisuAlgo                         | visualgo.net              |
+   399→| The Algorithms                   | GitHub                    |
+   400→| Great Frontend — JavaScript DSA  | greatfrontend.com         |
+   401→
+   402→### 9. System Design & Software Architecture
+   403→
+   404→| Resource                                                           | Link / Notes                             |
+   405→| ------------------------------------------------------------------ | ---------------------------------------- |
+   406→| System Design Primer                                               | GitHub: donnemartin/system-design-primer |
+   407→| Tech Interview Handbook — System Design                            | techinterviewhandbook.org                |
+   408→| System Design Interview resources                                  | System Design Handbook                   |
+   409→| ByteByteGo                                                         | bytebytego.com                           |
+   410→| Design Gurus                                                       | designgurus.io                           |
+   411→| Educative                                                          | educative.io                             |
+   412→| System Design Primer — summaries                                   | GitHub                                   |
+   413→| High Scalability                                                   | highscalability.com                      |
+   414→| AWS Well-Architected                                               | AWS                                      |
+   415→| Google Cloud Architecture Framework                                | Google Cloud                             |
+   416→| system-design-resources (InterviewReady)                           | GitHub                                   |
+   417→| best-system-design-resources                                       | GitHub                                   |
+   418→| The Best System Design Resources in 2026                           | educative.io                             |
+   419→| Best resources for grokking system design                          | designgurus.io                           |
+   420→| Top 20 System Design Interview Resources                           | javarevisited.blogspot.com               |
+   421→| System Design Interview Questions — 500+                           | GitHub                                   |
+   422→| System Design — Question & Solution                                | GitHub                                   |
+   423→| ByteByteGo System Design 101                                       | GitHub: ByteByteGoHq/system-design-101   |
+   424→| system-design-resources (InterviewReady)                           | GitHub                                   |
+   425→| best-system-design-resources                                       | GitHub                                   |
+   426→| The Best System Design Resources in 2026                           | educative.io                             |
+   427→| Best resources, books, and study guides for grokking system design | designgurus.io                           |
+   428→| Top 20 System Design Interview Resources                           | javarevisited.blogspot.com               |
+   429→
+   430→### 10. Web Security
+   431→
+   432→| Resource                         | Link / Notes                     |
+   433→| -------------------------------- | -------------------------------- |
+   434→| OWASP Top 10                     | owasp.org                        |
+   435→| OWASP Web Security Testing Guide | OWASP WSTG                       |
+   436→| PortSwigger Web Security Academy | portswigger.net/web-security     |
+   437→| MDN — Web Security               | developer.mozilla.org            |
+   438→| MDN — CORS                       | developer.mozilla.org            |
+   439→| Content Security Policy          | MDN CSP                          |
+   440→| Authentication — OWASP           | OWASP Authentication Cheat Sheet |
+   441→| JWT                              | jwt.io                           |
+   442→| OAuth 2.0 — RFC 6749             | RFC Editor                       |
+   443→| Web Security Academy Labs        | PortSwigger Labs                 |
+   444→
+   445→### 11. Testing, Debugging & Code Quality
+   446→
+   447→| Resource                  | Link / Notes                       |
+   448→| ------------------------- | ---------------------------------- |
+   449→| Testing Library           | testing-library.com                |
+   450→| Jest                      | jestjs.io                          |
+   451→| Vitest                    | vitest.dev                         |
+   452→| Playwright                | playwright.dev                     |
+   453→| Cypress                   | cypress.io                         |
+   454→| Storybook                 | storybook.js.org                   |
+   455→| MSW — Mock Service Worker | mswjs.io                           |
+   456→| Chrome DevTools           | developer.chrome.com/docs/devtools |
+   457→| ESLint                    | eslint.org                         |
+   458→| Prettier                  | prettier.io                        |
+   459→
+   460→### 12. Performance, Accessibility & SEO
+   461→
+   462→| Resource                                    | Link / Notes                         |
+   463→| ------------------------------------------- | ------------------------------------ |
+   464→| web.dev — Performance                       | web.dev                              |
+   465→| PageSpeed Insights                          | pagespeed.web.dev                    |
+   466→| Lighthouse                                  | developer.chrome.com/docs/lighthouse |
+   467→| Core Web Vitals                             | web.dev                              |
+   468→| Web Accessibility Initiative                | W3C WAI                              |
+   469→| WCAG Guidelines                             | W3C WCAG                             |
+   470→| WAI-ARIA Authoring Practices                | W3C APG                              |
+   471→| Google Search Central                       | developers.google.com/search         |
+   472→| Search Engine Optimization Starter Guide    | Google                               |
+   473→| web.dev Learn (Performance & Accessibility) | web.dev/learn                        |
+   474→
+   475→### 13. DevOps, Cloud & CI/CD
+   476→
+   477→| Resource                 | Link / Notes                      |
+   478→| ------------------------ | --------------------------------- |
+   479→| Docker Documentation     | docs.docker.com                   |
+   480→| GitHub Actions           | docs.github.com/actions           |
+   481→| Git Documentation        | git-scm.com/doc                   |
+   482→| GitHub Skills            | skills.github.com                 |
+   483→| Kubernetes Documentation | kubernetes.io/docs                |
+   484→| AWS Skill Builder        | skillbuilder.aws                  |
+   485→| Microsoft Learn — Azure  | learn.microsoft.com               |
+   486→| Google Cloud Skills      | cloudskillsboost.google           |
+   487→| Terraform Documentation  | developer.hashicorp.com/terraform |
+   488→| Vercel Documentation     | vercel.com/docs                   |
+   489→| Netlify Documentation    | docs.netlify.com                  |
+   490→
+   491→### 14. Behavioral Interview & Company-Specific Prep
+   492→
+   493→| Resource                                 | Link / Notes                  |
+   494→| ---------------------------------------- | ----------------------------- |
+   495→| Tech Interview Handbook                  | techinterviewhandbook.org     |
+   496→| Amazon Interview Preparation             | amazon.jobs                   |
+   497→| Google Careers — Interviewing            | Google Careers                |
+   498→| Microsoft Careers — Interview Tips       | Microsoft Careers             |
+   499→| Meta Careers                             | Meta Careers                  |
+   500→| STAR Method — Indeed Career Guide        | indeed.com                    |
+   501→| Glassdoor Interview Questions            | glassdoor.com                 |
+   502→| Levels.fyi                               | levels.fyi                    |
+   503→| Interview Rounds                         | GitHub                        |
+   504→| FrontendFreaks                           | GitHub                        |
+   505→| Frontend Interview Handbook — Airbnb     | frontendinterviewhandbook.com |
+   506→| GreatFrontEnd — Airbnb                   | greatfrontend.com             |
+   507→| Frontend Interview Prep — Company Guides | GitHub                        |
+   508→
+   509→### 15. Additional Learning Paths & Practice Platforms
+   510→
+   511→| Resource                                | Link / Notes       |
+   512→| --------------------------------------- | ------------------ |
+   513→| The Odin Project                        | theodinproject.com |
+   514→| Full Stack Open                         | fullstackopen.com  |
+   515→| Microsoft Web Development for Beginners | GitHub             |
+   516→| roadmap.sh — Frontend                   | roadmap.sh         |
+   517→| roadmap.sh — Backend                    | roadmap.sh         |
+   518→| roadmap.sh — Full Stack                 | roadmap.sh         |
+   519→| roadmap.sh — JavaScript                 | roadmap.sh         |
+   520→| roadmap.sh — React                      | roadmap.sh         |
+   521→| roadmap.sh — Node.js                    | roadmap.sh         |
+   522→| GitHub Explore                          | github.com/explore |
+   523→
+   524→### 16. Question Banks with Answers (Selected Highlights)
+   525→
+   526→**JavaScript**
+   527→
+   528→- sudheerj/javascript-interview-questions (~1000 questions)
+   529→- GreatFrontEnd JavaScript Quiz Interview Questions
+   530→- Awesome-JavaScript-Interviews (rohan-paul)
+   531→- lydiahallie/javascript-questions (output-based)
+   532→- fe-interview (haizlin)
+   533→- ۲۰۰ سوال مصاحبه جاوااسکریپت (فارسی) — virgool.io
+   534→- javascript-persian-interview-questions (Mariotek)
+   535→- JavaScript Interview Resources and Practice (NamasteDev)
+   536→- 14 GitHub Repositories to Ace Your JavaScript Interviews (dev.to roundup)
+   537→
+   538→**React**
+   539→
+   540→- sudheerj/reactjs-interview-questions (500+)
+   541→- GreatFrontEnd — 100+ React Interview Questions
+   542→- React Quiz Interview Questions (GreatFrontEnd)
+   543→- React Interview Playbook (GreatFrontEnd)
+   544→- بزرگ‌ترین لیست سوالات مصاحبه ریکت، ۵۰۰ سوال (فارسی)
+   545→- reactjs-persian-interview-questions (Mariotek)
+   546→- 50 React Interview Questions (quick review)
+   547→
+   548→**Frontend General**
+   549→
+   550→- readytodev-pro/frontend-interview-questions (100+ with full answers)
+   551→- sumitsingh4411/frontend-interview-questions (3000+)
+   552→- goswamikaushik/frontend-interview-mastery (500+ real questions + coding)
+   553→- Devtools-Tech-Team/front-end-interview-questions (200+)
+   554→- h5bp/Front-end-Developer-Interview-Questions (classic list)
+   555→- bcherny/frontend-interview-questions (JS answers)
+   556→- frontendi.com — ۴۰۰ سوال مصاحبه فرانت‌اند (فارسی)
+   557→- job.faradars.org — راهنمای مصاحبه فرانت‌اند
+   558→- Frontend Interview Questions — Yauhen Kavalchuk
+   559→
+   560→**Vue / Angular / Node.js**
+   561→
+   562→- vuejs-interview-questions (sudheerj — 300+)
+   563→- nodejs-interview-questions (sudheerj)
+   564→- angular-persian-interview-questions (Mariotek)
+   565→- vuejs-persian-interview-questions (Mariotek)
+   566→
+   567→**Backend & Full-Stack**
+   568→
+   569→- AS-Backend-Institute/backend-interview-questions
+   570→- wowgeekyboy/Web-Development-Interview
+   571→- valakhosravi/Interview-Questions-Answers
+   572→- Backend Developer Interview Questions (hackajob)
+   573→- roadmap.sh/questions/backend
+   574→
+   575→**SQL & Databases**
+   576→
+   577→- LeetCode SQL 50
+   578→- SQL for Interviews (GitHub)
+   579→- SQLBolt
+   580→- InterviewBit SQL & PostgreSQL questions
+   581→- MongoDB Interview Questions (GeeksforGeeks)
+   582→
+   583→**System Design**
+   584→
+   585→- donnemartin/system-design-primer
+   586→- System Design Interview Questions — 500+
+   587→- System Design — Question & Solution repositories
+   588→- ByteByteGo System Design 101
+   589→- Frontend System Design resources (GreatFrontEnd + Frontend Interview Prep)
+   590→
+   591→**Company Experience Reports**
+   592→
+   593→- Interview Rounds (GitHub)
+   594→- FrontendFreaks
+   595→- Frontend Interview Handbook — company sections (Airbnb and others)
+   596→- GreatFrontEnd company guides
+   597→- Frontend Interview Prep — Company Guides (Google, Meta, Amazon, Netflix, Stripe, etc.)
+   598→
+   599→---
+   600→
+   601→## Detailed Project & Study Roadmap
+   602→
+   603→This section contains two complementary roadmaps:
+   604→
+   605→1. **Product Roadmap** — how the application itself can evolve.
+   606→2. **Interview Preparation Roadmap** — a practical study path for candidates.
+   607→
+   608→---
+   609→
+   610→### 1. Product Roadmap (Application Development)
+   611→
+   612→#### Phase 1 — Foundation (Current)
+   613→
+   614→- Next.js App Router + TypeScript setup
+   615→- shadcn/ui design system + dark/light mode
+   616→- Bilingual support (English / Persian) with correct RTL
+   617→- Core resource catalog with all categories
+   618→- Basic search and category filtering
+   619→- Responsive layout and accessibility baseline
+   620→- Aceternity UI integration points prepared
+   621→
+   622→#### Phase 2 — Content Experience
+   623→
+   624→- Advanced search with filters (technology, difficulty, free/paid, language)
+   625→- Resource detail pages with descriptions, tags, and related links
+   626→- Bookmark / save-for-later functionality
+   627→- Progress tracking (mark resources as “Studied” / “In Progress”)
+   628→- Study roadmap visualization (using Aceternity Timeline component)
+   629→- Personalized “Suggested next resources” based on selected focus area
+   630→
+   631→#### Phase 3 — Practice Layer
+   632→
+   633→- Curated question sets extracted from the best question banks
+   634→- Daily challenge mode (one theory question + one coding prompt)
+   635→- Frontend machine-coding challenges (autocomplete, data table, etc.)
+   636→- Spaced-repetition mode for important concepts
+   637→- Simple note-taking per resource
+   638→
+   639→#### Phase 4 — Community & Polish
+   640→
+   641→- Contribution system for adding new high-quality resources
+   642→- User feedback on resource quality and difficulty
+   643→- Improved Persian content coverage and orthography checks
+   644→- Performance optimization and Core Web Vitals excellence
+   645→- Optional user accounts (via NextAuth or similar) for syncing progress
+   646→
+   647→---
+   648→
+   649→### 2. Interview Preparation Roadmap (For Candidates)
+   650→
+   651→You do not need to finish every resource. Follow this progressive path according to your target role and experience level.
+   652→
+   653→#### Stage 0 — Orientation (1–2 days)
+   654→
+   655→- Read the Front End Interview Handbook overview
+   656→- Skim Tech Interview Handbook
+   657→- Choose your main target: Frontend / Backend / Full-Stack
+   658→- Set a realistic timeline (4–12 weeks depending on experience)
+   659→
+   660→#### Stage 1 — Solid Fundamentals (1–2 weeks)
+   661→
+   662→**Primary resources**
+   663→
+   664→- MDN Web Docs (HTML, CSS, JavaScript, Web APIs)
+   665→- JavaScript.info
+   666→- web.dev Learn (HTML + CSS)
+   667→- Flexbox Froggy + Grid Garden
+   668→
+   669→**Goals**
+   670→
+   671→- Understand the browser, DOM, CSS layout, and core JavaScript deeply
+   672→- Be comfortable explaining how the web works end-to-end
+   673→
+   674→#### Stage 2 — Interview-Focused Frontend Core (2–3 weeks)
+   675→
+   676→**Primary resources**
+   677→
+   678→- Front End Interview Handbook
+   679→- Frontend Interview Prep
+   680→- GreatFrontEnd (free sections)
+   681→- 33 JS Concepts
+   682→- You Don’t Know JS (selected books)
+   683→- sudheerj/javascript-interview-questions
+   684→- lydiahallie/javascript-questions
+   685→
+   686→**Goals**
+   687→
+   688→- Master common trivia and conceptual questions
+   689→- Practice explaining closures, prototypes, event loop, this, promises, etc.
+   690→- Solve output-based JavaScript questions daily
+   691→
+   692→#### Stage 3 — Framework Mastery (React + Next.js) (2–4 weeks)
+   693→
+   694→**Primary resources**
+   695→
+   696→- Official React docs (Learn + Reference)
+   697→- Official Next.js docs + Next.js Learn
+   698→- GreatFrontEnd React Interview Playbook
+   699→- sudheerj/reactjs-interview-questions
+   700→- React TypeScript Cheatsheets
+   701→- TanStack Query + Zustand or Redux Toolkit (as needed)
+   702→
+   703→**Goals**
+   704→
+   705→- Deep understanding of hooks, rendering, state management, performance
+   706→- Ability to implement common UI patterns and discuss trade-offs
+   707→- Comfort with Server Components and modern Next.js patterns
+   708→
+   709→#### Stage 4 — Coding & Machine Coding Practice (Ongoing)
+   710→
+   711→**Primary resources**
+   712→
+   713→- NeetCode (Roadmap + Blind 75 / Grind 75)
+   714→- LeetCode
+   715→- GreatFrontEnd JavaScript DSA
+   716→- Frontend Mentor + Frontend Mini Challenges
+   717→- DOM Challenge repositories
+   718→
+   719→**Goals**
+   720→
+   721→- Consistent problem-solving rhythm
+   722→- Ability to implement clean, production-like UI under time pressure
+   723→- Strong command of common data structures and algorithms in JavaScript
+   724→
+   725→#### Stage 5 — Backend, Databases & APIs (2–3 weeks for Full-Stack)
+   726→
+   727→**Primary resources**
+   728→
+   729→- Node.js official documentation + Learn section
+   730→- Express / NestJS / Fastify docs
+   731→- PostgreSQL docs + SQLBolt + Use The Index, Luke!
+   732→- MongoDB University (if relevant)
+   733→- Backend interview question banks (AS-Backend-Institute, sudheerj/nodejs-interview-questions, roadmap.sh backend questions)
+   734→
+   735→**Goals**
+   736→
+   737→- Design simple REST/GraphQL APIs
+   738→- Understand authentication, sessions, JWT, and basic security
+   739→- Write efficient SQL and understand indexing
+   740→
+   741→#### Stage 6 — System Design & Architecture (2–4 weeks for Mid/Senior)
+   742→
+   743→**Primary resources**
+   744→
+   745→- System Design Primer (donnemartin)
+   746→- ByteByteGo + system-design-101
+   747→- Tech Interview Handbook System Design section
+   748→- GreatFrontEnd Frontend System Design
+   749→- Design Gurus / Educative (selected)
+   750→
+   751→**Goals**
+   752→
+   753→- Ability to design scalable frontend and full-stack systems
+   754→- Practice common problems: URL shortener, news feed, chat, autocomplete, data grids, etc.
+   755→- Communicate trade-offs clearly (consistency, caching, availability, latency)
+   756→
+   757→#### Stage 7 — Security, Testing, Performance & Quality
+   758→
+   759→**Primary resources**
+   760→
+   761→- OWASP Top 10 + PortSwigger Web Security Academy
+   762→- Testing Library + Playwright / Cypress
+   763→- web.dev Performance + Core Web Vitals
+   764→- WCAG + WAI-ARIA practices
+   765→- Lighthouse + PageSpeed Insights
+   766→
+   767→**Goals**
+   768→
+   769→- Recognize and prevent common web vulnerabilities
+   770→- Write meaningful tests
+   771→- Optimize loading, interactivity, and accessibility
+   772→
+   773→#### Stage 8 — Behavioral & Company-Specific Preparation
+   774→
+   775→**Primary resources**
+   776→
+   777→- Tech Interview Handbook (Behavioral)
+   778→- STAR method guides
+   779→- Company career pages (Google, Amazon, Meta, Microsoft, etc.)
+   780→- Glassdoor + Levels.fyi
+   781→- Interview experience repositories
+   782→
+   783→**Goals**
+   784→
+   785→- Prepare strong stories using the STAR framework
+   786→- Research target companies and common interview formats
+   787→- Practice mock interviews
+   788→
+   789→---
+   790→
+   791→### Suggested Weekly Rhythm
+   792→
+   793→| Day       | Focus                                    | Time Suggestion |
+   794→| --------- | ---------------------------------------- | --------------- |
+   795→| Mon–Fri   | Theory questions + 1 coding problem      | 1.5–3 hours     |
+   796→| Weekend 1 | System design or machine-coding practice | 2–4 hours       |
+   797→| Weekend 2 | Review weak areas + mock interview       | 2–3 hours       |
+   798→
+   799→Adjust intensity based on how close you are to real interviews.
+   800→
+   801→---
+   802→
+   803→### Role-Specific Focus Paths
+   804→
+   805→**Junior Frontend**
+   806→Stages 1 → 2 → 3 → 4 (light algorithms) → 8
+   807→
+   808→**Mid-level Frontend / React**
+   809→Stages 1–4 fully + Stage 6 (Frontend System Design) + Stage 7 + Stage 8
+   810→
+   811→**Full-Stack (Node.js)**
+   812→All stages, with extra depth on Stage 5 and Stage 6
+   813→
+   814→**Senior / Staff**
+   815→Heavy emphasis on Stages 6, 7, and 8 + deep knowledge of architecture and trade-offs
+   816→
+   817→---
+   818→
+   819→## Accessibility & Design Principles
+   820→
+   821→### Accessibility First
+   822→
+   823→- Semantic HTML5 elements and proper landmark regions (`header`, `nav`, `main`, `aside`, `footer`)
+   824→- Full keyboard navigation support and clearly visible focus indicators in both light and dark themes
+   825→- WCAG 2.2 AA (or better) color contrast ratios for text and interactive elements
+   826→- Respect for `prefers-reduced-motion` — animations are disabled or simplified when requested
+   827→- Correct `lang` attribute on the document and language switching that updates the attribute
+   828→- Complete Right-to-Left (RTL) support when Persian is active, including layout mirroring and logical properties
+   829→- No information is conveyed by color alone — icons, text labels, and patterns are used as well
+   830→- Screen-reader friendly structure with meaningful ARIA labels only where necessary
+   831→- Sufficient touch target sizes on mobile (minimum 44×44 px)
+   832→
+   833→### Visual Design Philosophy
+   834→
+   835→The interface follows a **“calm, content-first, quietly delightful”** approach:
+   836→
+   837→- **Clarity over decoration** — generous whitespace, clear hierarchy, and readable typography come first.
+   838→- **Consistent design system** — built on shadcn/ui tokens so spacing, radii, colors, and typography stay coherent.
+   839→- **Dual-theme excellence** — both light and dark modes are carefully tuned for comfort during long study sessions.
+   840→- **Subtle motion** — micro-interactions and page transitions feel responsive without becoming distracting.
+   841→- **Bilingual by design** — typography (Inter + Vazirmatn), spacing, and component layouts are tested in both LTR and RTL.
+   842→- **Performance-aware aesthetics** — skeleton loaders, optimized images, and minimal cumulative layout shift.
+   843→
+   844→### Role of Aceternity UI
+   845→
+   846→Aceternity UI is used as a selective enhancement layer, not as the foundation:
+   847→
+   848→| Area               | Recommended Aceternity Components          | Purpose                                 |
+   849→| ------------------ | ------------------------------------------ | --------------------------------------- |
+   850→| Hero / Landing     | Background Beams, Text Generate, Spotlight | Strong first impression without clutter |
+   851→| Resource Cards     | 3D Card, Hover Effect, Moving Border       | Make browsing resources more engaging   |
+   852→| Study Roadmap      | Timeline, Sticky Scroll                    | Visual progress and stage overview      |
+   853→| Featured / Popular | Infinite Moving Cards, Bento Grid          | Highlight curated content               |
+   854→| Navigation         | Floating Navbar / Dock                     | Modern, space-efficient navigation      |
+   855→| Calls to Action    | Border Beam, Animated Buttons              | Gentle emphasis on important actions    |
+   856→
+   857→All animations respect `prefers-reduced-motion`. Components are imported only where they add clear value, keeping the overall bundle and cognitive load low.
+   858→
+   859→### Typography & Color
+   860→
+   861→- **Latin text**: Inter (excellent readability and variable font support)
+   862→- **Persian text**: Vazirmatn (modern, highly legible Persian typeface with multiple weights)
+   863→- Color system is defined via CSS variables so light/dark themes stay consistent
+   864→- Accent colors are used sparingly to guide attention rather than decorate every element
+   865→
+   866→The final result should feel professional, calm, and inviting — a place where candidates can focus on learning rather than fighting the interface.
+   867→
+   868→---
+   869→
+   870→## Contributing
+   871→
+   872→Contributions are welcome. Useful contributions include:
+   873→
+   874→- Adding new high-quality resources (with short descriptions)
+   875→- Improving Persian translations and ensuring proper orthography (نیم‌فاصله, Persian digits in prose, correct ی/ک)
+   876→- Enhancing accessibility
+   877→- Improving search or filtering
+   878→- Adding new practice problems or study roadmaps
+   879→- Fixing bugs or improving performance
+   880→
+   881→Please open an issue first for larger changes.
+   882→
+   883→---
+   884→
+   885→## License
+   886→
+   887→This project is open source. Individual resources retain their original licenses. Always check the license of each linked repository or website before redistributing content.
+   888→
+   889→---
+   890→
+   891→## Final Notes
+   892→
+   893→This README and the accompanying application aim to turn a large collection of scattered interview resources into a single, pleasant, bilingual learning environment. The goal is not to replace deep study of official documentation, but to give candidates a clear map and high-quality practice material so they can prepare efficiently and confidently.
+   894→
+   895→Whether you are targeting a junior frontend role, a mid-level React position, a full-stack Node.js job, or a senior system design interview, the resources collected here cover the ground you need.
+   896→
+   897→Start with the fundamentals, practice consistently, and use the question banks and system design materials to simulate real interview conditions.
+   898→
+   899→Good luck with your interviews.
+   900→موفق باشید.
+   901→
+   902→---
+   903→
+   904→_Built with Next.js, shadcn/ui, and a strong preference for clarity, accessibility, and bilingual support. Enhanced visuals recommended via Aceternity UI._
+   905→
