@@ -8,11 +8,12 @@ export const dict = {
     "nav.home": "Home",
     "nav.resources": "Resources",
     "nav.roadmap": "Roadmap",
+    "nav.library": "My Library",
     "brand.tagline": "Interview Prep",
     "brand.taglineFull": "Bilingual Web Development Interview Prep",
 
     // Hero
-    "hero.badge": "Phase 1 · Foundation",
+    "hero.badge": "Phase 2 · Content Experience",
     "hero.title1": "Walk into your",
     "hero.title2": "web dev interview",
     "hero.title3": "ready.",
@@ -48,6 +49,55 @@ export const dict = {
     "home.cta.subtitle":
       "Strong basics beat last-minute cramming — every time. The map is ready; the next step is yours.",
     "home.cta.button": "Open the resource library",
+
+    // Your progress (Phase 2)
+    "home.progress.title": "Your progress",
+    "home.progress.empty":
+      "Bookmark resources and mark your study progress — everything stays in this browser, no account needed.",
+    "home.progress.cta": "Open my library",
+
+    // My Library view
+    "lib.title": "My Library",
+    "lib.subtitle":
+      "Everything you save or mark gathers here — bookmarks and study progress, stored only in your browser. No account, no sync, no clutter.",
+    "lib.hint":
+      "Tip: use the bookmark icon on any resource card to start building your library.",
+    "lib.tab.bookmarks": "Bookmarks",
+    "lib.tab.doing": "In progress",
+    "lib.tab.done": "Completed",
+    "lib.progress.of": "{done} of {total} resources completed",
+    "lib.empty.bookmarks.title": "No bookmarks yet",
+    "lib.empty.bookmarks.desc":
+      "Tap the bookmark icon on any resource card to save it for later.",
+    "lib.empty.doing.title": "Nothing in progress",
+    "lib.empty.doing.desc":
+      'Mark resources you are currently studying as "In progress" to keep track of them here.',
+    "lib.empty.done.title": "Nothing completed yet",
+    "lib.empty.done.desc":
+      'Mark finished resources as "Done" and watch your progress bar climb.',
+    "lib.empty.cta": "Browse resources",
+    "lib.reset": "Reset all data",
+    "lib.reset.confirm.title": "Reset everything?",
+    "lib.reset.confirm.desc":
+      "This clears all bookmarks and study progress stored in this browser. This action cannot be undone.",
+    "lib.reset.confirm.cancel": "Cancel",
+    "lib.reset.confirm.ok": "Yes, reset",
+
+    // Resource detail view
+    "detail.bookmark.add": "Save to library",
+    "detail.bookmark.remove": "Saved in library",
+    "detail.status.label": "Study status",
+    "detail.status.hint":
+      "Track where you are — the library and progress bar update as you go.",
+    "detail.status.todo": "Not started",
+    "detail.status.doing": "In progress",
+    "detail.status.done": "Done",
+    "detail.about": "About this category",
+    "detail.related": "More in {category}",
+    "detail.viewAll": "See all {category} resources",
+    "detail.notfound.title": "Resource not found",
+    "detail.notfound.desc":
+      "This link may be outdated or the resource no longer exists. Continue browsing from the resource library.",
 
     // Resources view
     "res.title": "Resource library",
@@ -87,7 +137,7 @@ export const dict = {
       "Adjust intensity based on how close you are to real interviews.",
     "road.product.current": "Current",
     "road.product.intro":
-      "How DevReady itself evolves — Phase 1 (Foundation) is what you are looking at now.",
+      "How DevReady itself evolves — Phase 2 (Content Experience) is what you are looking at now.",
     "road.phases": "Phase {n}",
 
     // Footer
@@ -118,6 +168,8 @@ export const dict = {
     "a11y.results": "Search results",
     "a11y.menu": "Open menu",
     "a11y.external": "(opens in a new tab)",
+    "a11y.details": "View details",
+    "a11y.breadcrumb": "Breadcrumb",
   },
 
   fa: {
@@ -125,11 +177,12 @@ export const dict = {
     "nav.home": "خانه",
     "nav.resources": "منابع",
     "nav.roadmap": "نقشه راه",
+    "nav.library": "کتابخانه من",
     "brand.tagline": "آمادگی مصاحبه",
     "brand.taglineFull": "پلتفرم دوزبانه آمادگی مصاحبه توسعه وب",
 
     // Hero
-    "hero.badge": "فاز ۱ · بنیان",
+    "hero.badge": "فاز ۲ · تجربه محتوا",
     "hero.title1": "برای مصاحبه",
     "hero.title2": "توسعه وب،",
     "hero.title3": "آماده برو.",
@@ -165,6 +218,55 @@ export const dict = {
     "home.cta.subtitle":
       "مبانی محکم همیشه از جمع‌زنی شبِ مصاحبه بهتر است. نقشه آماده است؛ قدم بعدی با شما.",
     "home.cta.button": "باز کردن کتابخانه منابع",
+
+    // Your progress (Phase 2)
+    "home.progress.title": "پیشرفت شما",
+    "home.progress.empty":
+      "منبع‌ها را نشان‌گذاری کنید و وضعیت مطالعه‌تان را ثبت کنید — همه‌چیز فقط در مرورگر خودتان می‌ماند؛ بدون نیاز به حساب کاربری.",
+    "home.progress.cta": "باز کردن کتابخانه من",
+
+    // My Library view
+    "lib.title": "کتابخانه من",
+    "lib.subtitle":
+      "هر منبعی که ذخیره یا علامت‌گذاری کنید همین‌جا جمع می‌شود — نشانک‌ها و پیشرفت مطالعه، فقط در مرورگر خودتان. بدون حساب کاربری، بدون همگام‌سازی، بدون شلوغی.",
+    "lib.hint":
+      "نکته: با آیکون نشانک روی هر منبع، کتابخانه خودتان را بسازید.",
+    "lib.tab.bookmarks": "نشانک‌ها",
+    "lib.tab.doing": "در حال انجام",
+    "lib.tab.done": "تمام‌شده",
+    "lib.progress.of": "{done} از {total} منبع تمام شده است",
+    "lib.empty.bookmarks.title": "هنوز نشانکی ندارید",
+    "lib.empty.bookmarks.desc":
+      "روی آیکون نشانک هر منبع بزنید تا برای بعد ذخیره شود.",
+    "lib.empty.doing.title": "منبعی در حال مطالعه نیست",
+    "lib.empty.doing.desc":
+      "وضعیت منبع‌هایی که مشغول خواندن‌شان هستید را «در حال انجام» بگذارید تا اینجا دیده شوند.",
+    "lib.empty.done.title": "هنوز منبعی را تمام نکرده‌اید",
+    "lib.empty.done.desc":
+      "منبع‌های تمام‌شده را «تمام‌شده» علامت بزنید تا نوار پیشرفت‌تان بالا برود.",
+    "lib.empty.cta": "مرور منابع",
+    "lib.reset": "پاک کردن همه داده‌ها",
+    "lib.reset.confirm.title": "همه‌چیز پاک شود؟",
+    "lib.reset.confirm.desc":
+      "همه نشانک‌ها و پیشرفت ذخیره‌شده در این مرورگر پاک می‌شوند. این کار قابل بازگشت نیست.",
+    "lib.reset.confirm.cancel": "انصراف",
+    "lib.reset.confirm.ok": "بله، پاک کن",
+
+    // Resource detail view
+    "detail.bookmark.add": "ذخیره در کتابخانه",
+    "detail.bookmark.remove": "در کتابخانه شما",
+    "detail.status.label": "وضعیت مطالعه",
+    "detail.status.hint":
+      "جای خود را مشخص کنید — کتابخانه و نوار پیشرفت با شما به‌روز می‌شوند.",
+    "detail.status.todo": "شروع نشده",
+    "detail.status.doing": "در حال انجام",
+    "detail.status.done": "تمام‌شده",
+    "detail.about": "درباره این دسته",
+    "detail.related": "بیشتر در {category}",
+    "detail.viewAll": "مشاهده همه منابع {category}",
+    "detail.notfound.title": "منبع پیدا نشد",
+    "detail.notfound.desc":
+      "ممکن است این لینک قدیمی شده باشد یا منبع دیگر وجود نداشته باشد. از کتابخانه منابع ادامه دهید.",
 
     // Resources view
     "res.title": "کتابخانه منابع",
@@ -203,7 +305,7 @@ export const dict = {
     "road.weekly.note": "شدت را بر اساس فاصله تا مصاحبه واقعی تنظیم کنید.",
     "road.product.current": "فعلی",
     "road.product.intro":
-      "روند تکامل خودِ DevReady — فاز ۱ (بنیان) همان چیزی است که اکنون می‌بینید.",
+      "روند تکامل خودِ DevReady — فاز ۲ (تجربه محتوا) همان چیزی است که اکنون می‌بینید.",
     "road.phases": "فاز {n}",
 
     // Footer
@@ -233,6 +335,8 @@ export const dict = {
     "a11y.results": "نتایج جستجو",
     "a11y.menu": "باز کردن منو",
     "a11y.external": "(در تب جدید باز می‌شود)",
+    "a11y.details": "مشاهده جزئیات",
+    "a11y.breadcrumb": "مسیر صفحه",
   },
 } as const;
 

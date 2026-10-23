@@ -1,6 +1,6 @@
 "use client";
 
-import { House, LibraryBig, Map, Menu, Zap } from "lucide-react";
+import { Bookmark, House, LibraryBig, Map, Menu, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -12,13 +12,16 @@ import {
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useLanguage } from "@/lib/language-context";
+import { useLibrary } from "@/lib/library-context";
+import type { DictKey } from "@/lib/i18n";
 import type { View } from "@/components/app-shell";
 import { cn } from "@/lib/utils";
 
-const NAV_ITEMS: { key: View; icon: typeof House; labelKey: "nav.home" | "nav.resources" | "nav.roadmap" }[] = [
+const NAV_ITEMS: { key: View; icon: typeof House; labelKey: DictKey }[] = [
   { key: "home", icon: House, labelKey: "nav.home" },
   { key: "resources", icon: LibraryBig, labelKey: "nav.resources" },
   { key: "roadmap", icon: Map, labelKey: "nav.roadmap" },
+  { key: "library", icon: Bookmark, labelKey: "nav.library" },
 ];
 
 interface HeaderProps {
@@ -28,8 +31,16 @@ interface HeaderProps {
 
 export function Header({ view, onNavigate }: HeaderProps) {
   const { t } = useLanguage();
+  const { bookmarkCount } = useLibrary();
 
   const go = (next: View) => () => onNavigate(next);
+
+  const countBadge = (show: boolean) =>
+    show ? (
+      <span className="ms-0.5 inline-grid min-w-5 place-items-center rounded-full bg-primary px-1.5 text-[11px] font-bold leading-5 text-primary-foreground">
+        {bookmarkCount}
+      </span>
+    ) : null;
 
   return (
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
@@ -61,7 +72,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
         {/* Desktop nav */}
         <nav
           aria-label={t("a11y.nav")}
-          className="ms-auto hidden items-center gap-1 md:flex"
+          className="ms-auto hidden items-center gap-1 lg:flex"
         >
           {NAV_ITEMS.map(({ key, icon: Icon, labelKey }) => {
             const active = view === key;
@@ -80,6 +91,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
               >
                 <Icon className="size-4" aria-hidden="true" />
                 {t(labelKey)}
+                {key === "library" ? countBadge(bookmarkCount > 0) : null}
               </Button>
             );
           })}
@@ -96,13 +108,13 @@ export function Header({ view, onNavigate }: HeaderProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="size-9 sm:size-10 md:hidden"
+                  className="size-9 sm:size-10 lg:hidden"
                   aria-label={t("a11y.menu")}
                 >
                   <Menu className="size-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="top" aria-describedby={undefined} className="md:hidden">
+              <SheetContent side="top" aria-describedby={undefined} className="lg:hidden">
                 <SheetHeader>
                   <SheetTitle className="text-start">DevReady</SheetTitle>
                 </SheetHeader>
@@ -125,6 +137,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
                       >
                         <Icon className="size-4" aria-hidden="true" />
                         {t(labelKey)}
+                        {key === "library" ? countBadge(bookmarkCount > 0) : null}
                       </Button>
                     </SheetTrigger>
                   ))}

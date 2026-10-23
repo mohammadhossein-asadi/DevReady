@@ -1,33 +1,65 @@
 "use client";
 
-import { ArrowUpRight, Languages } from "lucide-react";
+import { Info, Languages } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { SpotlightCard } from "@/components/aceternity/spotlight-card";
+import { BookmarkButton } from "@/components/bookmark-button";
 import { useLanguage } from "@/lib/language-context";
-import { domainOf, type Resource } from "@/lib/data/resources";
+import { useLibrary } from "@/lib/library-context";
+import {
+  domainOf,
+  getCategory,
+  resourceHref,
+  resourceKeyOf,
+  type Resource,
+} from "@/lib/data/resources";
 import { cn } from "@/lib/utils";
+
+interface ResourceCardProps {
+  resource: Resource;
+  /** Category the resource belongs to — scopes its storage key + detail route. */
+  categoryId: string;
+  /** Show the category name chip (used by the library view). */
+  showCategory?: boolean;
+  className?: string;
+}
 
 export function ResourceCard({
   resource,
+  categoryId,
+  showCategory = false,
   className,
-}: {
-  resource: Resource;
-  className?: string;
-}) {
+}: ResourceCardProps) {
   const { t, lang } = useLanguage();
+  const { statusOf } = useLibrary();
+  const key = resourceKeyOf(categoryId, resource);
+  const detailHref = resourceHref(categoryId, resource);
   const domain = domainOf(resource.url);
   const link = resource.url;
+  const category = getCategory(categoryId);
+  const status = statusOf(key);
+  const detailsLabel = t("a11y.details");
 
   const body = (
     <>
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-start justify-between gap-2">
         <h3 className="text-sm font-semibold leading-snug text-foreground group-hover:text-primary">
           {resource.name}
         </h3>
-        <ArrowUpRight
-          className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary rtl:-rotate-90 rtl:group-hover:-translate-x-0.5 rtl:group-hover:translate-y-0.5"
-          aria-hidden="true"
-        />
+        <div className="flex shrink-0 items-center gap-0.5">
+          <BookmarkButton id={key} className="relative z-30" />
+          <a
+            href={detailHref}
+            aria-label={`${resource.name} — ${detailsLabel}`}
+            title={detailsLabel}
+            className="relative z-30 grid size-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            <Info
+              className="size-4 transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+              aria-hidden="true"
+            />
+          </a>
+        </div>
       </div>
 
       {resource.note ? (
@@ -37,6 +69,11 @@ export function ResourceCard({
       ) : null}
 
       <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-3">
+        {showCategory && category ? (
+          <Badge variant="secondary" className="max-w-36 truncate text-[11px]">
+            {category.name[lang]}
+          </Badge>
+        ) : null}
         {resource.group ? (
           <Badge variant="secondary" className="text-[11px]">
             {resource.group[lang]}
@@ -50,6 +87,24 @@ export function ResourceCard({
             <Languages className="size-3" aria-hidden="true" />
             {t("res.badge.fa")}
           </Badge>
+        ) : null}
+        {status === "done" ? (
+          <span
+            className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700 dark:text-emerald-400"
+            title={t("detail.status.done")}
+          >
+            <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+            <span className="sr-only">{t("detail.status.done")}</span>
+          </span>
+        ) : null}
+        {status === "doing" ? (
+          <span
+            className="inline-flex items-center gap-1 text-[11px] font-medium text-amber-700 dark:text-amber-400"
+            title={t("detail.status.doing")}
+          >
+            <span className="size-1.5 animate-pulse rounded-full bg-amber-500 motion-reduce:animate-none" aria-hidden="true" />
+            <span className="sr-only">{t("detail.status.doing")}</span>
+          </span>
         ) : null}
         {domain ? (
           <span className="ms-auto truncate font-mono text-[11px] text-muted-foreground/80">

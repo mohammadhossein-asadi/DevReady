@@ -33,6 +33,7 @@ interface ResourcesViewProps {
 
 interface DecoratedResource {
   key: string;
+  categoryId: string;
   resource: Resource;
 }
 
@@ -55,6 +56,7 @@ export function ResourcesView({
       catId: string
     ): DecoratedResource => ({
       key: `${catId}·${resource.name}·${resource.url ?? "nolink"}`,
+      categoryId: catId,
       resource,
     });
 
@@ -225,8 +227,12 @@ export function ResourcesView({
       {/* Results */}
       {results.length > 0 ? (
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {results.map(({ key, resource }) => (
-            <ResourceCard key={key} resource={resource} />
+          {results.map(({ key, resource, categoryId }) => (
+            <ResourceCard
+              key={key}
+              resource={resource}
+              categoryId={categoryId}
+            />
           ))}
         </ul>
       ) : (

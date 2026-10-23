@@ -61,3 +61,28 @@ Stage Summary:
 - Persian typography now: Vazir FD (Persian digits for ALL numbers incl. inside Latin text), Vazir Black h1/h2, 1.9 paragraph line-height, neutral letter-spacing; Latin stays Inter in both locales.
 - Fully responsive: no horizontal overflow from 320px to 1920px in either language.
 - Files touched: src/app/globals.css, src/lib/language-context.tsx, src/components/{header,theme-toggle,language-switcher}.tsx, src/components/views/resources-view.tsx, public/fonts/vazir/Vazir-FD-*.woff2 (4 files).
+
+---
+Task ID: 4
+Agent: Main agent (Z.ai)
+Task: Phase 2 — bookmarks + progress tracking (localStorage) and deep-linkable RTL-aware resource detail pages, per user's confirmed order.
+
+Work Log:
+- Built `src/lib/library-context.tsx`: LibraryProvider over localStorage (`devready:library:v1` = {v:1, bookmarks: string[], status: Record<"doing"|"done">}) via useSyncExternalStore (server snapshot = empty), cached-parse for stable snapshot identity, storage+custom-event cross-tab sync, graceful private-mode fallback. API: isBookmarked/toggleBookmark/statusOf/setStatus/bookmarkCount/doingCount/doneCount/hasData/resetAll. "todo" statuses stored as absence.
+- Data layer (`resources.ts`): resourceKeyOf (`catId·name·url`, mirrors resources-view keys so cross-category duplicates stay distinct), resourceRefs decorated catalog + refOf(key) map, resolveResource(catId,name) and resourceHref (`#/resource/<cat>/<encodeURIComponent(name)>`).
+- Router (`app-shell.tsx`): View type + HashState gained "library" and "resource" (`name` = decoded resource name); added scrollTo-top effect on routed-state change; LibraryView/ResourceDetailView mounted.
+- Components: `bookmark-button.tsx` (icon variant for cards with relative z-30 above link overlay + labeled variant, aria-pressed, active:scale-90, fill-current when saved), `status-picker.tsx` (radiogroup of todo/doing/done, aria-checked, emerald-active pill).
+- ResourceCard: now requires categoryId; top-right cluster = bookmark + info (details deep link, replaces decorative ArrowUpRight); optional showCategory chip; status dot on card (emerald done / pulsing amber doing) with sr-only text.
+- `resource-detail-view.tsx`: breadcrumb (rtl:rotate-180 chevrons, aria-current), h1 + meta badges + domain, note, action bar (Open resource external + labeled bookmark), Study status picker, About-this-category aside (desc + practiceNote), related grid (4 URL-preferring siblings + view-all tile), not-found state for bad cat/name (verified with garbage links).
+- `library-view.tsx`: summary card (percent with Math.ceil so 1/272 reads 1%, Progress bar, three clickable stat chips that switch tabs), controlled Tabs (bookmarks/doing/done) with live count badges, per-tab empty states + CTA, AlertDialog reset ("Reset all data"), hint row when empty. TabsTrigger flex-none fix (base flex-1 stretched them full-width); TabsList w-fit + max-w-full + flex-wrap.
+- Header: 4th nav item "My Library" (Bookmark icon) with live count badge (desktop + mobile sheet); desktop nav breakpoint moved md→lg with paired lg:hidden sheet trigger so 768–1024 uses the menu (4 items + brand don't fit md). Footer gained Library link.
+- Home: ProgressWidget strip under hero (discovery + counts + progress bar + CTA; empty-state copy when no data). Providers: LibraryProvider inside LanguageProvider.
+- i18n: ~40 new EN/FA keys (lib.*, detail.*, home.progress.*, a11y.details/breadcrumb); hero.badge + road.product.intro updated to Phase 2 · Content Experience; roadmap.ts productPhases current badge moved Phase 1→2.
+- Fixed en route: two i18n strings had curly-quote delimiters (syntax) → single-quoted; stale-ref/role-selector test issues in verification were tooling, not app bugs.
+- Verified (agent-browser, EN+FA, light+dark, 320–1280px): bookmark add/remove from cards, library, and detail; header badge live; status doing/done persisted with correct keys; status dots on cards; tabs + chips reactively update; percent Math.ceil fix; persistence across reload; reset dialog clears storage; deep links `#/resource/javascript/...`, `#/resource/fundamentals/web.dev`, `#/resource/react-frameworks/React — Official Docs` (encoded em-dash) + not-found for bad ids/names; FA RTL mirroring on detail + library (lang=fa, dir=rtl, Vazir FD Persian digits); dark mode via theme menu (html.dark); mobile sheet shows 4 items incl. My Library badge; 0 horizontal overflow 320/375/1280 in both languages; roadmap product tab shows Phase 2 = Current; 0 console errors on clean loads of all 5 views; `bun run lint` clean.
+
+Stage Summary:
+- Phase 2 (Content Experience core) is live: bookmarks + 3-state progress in localStorage, My Library view, deep-linkable detail pages, all bilingual and RTL-correct, dark-mode-safe, responsive 320→1920.
+- Product roadmap in-app now honestly marks Phase 2 as current; detail pages + bookmarks + progress checkboxes are shipped items.
+- New files: src/lib/library-context.tsx, src/components/{bookmark-button,status-picker}.tsx, src/components/views/{library-view,resource-detail-view}.tsx. Key edits: app-shell, header, footer, resource-card, resources-view, home-view, providers, i18n, data/resources.ts, data/roadmap.ts.
+- localStorage contract: key `devready:library:v1`; resource keys are `<catId>·<name>·<url|nolink>` (also the React key scheme) — future features (notes, Phase 3 practice layer) should reuse refOf()/resourceRefs.

@@ -21,6 +21,48 @@ export function getCategory(id: string): Category | undefined {
   return categories.find((c) => c.id === id);
 }
 
+/**
+ * Stable storage key for a resource within its category. Mirrors the
+ * category-scoped React keys used by the resources view, so cross-category
+ * duplicates (e.g. SQLBolt in Databases AND Question Banks) stay unique.
+ */
+export function resourceKeyOf(catId: string, resource: Resource): string {
+  return `${catId}·${resource.name}·${resource.url ?? "nolink"}`;
+}
+
+export interface ResourceRef {
+  category: Category;
+  resource: Resource;
+  /** Storage key (see resourceKeyOf). */
+  key: string;
+}
+
+/** Decorated catalog — every resource with its category and storage key. */
+export const resourceRefs: ResourceRef[] = categories.flatMap((c) =>
+  c.resources.map((r) => ({ category: c, resource: r, key: resourceKeyOf(c.id, r) }))
+);
+
+const refByKey = new Map(resourceRefs.map((ref) => [ref.key, ref]));
+
+/** Look a resource up by its storage key (used by the library view). */
+export function refOf(key: string): ResourceRef | undefined {
+  return refByKey.get(key);
+}
+
+/** Resolve a resource detail route (`#/resource/<catId>/<encodedName>`). */
+export function resolveResource(catId: string, name: string): ResourceRef | undefined {
+  const category = getCategory(catId);
+  if (!category) return undefined;
+  const resource = category.resources.find((r) => r.name === name);
+  if (!resource) return undefined;
+  return { category, resource, key: resourceKeyOf(catId, resource) };
+}
+
+/** Deep-linkable hash URL for a resource's detail page. */
+export function resourceHref(catId: string, resource: Resource): string {
+  return `#/resource/${catId}/${encodeURIComponent(resource.name)}`;
+}
+
 /** Best-effort domain label for a resource URL. */
 export function domainOf(url?: string): string | undefined {
   if (!url) return undefined;

@@ -3,6 +3,9 @@
 import {
   ArrowRight,
   BookOpenCheck,
+  Bookmark,
+  CircleCheckBig,
+  CircleDot,
   Compass,
   LibraryBig,
   Search,
@@ -11,6 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { BackgroundBeams } from "@/components/aceternity/background-beams";
 import { TextGenerate } from "@/components/aceternity/text-generate";
 import { MovingBorderButton } from "@/components/aceternity/moving-border";
@@ -18,6 +22,7 @@ import { InfiniteMovingCards } from "@/components/aceternity/infinite-moving-car
 import { SpotlightCard } from "@/components/aceternity/spotlight-card";
 import { HUE_CHIP } from "@/components/views/resources-view";
 import { useLanguage } from "@/lib/language-context";
+import { useLibrary } from "@/lib/library-context";
 import {
   categories,
   totalResources,
@@ -44,7 +49,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-const ICONS: Record<CategoryIcon, LucideIcon> = {
+/** Category icon registry — shared with the resource detail view. */
+export const ICONS: Record<CategoryIcon, LucideIcon> = {
   target: Target,
   globe: Globe,
   braces: Braces,
@@ -87,6 +93,72 @@ const STEPS: {
   { icon: Compass, titleKey: "home.how.step2.title", descKey: "home.how.step2.desc" },
   { icon: BookOpenCheck, titleKey: "home.how.step3.title", descKey: "home.how.step3.desc" },
 ];
+
+/** Personal progress strip — Phase 2 feature discovery + jump-off point. */
+function ProgressWidget({ onNavigate }: { onNavigate: (view: View, category?: string) => void }) {
+  const { t, num } = useLanguage();
+  const { bookmarkCount, doingCount, doneCount, hasData } = useLibrary();
+  const percent = totalResources > 0 ? Math.min(100, Math.ceil((doneCount / totalResources) * 100)) : 0;
+
+  const metrics = [
+    { icon: Bookmark, value: bookmarkCount, label: t("lib.tab.bookmarks") },
+    { icon: CircleDot, value: doingCount, label: t("lib.tab.doing") },
+    { icon: CircleCheckBig, value: doneCount, label: t("lib.tab.done") },
+  ];
+
+  return (
+    <section aria-labelledby="progress-title" className="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+      <div className="rounded-2xl border bg-card p-5 sm:p-6">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0 flex-1">
+            <h2 id="progress-title" className="flex items-center gap-2 text-lg font-bold tracking-tight">
+              <CircleCheckBig className="size-5 text-primary" aria-hidden="true" />
+              {t("home.progress.title")}
+            </h2>
+            {hasData ? (
+              <>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {t("lib.progress.of", { done: num(doneCount), total: num(totalResources) })}
+                </p>
+                <Progress
+                  value={percent}
+                  aria-label={t("lib.progress.of", { done: num(doneCount), total: num(totalResources) })}
+                  className="mt-3 h-2 max-w-md"
+                />
+              </>
+            ) : (
+              <p className="mt-1 max-w-md text-sm leading-relaxed text-muted-foreground">
+                {t("home.progress.empty")}
+              </p>
+            )}
+          </div>
+
+          <dl className="grid grid-cols-3 gap-2 sm:gap-3">
+            {metrics.map(({ icon: Icon, value, label }) => (
+              <div
+                key={label}
+                className="flex min-h-16 flex-col items-center justify-center gap-1 rounded-xl border bg-background p-3 text-center"
+              >
+                <Icon className="size-4 text-primary" aria-hidden="true" />
+                <dd className="text-lg font-extrabold leading-none">{num(value)}</dd>
+                <dt className="text-[11px] font-medium text-muted-foreground">{label}</dt>
+              </div>
+            ))}
+          </dl>
+
+          <Button
+            variant="outline"
+            className="min-h-11 shrink-0 gap-2"
+            onClick={() => onNavigate("library")}
+          >
+            <Bookmark className="size-4" aria-hidden="true" />
+            {hasData ? t("home.progress.cta") : t("lib.title")}
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: string) => void }) {
   const { t, num, isFa } = useLanguage();
@@ -159,6 +231,9 @@ export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: s
           </dl>
         </div>
       </section>
+
+      {/* ============ Your progress (Phase 2) ============ */}
+      <ProgressWidget onNavigate={onNavigate} />
 
       {/* ============ Featured marquee ============ */}
       <section aria-labelledby="featured-title" className="border-b bg-muted/20 py-8">

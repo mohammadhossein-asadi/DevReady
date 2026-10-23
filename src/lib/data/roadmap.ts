@@ -222,7 +222,6 @@ export const productPhases: ProductPhase[] = [
   {
     num: 1,
     title: { en: "Foundation", fa: "بنیان" },
-    current: true,
     items: [
       { en: "Next.js App Router + TypeScript setup", fa: "راه‌اندازی Next.js App Router + TypeScript" },
       { en: "shadcn/ui design system + dark/light mode", fa: "سیستم دیزاین shadcn/ui + حالت روشن/تاریک" },
@@ -236,6 +235,7 @@ export const productPhases: ProductPhase[] = [
   {
     num: 2,
     title: { en: "Content Experience", fa: "تجربه محتوا" },
+    current: true,
     items: [
       { en: "Advanced search with filters (technology, difficulty, free/paid, language)", fa: "جستجوی پیشرفته با فیلترها (تکنولوژی، سختی، رایگان/پولی، زبان)" },
       { en: "Resource detail pages with descriptions, tags, and related links", fa: "صفحات جزئیات منبع با توضیحات، برچسب‌ها و لینک‌های مرتبط" },
