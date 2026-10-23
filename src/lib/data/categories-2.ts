@@ -34,6 +34,9 @@ export const categoriesPart2: Category[] = [
       { name: "System Design Interview Questions — 500+", url: "https://github.com/search?q=system-design-interview-questions&type=repositories", note: "500+ questions" },
       { name: "System Design — Question & Solution", url: "https://github.com/search?q=system-design-question-solution&type=repositories" },
       { name: "ByteByteGo System Design 101", url: "https://github.com/ByteByteGoHq/system-design-101" },
+      { name: "Designing Data-Intensive Applications (book)", url: "https://dataintensive.net" },
+      { name: "Microservices.io — Patterns", url: "https://microservices.io" },
+      { name: "Cloud Design Patterns — Azure", url: "https://learn.microsoft.com/en-us/azure/architecture/patterns" },
     ],
   },
   {
@@ -56,6 +59,8 @@ export const categoriesPart2: Category[] = [
       { name: "JWT", url: "https://jwt.io" },
       { name: "OAuth 2.0 — RFC 6749", url: "https://www.rfc-editor.org/rfc/rfc6749" },
       { name: "Web Security Academy Labs", url: "https://portswigger.net/web-security", note: "PortSwigger Labs" },
+      { name: "OWASP Cheat Sheet Series", url: "https://cheatsheetseries.owasp.org" },
+      { name: "Hacker101 — Free Security Training", url: "https://www.hacker101.com" },
     ],
   },
   {
@@ -78,6 +83,8 @@ export const categoriesPart2: Category[] = [
       { name: "Chrome DevTools", url: "https://developer.chrome.com/docs/devtools" },
       { name: "ESLint", url: "https://eslint.org" },
       { name: "Prettier", url: "https://prettier.io" },
+      { name: "Testing JavaScript (Kent C. Dodds)", url: "https://testingjavascript.com" },
+      { name: "jest-dom — Custom Matchers", url: "https://github.com/testing-library/jest-dom" },
     ],
   },
   {
@@ -100,6 +107,9 @@ export const categoriesPart2: Category[] = [
       { name: "Google Search Central", url: "https://developers.google.com/search" },
       { name: "Search Engine Optimization Starter Guide", url: "https://developers.google.com/search/docs/fundamentals/seo-starter-guide", note: "Google" },
       { name: "web.dev Learn (Performance & Accessibility)", url: "https://web.dev/learn" },
+      { name: "WebPageTest", url: "https://www.webpagetest.org" },
+      { name: "Lighthouse CI", url: "https://github.com/GoogleChrome/lighthouse-ci" },
+      { name: "Web Performance — MDN", url: "https://developer.mozilla.org/en-US/docs/Web/Performance" },
     ],
   },
   {
@@ -123,6 +133,9 @@ export const categoriesPart2: Category[] = [
       { name: "Terraform Documentation", url: "https://developer.hashicorp.com/terraform" },
       { name: "Vercel Documentation", url: "https://vercel.com/docs" },
       { name: "Netlify Documentation", url: "https://docs.netlify.com" },
+      { name: "Learn Git Branching (interactive)", url: "https://learngitbranching.js.org" },
+      { name: "Pro Git — The Book", url: "https://git-scm.com/book/en/v2" },
+      { name: "Oh Shit, Git!?! — Git Recovery Recipes", url: "https://ohshitgit.com" },
     ],
   },
   {
@@ -148,6 +161,9 @@ export const categoriesPart2: Category[] = [
       { name: "Frontend Interview Handbook — Airbnb", url: "https://frontendinterviewhandbook.com" },
       { name: "GreatFrontEnd — Airbnb", url: "https://www.greatfrontend.com" },
       { name: "Frontend Interview Prep — Company Guides", url: "https://github.com/search?q=frontend+interview+company+guides&type=repositories" },
+      { name: "Exponent — Interview Prep & Mocks", url: "https://www.tryexponent.com" },
+      { name: "Pramp — Peer Mock Interviews", url: "https://www.pramp.com" },
+      { name: "Interviewing.io — Anonymous Mocks", url: "https://interviewing.io" },
     ],
   },
   {
@@ -170,6 +186,8 @@ export const categoriesPart2: Category[] = [
       { name: "roadmap.sh — React", url: "https://roadmap.sh/react" },
       { name: "roadmap.sh — Node.js", url: "https://roadmap.sh/nodejs" },
       { name: "GitHub Explore", url: "https://github.com/explore" },
+      { name: "CS50W — Web Programming with Python and JavaScript", url: "https://cs50.harvard.edu/web" },
+      { name: "JavaScript30 — 30 Day Vanilla JS Challenge", url: "https://javascript30.com" },
     ],
   },
   {

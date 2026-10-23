@@ -1,11 +1,16 @@
-import type { Category } from "./types";
+import type { Category, Resource } from "./types";
 import { categoriesPart1 } from "./categories-1";
 import { categoriesPart2 } from "./categories-2";
+import { categoriesPart3 } from "./categories-3";
 
 export * from "./types";
 
-/** The complete DevReady catalog — all 16 categories. */
-export const categories: Category[] = [...categoriesPart1, ...categoriesPart2];
+/** The complete DevReady catalog — all 20 categories. */
+export const categories: Category[] = [
+  ...categoriesPart1,
+  ...categoriesPart2,
+  ...categoriesPart3,
+];
 
 export const totalResources: number = categories.reduce(
   (sum, c) => sum + c.resources.length,

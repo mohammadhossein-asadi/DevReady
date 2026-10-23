@@ -9,16 +9,17 @@ export const dict = {
     "nav.resources": "Resources",
     "nav.roadmap": "Roadmap",
     "nav.library": "My Library",
+    "nav.daily": "Daily",
     "brand.tagline": "Interview Prep",
     "brand.taglineFull": "Bilingual Web Development Interview Prep",
 
     // Hero
-    "hero.badge": "Phase 2 · Content Experience",
+    "hero.badge": "Phase 3 · Practice Layer",
     "hero.title1": "Walk into your",
     "hero.title2": "web dev interview",
     "hero.title3": "ready.",
     "hero.subtitle":
-      "A curated, bilingual library of {count}+ high-quality resources for Frontend, Backend, Full-Stack, System Design, Algorithms, Security and Behavioral rounds — in English and فارسی.",
+      "A curated, bilingual library of {count}+ high-quality resources for Frontend, Backend, Mobile, System Design, Algorithms, Security and Behavioral rounds — in English and فارسی.",
     "hero.cta1": "Explore resources",
     "hero.cta2": "View roadmap",
 
@@ -32,7 +33,7 @@ export const dict = {
     // Home sections
     "home.categories.title": "Browse by category",
     "home.categories.subtitle":
-      "Every major interview topic, organized into 16 dedicated sections. Pick one to see its full resource list.",
+      "Every major interview topic — from HTML basics to mobile, AI tooling and extra backend stacks — organized into dedicated sections.",
     "home.featured.title": "Community favorites",
     "home.featured.subtitle": "The names you will keep hearing in every prep journey.",
     "home.how.title": "How to use DevReady",
@@ -56,15 +57,57 @@ export const dict = {
       "Bookmark resources and mark your study progress — everything stays in this browser, no account needed.",
     "home.progress.cta": "Open my library",
 
+    // Daily challenge (Phase 3)
+    "home.daily.title": "Today's challenge",
+    "home.daily.cta": "Solve today's challenge",
+    "home.daily.done": "Review today's challenge",
+
+    // Daily view
+    "daily.title": "Daily challenge",
+    "daily.subtitle":
+      "One interview question a day — theory, coding, system design or behavioral — with progressive hints, a model answer and a streak that rewards showing up.",
+    "daily.today": "Today's challenge",
+    "daily.markDone": "Mark today as done",
+    "daily.doneToday": "Done — streak protected. See you tomorrow.",
+    "daily.showHint": "Show hint {n} of {total}",
+    "daily.showAnswer": "Reveal the model answer",
+    "daily.hideAnswer": "Hide the answer",
+    "daily.answer": "Model answer — points you should hit",
+    "daily.study": "Study this topic",
+    "daily.streak.current": "Current streak",
+    "daily.streak.best": "Best streak",
+    "daily.streak.total": "Days completed",
+    "daily.browse.title": "Challenge archive",
+    "daily.browse.subtitle":
+      "Practice ahead or revisit past days — filter by topic. Answers are one click away, but try the hints first.",
+    "daily.topic.all": "All topics",
+    "daily.type.theory": "Theory",
+    "daily.type.coding": "Coding",
+    "daily.type.system": "System design",
+    "daily.type.behavioral": "Behavioral",
+    "daily.difficulty.1": "Warm-up",
+    "daily.difficulty.2": "Standard",
+    "daily.difficulty.3": "Senior-level",
+
+    // Per-resource notes (Phase 3)
+    "note.label": "Your note",
+    "note.hint": "Saved automatically in this browser — interview prep thoughts, gotchas, things to revisit.",
+    "note.placeholder": "Write what you want to remember about this resource…",
+    "note.saved": "Saved",
+    "note.save": "Save",
+    "note.delete": "Delete note",
+    "note.preview": "Your note",
+
     // My Library view
     "lib.title": "My Library",
     "lib.subtitle":
-      "Everything you save or mark gathers here — bookmarks and study progress, stored only in your browser. No account, no sync, no clutter.",
+      "Everything you save or mark gathers here — bookmarks, study progress and personal notes, stored only in your browser. No account, no sync, no clutter.",
     "lib.hint":
       "Tip: use the bookmark icon on any resource card to start building your library.",
     "lib.tab.bookmarks": "Bookmarks",
     "lib.tab.doing": "In progress",
     "lib.tab.done": "Completed",
+    "lib.tab.notes": "Notes",
     "lib.progress.of": "{done} of {total} resources completed",
     "lib.empty.bookmarks.title": "No bookmarks yet",
     "lib.empty.bookmarks.desc":
@@ -75,11 +118,14 @@ export const dict = {
     "lib.empty.done.title": "Nothing completed yet",
     "lib.empty.done.desc":
       'Mark finished resources as "Done" and watch your progress bar climb.',
+    "lib.empty.notes.title": "No notes yet",
+    "lib.empty.notes.desc":
+      "Open any resource's detail page and write what you want to remember — your notes collect here.",
     "lib.empty.cta": "Browse resources",
     "lib.reset": "Reset all data",
     "lib.reset.confirm.title": "Reset everything?",
     "lib.reset.confirm.desc":
-      "This clears all bookmarks and study progress stored in this browser. This action cannot be undone.",
+      "This clears all bookmarks, study progress and notes stored in this browser. This action cannot be undone.",
     "lib.reset.confirm.cancel": "Cancel",
     "lib.reset.confirm.ok": "Yes, reset",
 
@@ -136,8 +182,9 @@ export const dict = {
     "road.weekly.note":
       "Adjust intensity based on how close you are to real interviews.",
     "road.product.current": "Current",
+    "road.product.done": "Shipped",
     "road.product.intro":
-      "How DevReady itself evolves — Phase 2 (Content Experience) is what you are looking at now.",
+      "How DevReady itself evolves — Phase 3 (Practice Layer) is what you are looking at now.",
     "road.phases": "Phase {n}",
 
     // Footer
@@ -178,16 +225,17 @@ export const dict = {
     "nav.resources": "منابع",
     "nav.roadmap": "نقشه راه",
     "nav.library": "کتابخانه من",
+    "nav.daily": "چالش روزانه",
     "brand.tagline": "آمادگی مصاحبه",
     "brand.taglineFull": "پلتفرم دوزبانه آمادگی مصاحبه توسعه وب",
 
     // Hero
-    "hero.badge": "فاز ۲ · تجربه محتوا",
+    "hero.badge": "فاز ۳ · لایه تمرین",
     "hero.title1": "برای مصاحبه",
     "hero.title2": "توسعه وب،",
     "hero.title3": "آماده برو.",
     "hero.subtitle":
-      "کتابخانه‌ای منتخب و دوزبانه از بیش از {count} منبع باکیفیت برای راند‌های فرانت‌اند، بک‌اند، فول‌استک، طراحی سیستم، الگوریتم، امنیت و مصاحبه رفتاری — به انگلیسی و فارسی.",
+      "کتابخانه‌ای منتخب و دوزبانه از بیش از {count} منبع باکیفیت برای راند‌های فرانت‌اند، بک‌اند، موبایل، طراحی سیستم، الگوریتم، امنیت و مصاحبه رفتاری — به انگلیسی و فارسی.",
     "hero.cta1": "مشاهده منابع",
     "hero.cta2": "نقشه راه",
 
@@ -201,7 +249,7 @@ export const dict = {
     // Home sections
     "home.categories.title": "مرور بر اساس دسته",
     "home.categories.subtitle":
-      "هر موضوع مهم مصاحبه، در ۱۶ بخش اختصاصی. یکی را انتخاب کنید تا فهرست کامل منابعش را ببینید.",
+      "هر موضوع مهم مصاحبه — از مبانی HTML تا موبایل، ابزارهای هوش مصنوعی و استک‌های بک‌اند — در بخش‌های اختصاصی. یکی را انتخاب کنید تا فهرست کامل منابعش را ببینید.",
     "home.featured.title": "محبوب‌های جامعه",
     "home.featured.subtitle": "نام‌هایی که در هر مسیر آمادگی مدام خواهید شنید.",
     "home.how.title": "چطور از DevReady استفاده کنیم",
@@ -225,15 +273,57 @@ export const dict = {
       "منبع‌ها را نشان‌گذاری کنید و وضعیت مطالعه‌تان را ثبت کنید — همه‌چیز فقط در مرورگر خودتان می‌ماند؛ بدون نیاز به حساب کاربری.",
     "home.progress.cta": "باز کردن کتابخانه من",
 
+    // Daily challenge (Phase 3)
+    "home.daily.title": "چالش امروز",
+    "home.daily.cta": "حل چالش امروز",
+    "home.daily.done": "مرور چالش امروز",
+
+    // Daily view
+    "daily.title": "چالش روزانه",
+    "daily.subtitle":
+      "روزی یک سوال مصاحبه — نظری، کدنویسی، طراحی سیستم یا رفتاری — با راهنماهای پلکانی، پاسخ نمونه و استریکی که برای حضور روزانه به شما پاداش می‌دهد.",
+    "daily.today": "چالش امروز",
+    "daily.markDone": "امروز را تمام‌شده علامت بزن",
+    "daily.doneToday": "انجام شد — استریک حفظ شد. فردا می‌بینیمت.",
+    "daily.showHint": "نمایش راهنمای {n} از {total}",
+    "daily.showAnswer": "نمایش پاسخ نمونه",
+    "daily.hideAnswer": "پنهان کردن پاسخ",
+    "daily.answer": "پاسخ نمونه — نکاتی که باید بگویید",
+    "daily.study": "مطالعه این موضوع",
+    "daily.streak.current": "استریک فعلی",
+    "daily.streak.best": "بهترین استریک",
+    "daily.streak.total": "روزهای انجام‌شده",
+    "daily.browse.title": "آرشیو چالش‌ها",
+    "daily.browse.subtitle":
+      "جلوتر تمرین کنید یا روزهای قبلی را مرور کنید — بر اساس موضوع فیلتر کنید. پاسخ‌ها یک کلیک فاصله دارند، اما اول سراغ راهنماها بروید.",
+    "daily.topic.all": "همه موضوع‌ها",
+    "daily.type.theory": "نظری",
+    "daily.type.coding": "کدنویسی",
+    "daily.type.system": "طراحی سیستم",
+    "daily.type.behavioral": "رفتاری",
+    "daily.difficulty.1": "گرم‌کردن",
+    "daily.difficulty.2": "استاندارد",
+    "daily.difficulty.3": "سطح سنیور",
+
+    // Per-resource notes (Phase 3)
+    "note.label": "یادداشت شما",
+    "note.hint": "به‌صورت خودکار در همین مرورگر ذخیره می‌شود — نکات مصاحبه، تله‌ها و چیزهایی که باید دوباره مرور کنید.",
+    "note.placeholder": "چیزهایی که می‌خواهید درباره این منبع به یاد داشته باشید را بنویسید…",
+    "note.saved": "ذخیره شد",
+    "note.save": "ذخیره",
+    "note.delete": "حذف یادداشت",
+    "note.preview": "یادداشت شما",
+
     // My Library view
     "lib.title": "کتابخانه من",
     "lib.subtitle":
-      "هر منبعی که ذخیره یا علامت‌گذاری کنید همین‌جا جمع می‌شود — نشانک‌ها و پیشرفت مطالعه، فقط در مرورگر خودتان. بدون حساب کاربری، بدون همگام‌سازی، بدون شلوغی.",
+      "هر منبعی که ذخیره یا علامت‌گذاری کنید همین‌جا جمع می‌شود — نشانک‌ها، پیشرفت مطالعه و یادداشت‌های شخصی، فقط در مرورگر خودتان. بدون حساب کاربری، بدون همگام‌سازی، بدون شلوغی.",
     "lib.hint":
       "نکته: با آیکون نشانک روی هر منبع، کتابخانه خودتان را بسازید.",
     "lib.tab.bookmarks": "نشانک‌ها",
     "lib.tab.doing": "در حال انجام",
     "lib.tab.done": "تمام‌شده",
+    "lib.tab.notes": "یادداشت‌ها",
     "lib.progress.of": "{done} از {total} منبع تمام شده است",
     "lib.empty.bookmarks.title": "هنوز نشانکی ندارید",
     "lib.empty.bookmarks.desc":
@@ -244,11 +334,14 @@ export const dict = {
     "lib.empty.done.title": "هنوز منبعی را تمام نکرده‌اید",
     "lib.empty.done.desc":
       "منبع‌های تمام‌شده را «تمام‌شده» علامت بزنید تا نوار پیشرفت‌تان بالا برود.",
+    "lib.empty.notes.title": "هنوز یادداشتی ندارید",
+    "lib.empty.notes.desc":
+      "صفحه جزئیات هر منبع را باز کنید و آنچه می‌خواهید به یاد داشته باشید را بنویسید — یادداشت‌ها اینجا جمع می‌شوند.",
     "lib.empty.cta": "مرور منابع",
     "lib.reset": "پاک کردن همه داده‌ها",
     "lib.reset.confirm.title": "همه‌چیز پاک شود؟",
     "lib.reset.confirm.desc":
-      "همه نشانک‌ها و پیشرفت ذخیره‌شده در این مرورگر پاک می‌شوند. این کار قابل بازگشت نیست.",
+      "همه نشانک‌ها، پیشرفت و یادداشت‌های ذخیره‌شده در این مرورگر پاک می‌شوند. این کار قابل بازگشت نیست.",
     "lib.reset.confirm.cancel": "انصراف",
     "lib.reset.confirm.ok": "بله، پاک کن",
 
@@ -304,8 +397,9 @@ export const dict = {
     "road.weekly.time": "زمان پیشنهادی",
     "road.weekly.note": "شدت را بر اساس فاصله تا مصاحبه واقعی تنظیم کنید.",
     "road.product.current": "فعلی",
+    "road.product.done": "ارسال‌شده",
     "road.product.intro":
-      "روند تکامل خودِ DevReady — فاز ۲ (تجربه محتوا) همان چیزی است که اکنون می‌بینید.",
+      "روند تکامل خودِ DevReady — فاز ۳ (لایه تمرین) همان چیزی است که اکنون می‌بینید.",
     "road.phases": "فاز {n}",
 
     // Footer

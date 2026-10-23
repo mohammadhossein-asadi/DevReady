@@ -7,6 +7,7 @@ import {
   CircleCheckBig,
   CircleDot,
   Compass,
+  Flame,
   LibraryBig,
   Search,
   Target,
@@ -23,11 +24,13 @@ import { SpotlightCard } from "@/components/aceternity/spotlight-card";
 import { HUE_CHIP } from "@/components/views/resources-view";
 import { useLanguage } from "@/lib/language-context";
 import { useLibrary } from "@/lib/library-context";
+import { useDaily } from "@/lib/daily-context";
 import {
   categories,
   totalResources,
   type CategoryIcon,
 } from "@/lib/data/resources";
+import { studyStages } from "@/lib/data/roadmap";
 import type { View } from "@/components/app-shell";
 import { cn } from "@/lib/utils";
 
@@ -37,16 +40,20 @@ import {
   BookOpen,
   Braces,
   Container,
+  Cpu,
   Database,
   FlaskConical,
   Gauge,
   Globe,
+  Layers,
   Map,
   MessagesSquare,
   MonitorSmartphone,
   Network,
   Server,
   ShieldCheck,
+  Smartphone,
+  Sparkles,
 } from "lucide-react";
 
 /** Category icon registry — shared with the resource detail view. */
@@ -67,6 +74,10 @@ export const ICONS: Record<CategoryIcon, LucideIcon> = {
   messages: MessagesSquare,
   map: Map,
   book: BookOpen,
+  smartphone: Smartphone,
+  sparkles: Sparkles,
+  layers: Layers,
+  cpu: Cpu,
 };
 
 const FEATURED = [
@@ -160,6 +171,59 @@ function ProgressWidget({ onNavigate }: { onNavigate: (view: View, category?: st
   );
 }
 
+/** Daily challenge teaser — Phase 3 discovery + jump-off point. */
+function DailyWidget({ onNavigate }: { onNavigate: (view: View, category?: string) => void }) {
+  const { t, num, lang, isFa } = useLanguage();
+  const { today, todayChallenge, isTodayDone, currentStreak } = useDaily();
+
+  const day = today
+    ? new Intl.DateTimeFormat(isFa ? "fa-IR" : "en-US", {
+        dateStyle: "long",
+        timeZone: "UTC",
+      }).format(new Date(`${today}T12:00:00Z`))
+    : "";
+
+  return (
+    <section aria-labelledby="daily-widget-title" className="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+      <SpotlightCard className="rounded-2xl">
+        <div className="flex flex-col gap-5 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0 flex-1">
+            <h2
+              id="daily-widget-title"
+              className="flex items-center gap-2 text-lg font-bold tracking-tight"
+            >
+              <Flame className="size-5 text-orange-500" aria-hidden="true" />
+              {t("home.daily.title")}
+              {currentStreak > 0 ? (
+                <Badge
+                  variant="outline"
+                  className="gap-1 border-orange-500/30 text-xs text-orange-600 dark:text-orange-400"
+                >
+                  <Flame className="size-3" aria-hidden="true" />
+                  {num(currentStreak)}
+                </Badge>
+              ) : null}
+            </h2>
+            {day ? <p className="mt-0.5 text-xs text-muted-foreground">{day}</p> : null}
+            <p className="mt-1.5 line-clamp-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+              {todayChallenge.question[lang]}
+            </p>
+          </div>
+
+          <Button
+            variant={isTodayDone ? "outline" : "default"}
+            className="min-h-11 shrink-0 gap-2"
+            onClick={() => onNavigate("daily")}
+          >
+            <Flame className="size-4" aria-hidden="true" />
+            {isTodayDone ? t("home.daily.done") : t("home.daily.cta")}
+          </Button>
+        </div>
+      </SpotlightCard>
+    </section>
+  );
+}
+
 export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: string) => void }) {
   const { t, num, isFa } = useLanguage();
 
@@ -167,7 +231,7 @@ export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: s
     { value: `${num(totalResources)}+`, label: t("stats.resources") },
     { value: num(categories.length), label: t("stats.categories") },
     { value: num(2), label: t("stats.languages") },
-    { value: num(9), label: t("stats.stages") },
+    { value: num(studyStages.length), label: t("stats.stages") },
   ];
 
   const headline = `${t("hero.title1")} ${t("hero.title2")} ${t("hero.title3")}`;
@@ -234,6 +298,9 @@ export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: s
 
       {/* ============ Your progress (Phase 2) ============ */}
       <ProgressWidget onNavigate={onNavigate} />
+
+      {/* ============ Daily challenge (Phase 3) ============ */}
+      <DailyWidget onNavigate={onNavigate} />
 
       {/* ============ Featured marquee ============ */}
       <section aria-labelledby="featured-title" className="border-b bg-muted/20 py-8">

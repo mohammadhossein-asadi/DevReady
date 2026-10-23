@@ -1,6 +1,6 @@
 "use client";
 
-import { Bookmark, House, LibraryBig, Map, Menu, Zap } from "lucide-react";
+import { Bookmark, Flame, House, LibraryBig, Map, Menu, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -13,6 +13,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useLanguage } from "@/lib/language-context";
 import { useLibrary } from "@/lib/library-context";
+import { useDaily } from "@/lib/daily-context";
 import type { DictKey } from "@/lib/i18n";
 import type { View } from "@/components/app-shell";
 import { cn } from "@/lib/utils";
@@ -21,6 +22,7 @@ const NAV_ITEMS: { key: View; icon: typeof House; labelKey: DictKey }[] = [
   { key: "home", icon: House, labelKey: "nav.home" },
   { key: "resources", icon: LibraryBig, labelKey: "nav.resources" },
   { key: "roadmap", icon: Map, labelKey: "nav.roadmap" },
+  { key: "daily", icon: Flame, labelKey: "nav.daily" },
   { key: "library", icon: Bookmark, labelKey: "nav.library" },
 ];
 
@@ -32,6 +34,7 @@ interface HeaderProps {
 export function Header({ view, onNavigate }: HeaderProps) {
   const { t } = useLanguage();
   const { bookmarkCount } = useLibrary();
+  const { currentStreak } = useDaily();
 
   const go = (next: View) => () => onNavigate(next);
 
@@ -39,6 +42,17 @@ export function Header({ view, onNavigate }: HeaderProps) {
     show ? (
       <span className="ms-0.5 inline-grid min-w-5 place-items-center rounded-full bg-primary px-1.5 text-[11px] font-bold leading-5 text-primary-foreground">
         {bookmarkCount}
+      </span>
+    ) : null;
+
+  const streakBadge = (show: boolean) =>
+    show ? (
+      <span
+        title={t("daily.streak.current")}
+        className="ms-0.5 inline-flex items-center gap-0.5 rounded-full bg-orange-500/15 px-1.5 text-[11px] font-bold leading-5 text-orange-600 dark:text-orange-400"
+      >
+        <Flame className="size-3" aria-hidden="true" />
+        {currentStreak}
       </span>
     ) : null;
 
@@ -92,6 +106,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
                 <Icon className="size-4" aria-hidden="true" />
                 {t(labelKey)}
                 {key === "library" ? countBadge(bookmarkCount > 0) : null}
+                {key === "daily" ? streakBadge(currentStreak > 0) : null}
               </Button>
             );
           })}
@@ -138,6 +153,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
                         <Icon className="size-4" aria-hidden="true" />
                         {t(labelKey)}
                         {key === "library" ? countBadge(bookmarkCount > 0) : null}
+                        {key === "daily" ? streakBadge(currentStreak > 0) : null}
                       </Button>
                     </SheetTrigger>
                   ))}

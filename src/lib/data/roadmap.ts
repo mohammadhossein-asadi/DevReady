@@ -161,6 +161,23 @@ export const studyStages: StudyStage[] = [
       { en: "Practice mock interviews", fa: "تمرین مصاحبه‌های آزمایشی" },
     ],
   },
+  {
+    num: 9,
+    title: { en: "AI-Era Skills & Continuous Growth", fa: "مهارت‌های عصر هوش مصنوعی و رشد مداوم" },
+    duration: { en: "Ongoing", fa: "مداوم" },
+    resources: [
+      "Prompt Engineering Guide",
+      "GitHub Copilot / Cursor docs",
+      "Vercel AI SDK / LangChain",
+      "RAG Techniques repository",
+      "DevReady daily challenge mode",
+    ],
+    goals: [
+      { en: "Use AI assistants to accelerate — not replace — understanding", fa: "از دستیارهای هوش مصنوعی برای شتاب‌دادن استفاده کنید، نه جایگزینی درک" },
+      { en: "Ship an LLM-powered feature end-to-end (streaming, structured output, RAG basics)", fa: "یک قابلیت مبتنی بر LLM را سرتاسری بسازید (استریم، خروجی ساختاریافته، مبانی RAG)" },
+      { en: "Keep a daily practice streak and stay current with the ecosystem", fa: "با تمرین روزانه استریک بسازید و با اکوسیستم به‌روز بمانید" },
+    ],
+  },
 ];
 
 export interface RhythmRow {
@@ -209,6 +226,22 @@ export const rolePaths: RolePath[] = [
     role: { en: "Senior / Staff", fa: "سنیور / استف" },
     path: { en: "Heavy emphasis on Stages 6, 7, and 8 + deep knowledge of architecture and trade-offs", fa: "تأکید زیاد بر مراحل ۶، ۷ و ۸ + دانش عمیق معماری و توازن‌ها" },
   },
+  {
+    role: { en: "Junior Backend (Node.js)", fa: "بک‌اند جونیور (نود‌جی‌اس)" },
+    path: { en: "Stages 1 (light CSS) → 2 → 5 fully → 7 (security focus) → 8", fa: "مرحله ۱ (CSS سبک) ← ۲ ← ۵ کامل ← ۷ (تمرکز امنیت) ← ۸" },
+  },
+  {
+    role: { en: "Mobile-leaning Frontend (React Native)", fa: "فرانت‌اند موبایل‌محور (ریکت نیتیو)" },
+    path: { en: "Stages 1–3 + Mobile & Cross-Platform category + Stage 4 (UI challenges) → 8", fa: "مراحل ۱ تا ۳ + دسته موبایل و کراس‌پلتفرم + مرحله ۴ (چالش‌های UI) ← ۸" },
+  },
+  {
+    role: { en: "AI-Era Full-Stack", fa: "فول‌استک عصر هوش مصنوعی" },
+    path: { en: "All stages + AI-Assisted Development category + Stage 9 as the through-line", fa: "همه مراحل + دسته توسعه با هوش مصنوعی + مرحله ۹ در طول مسیر" },
+  },
+  {
+    role: { en: "Backend on Python / Java / .NET", fa: "بک‌اند پایتون / جاوا / دات‌نت" },
+    path: { en: "Stages 1–2 (JS basics) → Backend Stacks Beyond Node.js + Stage 5 concepts → 6 → 7 → 8", fa: "مراحل ۱ و ۲ (مبانی JS) ← استک‌های بک‌اند فراتر از نود + مفاهیم مرحله ۵ ← ۶ ← ۷ ← ۸" },
+  },
 ];
 
 export interface ProductPhase {
@@ -216,12 +249,15 @@ export interface ProductPhase {
   title: LocaleText;
   items: LocaleText[];
   current?: boolean;
+  /** Phase has shipped — rendered with a "done" check style. */
+  done?: boolean;
 }
 
 export const productPhases: ProductPhase[] = [
   {
     num: 1,
     title: { en: "Foundation", fa: "بنیان" },
+    done: true,
     items: [
       { en: "Next.js App Router + TypeScript setup", fa: "راه‌اندازی Next.js App Router + TypeScript" },
       { en: "shadcn/ui design system + dark/light mode", fa: "سیستم دیزاین shadcn/ui + حالت روشن/تاریک" },
@@ -235,25 +271,26 @@ export const productPhases: ProductPhase[] = [
   {
     num: 2,
     title: { en: "Content Experience", fa: "تجربه محتوا" },
-    current: true,
+    done: true,
     items: [
-      { en: "Advanced search with filters (technology, difficulty, free/paid, language)", fa: "جستجوی پیشرفته با فیلترها (تکنولوژی، سختی، رایگان/پولی، زبان)" },
-      { en: "Resource detail pages with descriptions, tags, and related links", fa: "صفحات جزئیات منبع با توضیحات، برچسب‌ها و لینک‌های مرتبط" },
+      { en: "Instant search with category filters and Persian-only mode", fa: "جستجوی فوری با فیلتر دسته‌ها و حالت فقط‌فارسی" },
+      { en: "Resource detail pages, deep-linkable and RTL-aware", fa: "صفحات جزئیات منبع، با دیپ‌لینک و سازگار با RTL" },
       { en: "Bookmark / save-for-later functionality", fa: "قابلیت نشان‌گذاری / ذخیره برای بعد" },
-      { en: "Progress tracking (Studied / In Progress)", fa: "پیگیری پیشرفت (خوانده‌شده / در حال مطالعه)" },
-      { en: "Study roadmap visualization (Aceternity Timeline)", fa: "بصری‌سازی نقشه راه مطالعه (Aceternity Timeline)" },
-      { en: "Personalized suggested next resources", fa: "پیشنهاد شخصی‌سازی‌شده منابع بعدی" },
+      { en: "Progress tracking (todo / doing / done)", fa: "پیگیری پیشرفت (شروع نشده / در حال انجام / تمام‌شده)" },
+      { en: "My Library view with progress bar", fa: "نمای کتابخانه من با نوار پیشرفت" },
+      { en: "Vazir + Vazir FD self-hosted Persian typography", fa: "تایپوگرافی فارسی با فونت‌های سلف‌هاست Vazir و Vazir FD" },
     ],
   },
   {
     num: 3,
     title: { en: "Practice Layer", fa: "لایه تمرین" },
+    current: true,
     items: [
-      { en: "Curated question sets from the best question banks", fa: "مجموعه سوالات منتخب از بهترین بانک‌های سوال" },
-      { en: "Daily challenge mode (theory + coding prompt)", fa: "حالت چالش روزانه (نظری + کدنویسی)" },
-      { en: "Frontend machine-coding challenges", fa: "چالش‌های ماشین‌کدینگ فرانت‌اند" },
-      { en: "Spaced-repetition mode for key concepts", fa: "حالت مرور با فاصله‌گذاری برای مفاهیم کلیدی" },
-      { en: "Simple note-taking per resource", fa: "یادداشت‌برداری ساده برای هر منبع" },
+      { en: "Per-resource personal notes (localStorage)", fa: "یادداشت شخصی برای هر منبع (localStorage)" },
+      { en: "Daily challenge mode with hints, answers and streaks", fa: "حالت چالش روزانه با راهنما، پاسخ و استریک" },
+      { en: "Aceternity timeline for the study path", fa: "تایم‌لاین Aceternity برای مسیر مطالعه" },
+      { en: "Expanded catalog: 20 categories incl. mobile, AI tooling and extra stacks", fa: "کاتالوگ گسترش‌یافته: ۲۰ دسته شامل موبایل، ابزارهای هوش مصنوعی و استک‌های بیشتر" },
+      { en: "Extended roadmap: 10 stages and 8 role paths", fa: "نقشه راه گسترش‌یافته: ۱۰ مرحله و ۸ مسیر نقش" },
     ],
   },
   {
@@ -262,8 +299,8 @@ export const productPhases: ProductPhase[] = [
     items: [
       { en: "Contribution system for new high-quality resources", fa: "سیستم مشارکت برای منابع جدید باکیفیت" },
       { en: "User feedback on resource quality and difficulty", fa: "بازخورد کاربران درباره کیفیت و سختی منابع" },
+      { en: "Spaced-repetition mode for key concepts", fa: "حالت مرور با فاصله‌گذاری برای مفاهیم کلیدی" },
       { en: "Improved Persian content coverage and orthography checks", fa: "پوشش بهتر محتوای فارسی و بررسی املا" },
-      { en: "Performance optimization and Core Web Vitals excellence", fa: "بهینه‌سازی کارایی و تعالی Core Web Vitals" },
       { en: "Optional user accounts for syncing progress", fa: "حساب کاربری اختیاری برای همگام‌سازی پیشرفت" },
     ],
   },

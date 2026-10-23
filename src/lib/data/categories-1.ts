@@ -66,6 +66,10 @@ export const categoriesPart1: Category[] = [
       { name: "CSS Interview Questions and Answers", url: "https://www.golinuxcloud.com/css-interview-questions" },
       { name: "400+ CSS Interview Questions Practice Test", url: "https://www.udemy.com", note: "Paid" },
       { name: "MDN Learn web development", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development" },
+      { name: "Can I use — Browser Support Tables", url: "https://caniuse.com" },
+      { name: "Learn Accessibility — web.dev", url: "https://web.dev/learn/accessibility" },
+      { name: "Learn Forms — web.dev", url: "https://web.dev/learn/forms" },
+      { name: "How To Meet WCAG (Quick Reference)", url: "https://www.w3.org/WAI/WCAG22/quickref" },
     ],
   },
   {
@@ -97,6 +101,10 @@ export const categoriesPart1: Category[] = [
       { name: "javascript-persian-interview-questions", url: "https://github.com/Mariotek/javascript-persian-interview-questions", fa: true },
       { name: "JavaScript Interview Resources and Practice (NamasteDev)", url: "https://namastedev.com" },
       { name: "10 GitHub Repositories to Achieve JavaScript Mastery", url: "https://dev.to" },
+      { name: "Clean Code JavaScript", url: "https://github.com/ryanmcdermott/clean-code-javascript" },
+      { name: "WTF JavaScript", url: "https://github.com/denysdovhan/wtfjs" },
+      { name: "Exploring JS — Dr. Axel's books", url: "https://exploringjs.com" },
+      { name: "Functional-Light JS", url: "https://github.com/getify/Functional-Light-JS" },
     ],
   },
   {
@@ -130,6 +138,11 @@ export const categoriesPart1: Category[] = [
       { name: "vuejs-interview-questions", url: "https://github.com/sudheerj/vuejs-interview-questions" },
       { name: "angular-persian-interview-questions", url: "https://github.com/Mariotek/angular-persian-interview-questions", fa: true },
       { name: "vuejs-persian-interview-questions", url: "https://github.com/Mariotek/vuejs-persian-interview-questions", fa: true },
+      { name: "React Compiler", url: "https://react.dev/learn/react-compiler" },
+      { name: "Vite — Build Tool Documentation", url: "https://vite.dev" },
+      { name: "React Hook Form", url: "https://react-hook-form.com" },
+      { name: "Jotai — Atomic State Management", url: "https://jotai.org" },
+      { name: "TanStack Router", url: "https://tanstack.com/router/latest" },
     ],
   },
   {
@@ -156,6 +169,7 @@ export const categoriesPart1: Category[] = [
       { name: "UI.dev", url: "https://ui.dev" },
       { name: "Frontend Interview Prep — Machine Coding", url: "https://frontend-interview.com", note: "Also on GitHub" },
       { name: "GreatFrontEnd — JavaScript DSA & UI Challenges", url: "https://www.greatfrontend.com" },
+      { name: "Patterns.dev — Design & Rendering Patterns", url: "https://www.patterns.dev" },
     ],
   },
   {
@@ -192,6 +206,8 @@ export const categoriesPart1: Category[] = [
       { name: "roadmap.sh — Backend Questions", url: "https://roadmap.sh/questions/backend" },
       { name: "Web Development Interview (Full-Stack)", url: "https://github.com/wowgeekyboy/Web-Development-Interview" },
       { name: "Node.js & SQL Interview Roadmap", url: "https://gist.github.com" },
+      { name: "The Twelve-Factor App", url: "https://12factor.net" },
+      { name: "Hoppscotch — Open Source API Testing", url: "https://hoppscotch.io" },
     ],
   },
   {
@@ -219,6 +235,9 @@ export const categoriesPart1: Category[] = [
       { name: "PostgreSQL Interview Questions — InterviewBit", url: "https://www.interviewbit.com/postgresql-interview-questions" },
       { name: "MongoDB Interview Questions — GeeksforGeeks", url: "https://www.geeksforgeeks.org/mongodb-interview-questions" },
       { name: "SQL for Interviews", url: "https://github.com/search?q=sql-for-interviews&type=repositories" },
+      { name: "SQLZoo — Interactive SQL Tutorial", url: "https://sqlzoo.net" },
+      { name: "PostgreSQL Exercises", url: "https://pgexercises.com" },
+      { name: "DB Fiddle — SQL Playground", url: "https://www.db-fiddle.com" },
     ],
   },
   {
@@ -244,6 +263,9 @@ export const categoriesPart1: Category[] = [
       { name: "VisuAlgo", url: "https://visualgo.net/en" },
       { name: "The Algorithms", url: "https://github.com/TheAlgorithms" },
       { name: "Great Frontend — JavaScript DSA", url: "https://www.greatfrontend.com" },
+      { name: "LeetCode Patterns (Sean Prashad)", url: "https://seanprashad.com/leetcode-patterns" },
+      { name: "Interview Cake", url: "https://www.interviewcake.com" },
+      { name: "Codility — Skills Tests", url: "https://www.codility.com" },
     ],
   },
 ];

@@ -13,6 +13,7 @@ export function Footer({ onNavigate }: { onNavigate: (view: View) => void }) {
     { key: "home", label: t("nav.home") },
     { key: "resources", label: t("nav.resources") },
     { key: "roadmap", label: t("nav.roadmap") },
+    { key: "daily", label: t("nav.daily") },
     { key: "library", label: t("nav.library") },
   ];
 

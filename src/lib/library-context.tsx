@@ -18,18 +18,25 @@ import {
 
 export type StudyStatus = "todo" | "doing" | "done";
 
+interface NoteEntry {
+  text: string;
+  updatedAt: number;
+}
+
 interface LibraryData {
   v: 1;
   /** Saved resource keys in insertion order. */
   bookmarks: string[];
   /** Only non-default statuses are stored; an absent key means "todo". */
   status: Record<string, Exclude<StudyStatus, "todo">>;
+  /** Per-resource personal notes (Phase 3). Absent = no note yet. */
+  notes?: Record<string, NoteEntry>;
 }
 
 const STORAGE_KEY = "devready:library:v1";
 const LIB_EVENT = "devready:library-change";
 
-const EMPTY: LibraryData = { v: 1, bookmarks: [], status: {} };
+const EMPTY: LibraryData = { v: 1, bookmarks: [], status: {}, notes: {} };
 
 function parse(raw: string | null): LibraryData {
   if (!raw) return EMPTY;
@@ -37,6 +44,20 @@ function parse(raw: string | null): LibraryData {
     const data = JSON.parse(raw) as Partial<LibraryData>;
     if (data.v !== 1 || !Array.isArray(data.bookmarks) || typeof data.status !== "object" || data.status === null) {
       return EMPTY;
+    }
+    // notes is optional — pre-Phase-3 payloads migrate transparently.
+    const notes: Record<string, NoteEntry> = {};
+    if (typeof data.notes === "object" && data.notes !== null) {
+      for (const [key, entry] of Object.entries(data.notes)) {
+        if (
+          entry &&
+          typeof entry === "object" &&
+          typeof (entry as NoteEntry).text === "string" &&
+          typeof (entry as NoteEntry).updatedAt === "number"
+        ) {
+          notes[key] = { text: (entry as NoteEntry).text, updatedAt: (entry as NoteEntry).updatedAt };
+        }
+      }
     }
     return {
       v: 1,
@@ -47,6 +68,7 @@ function parse(raw: string | null): LibraryData {
             entry[1] === "doing" || entry[1] === "done"
         )
       ),
+      notes,
     };
   } catch {
     return EMPTY;
@@ -96,16 +118,21 @@ function writeData(next: LibraryData) {
 }
 
 interface LibraryContextValue {
-  /** Raw library data (bookmarks in order + status map). */
+  /** Raw library data (bookmarks in order + status map + notes). */
   data: LibraryData;
   isBookmarked: (id: string) => boolean;
   toggleBookmark: (id: string) => void;
   statusOf: (id: string) => StudyStatus;
   setStatus: (id: string, status: StudyStatus) => void;
+  /** Note text for a resource key ("" when none). */
+  noteOf: (id: string) => string;
+  /** Create/update a note; empty text deletes it. */
+  setNote: (id: string, text: string) => void;
   bookmarkCount: number;
   doingCount: number;
   doneCount: number;
-  /** True when at least one bookmark or status exists. */
+  notesCount: number;
+  /** True when at least one bookmark, status or note exists. */
   hasData: boolean;
   resetAll: () => void;
 }
@@ -134,6 +161,18 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
     writeData({ ...current, status: nextStatus });
   }, []);
 
+  const setNote = useCallback((id: string, text: string) => {
+    const current = readData();
+    const nextNotes = { ...current.notes };
+    const trimmed = text.trim();
+    if (trimmed) {
+      nextNotes[id] = { text: trimmed, updatedAt: Date.now() };
+    } else {
+      delete nextNotes[id];
+    }
+    writeData({ ...current, notes: nextNotes });
+  }, []);
+
   const resetAll = useCallback(() => {
     writeData(EMPTY);
   }, []);
@@ -141,19 +180,24 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
   const value = useMemo<LibraryContextValue>(() => {
     const doingCount = Object.values(data.status).filter((s) => s === "doing").length;
     const doneCount = Object.values(data.status).filter((s) => s === "done").length;
+    const notes = data.notes ?? {};
+    const notesCount = Object.keys(notes).length;
     return {
       data,
       isBookmarked: (id) => data.bookmarks.includes(id),
       toggleBookmark,
       statusOf: (id) => data.status[id] ?? "todo",
       setStatus,
+      noteOf: (id) => notes[id]?.text ?? "",
+      setNote,
       bookmarkCount: data.bookmarks.length,
       doingCount,
       doneCount,
-      hasData: data.bookmarks.length > 0 || doingCount + doneCount > 0,
+      notesCount,
+      hasData: data.bookmarks.length > 0 || doingCount + doneCount + notesCount > 0,
       resetAll,
     };
-  }, [data, toggleBookmark, setStatus, resetAll]);
+  }, [data, toggleBookmark, setStatus, setNote, resetAll]);
 
   return (
     <LibraryContext.Provider value={value}>

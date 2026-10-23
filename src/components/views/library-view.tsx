@@ -6,6 +6,7 @@ import {
   CircleDot,
   CircleCheckBig,
   Compass,
+  NotebookPen,
   SearchX,
   Trash2,
 } from "lucide-react";
@@ -34,22 +35,29 @@ import { useLanguage } from "@/lib/language-context";
 import { useLibrary } from "@/lib/library-context";
 import {
   refOf,
+  resourceHref,
   resourceRefs,
   totalResources,
   type ResourceRef,
 } from "@/lib/data/resources";
+import type { DictKey } from "@/lib/i18n";
 import type { View } from "@/components/app-shell";
 import { cn } from "@/lib/utils";
 
-type TabValue = "bookmarks" | "doing" | "done";
+type TabValue = "bookmarks" | "doing" | "done" | "notes";
 
 const EMPTY_STATES: Record<
   TabValue,
-  { icon: typeof Bookmark; titleKey: "lib.empty.bookmarks.title" | "lib.empty.doing.title" | "lib.empty.done.title"; descKey: "lib.empty.bookmarks.desc" | "lib.empty.doing.desc" | "lib.empty.done.desc" }
+  {
+    icon: typeof Bookmark;
+    titleKey: DictKey;
+    descKey: DictKey;
+  }
 > = {
   bookmarks: { icon: Bookmark, titleKey: "lib.empty.bookmarks.title", descKey: "lib.empty.bookmarks.desc" },
   doing: { icon: CircleDot, titleKey: "lib.empty.doing.title", descKey: "lib.empty.doing.desc" },
   done: { icon: CircleCheckBig, titleKey: "lib.empty.done.title", descKey: "lib.empty.done.desc" },
+  notes: { icon: NotebookPen, titleKey: "lib.empty.notes.title", descKey: "lib.empty.notes.desc" },
 };
 
 /**
@@ -57,8 +65,8 @@ const EMPTY_STATES: Record<
  * Tabs are controlled so the summary chips can jump between them.
  */
 export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?: string) => void }) {
-  const { t, num } = useLanguage();
-  const { data, bookmarkCount, doingCount, doneCount, hasData, resetAll } = useLibrary();
+  const { t, num, lang } = useLanguage();
+  const { data, bookmarkCount, doingCount, doneCount, notesCount, hasData, resetAll } = useLibrary();
   const [tab, setTab] = useState<TabValue>("bookmarks");
 
   const bookmarkRefs = data.bookmarks
@@ -66,6 +74,10 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
     .filter((r): r is ResourceRef => Boolean(r));
   const doingRefs = resourceRefs.filter((r) => data.status[r.key] === "doing");
   const doneRefs = resourceRefs.filter((r) => data.status[r.key] === "done");
+  const noteRefs = Object.entries(data.notes ?? {})
+    .sort((a, b) => (b[1]?.updatedAt ?? 0) - (a[1]?.updatedAt ?? 0))
+    .map(([key]) => refOf(key))
+    .filter((r): r is ResourceRef => Boolean(r));
 
   // Ceil so the first completed resource already reads as 1% (round would show 0%).
   const percent = totalResources > 0 ? Math.min(100, Math.ceil((doneCount / totalResources) * 100)) : 0;
@@ -74,12 +86,14 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
     bookmarks: bookmarkRefs,
     doing: doingRefs,
     done: doneRefs,
+    notes: noteRefs,
   };
 
-  const chips: { value: TabValue; icon: typeof Bookmark; count: number; labelKey: "lib.tab.bookmarks" | "lib.tab.doing" | "lib.tab.done" }[] = [
+  const chips: { value: TabValue; icon: typeof Bookmark; count: number; labelKey: "lib.tab.bookmarks" | "lib.tab.doing" | "lib.tab.done" | "lib.tab.notes" }[] = [
     { value: "bookmarks", icon: Bookmark, count: bookmarkCount, labelKey: "lib.tab.bookmarks" },
     { value: "doing", icon: CircleDot, count: doingCount, labelKey: "lib.tab.doing" },
     { value: "done", icon: CircleCheckBig, count: doneCount, labelKey: "lib.tab.done" },
+    { value: "notes", icon: NotebookPen, count: notesCount, labelKey: "lib.tab.notes" },
   ];
 
   return (
@@ -108,7 +122,7 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
             />
           </div>
 
-          <div className="grid grid-cols-3 gap-2 sm:gap-3" role="group" aria-label={t("lib.title")}>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3" role="group" aria-label={t("lib.title")}>
             {chips.map(({ value, icon: Icon, count, labelKey }) => (
               <button
                 key={value}
@@ -153,7 +167,7 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
           ))}
         </TabsList>
 
-        {(["bookmarks", "doing", "done"] as TabValue[]).map((value) => {
+        {(["bookmarks", "doing", "done", "notes"] as TabValue[]).map((value) => {
           const refs = lists[value];
           const empty = EMPTY_STATES[value];
           return (
@@ -161,12 +175,33 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
               {refs.length > 0 ? (
                 <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {refs.map(({ key, resource, category }) => (
-                    <ResourceCard
-                      key={key}
-                      resource={resource}
-                      categoryId={category.id}
-                      showCategory
-                    />
+                    <li key={key} className="flex flex-col gap-2">
+                      <ResourceCard
+                        resource={resource}
+                        categoryId={category.id}
+                        showCategory
+                        className="flex-1"
+                      />
+                      {value === "notes" ? (
+                        <a
+                          href={resourceHref(category.id, resource)}
+                          className="rounded-lg border border-dashed bg-muted/30 px-3 py-2 text-xs leading-relaxed text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                        >
+                          <span className="mb-1 flex items-center gap-1.5 font-semibold text-foreground">
+                            <NotebookPen className="size-3 text-primary" aria-hidden="true" />
+                            {t("note.preview")}
+                          </span>
+                          <span className="line-clamp-3 whitespace-pre-line">
+                            {data.notes?.[key]?.text ?? ""}
+                          </span>
+                          <span className="mt-1 block text-[10px] text-muted-foreground/70">
+                            {new Date(data.notes?.[key]?.updatedAt ?? 0).toLocaleDateString(
+                              lang === "fa" ? "fa-IR" : "en-US"
+                            )}
+                          </span>
+                        </a>
+                      ) : null}
+                    </li>
                   ))}
                 </ul>
               ) : (

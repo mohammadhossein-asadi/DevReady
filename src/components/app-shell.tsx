@@ -11,10 +11,11 @@ import { HomeView } from "@/components/views/home-view";
 import { ResourcesView } from "@/components/views/resources-view";
 import { RoadmapView } from "@/components/views/roadmap-view";
 import { LibraryView } from "@/components/views/library-view";
+import { DailyView } from "@/components/views/daily-view";
 import { ResourceDetailView } from "@/components/views/resource-detail-view";
 import { getCategory } from "@/lib/data/resources";
 
-export type View = "home" | "resources" | "roadmap" | "library" | "resource";
+export type View = "home" | "resources" | "roadmap" | "library" | "daily" | "resource";
 
 interface HashState {
   view: View;
@@ -41,6 +42,7 @@ function parseHash(): HashState {
   }
   if (segment === "roadmap") return { view: "roadmap", category: "", name: "" };
   if (segment === "library") return { view: "library", category: "", name: "" };
+  if (segment === "daily") return { view: "daily", category: "", name: "" };
   if (segment === "resource") {
     const cat = a && getCategory(a) ? a : "";
     let name = "";
@@ -90,9 +92,11 @@ export function AppShell() {
           ? "#/roadmap"
           : next === "library"
             ? "#/library"
-            : nextCategory
-              ? `#/resources/${nextCategory}`
-              : "#/resources";
+            : next === "daily"
+              ? "#/daily"
+              : nextCategory
+                ? `#/resources/${nextCategory}`
+                : "#/resources";
 
     if (window.location.hash === target) {
       // Same-hash navigation doesn't fire `hashchange` — just scroll up.
@@ -127,6 +131,7 @@ export function AppShell() {
         )}
         {view === "roadmap" && <RoadmapView />}
         {view === "library" && <LibraryView onNavigate={navigate} />}
+        {view === "daily" && <DailyView />}
         {view === "resource" && (
           <ResourceDetailView categoryId={category} name={name} />
         )}

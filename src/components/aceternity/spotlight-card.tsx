@@ -19,9 +19,11 @@ export function SpotlightCard({
   className?: string;
   as?: "div" | "article" | "li";
 } & React.HTMLAttributes<HTMLElement>) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement | null>(null);
 
-  const onMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
+  // HTMLElement-typed handler is assignable to the div/article/li union
+  // (contravariance), which keeps the polymorphic `as` prop type-safe.
+  const onMove = useCallback((event: MouseEvent<HTMLElement>) => {
     const node = ref.current;
     if (!node) return;
     const rect = node.getBoundingClientRect();
@@ -31,7 +33,7 @@ export function SpotlightCard({
 
   return (
     <Tag
-      ref={ref as React.Ref<HTMLDivElement>}
+      ref={ref as unknown as React.Ref<HTMLDivElement> & React.Ref<HTMLElement> & React.Ref<HTMLLIElement>}
       onMouseMove={onMove}
       className={cn(
         "group/spot relative overflow-hidden rounded-xl border bg-card text-card-foreground",

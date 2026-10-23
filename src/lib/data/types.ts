@@ -32,7 +32,11 @@ export type CategoryIcon =
   | "container"
   | "messages"
   | "map"
-  | "book";
+  | "book"
+  | "smartphone"
+  | "sparkles"
+  | "layers"
+  | "cpu";
 
 export type Hue =
   | "emerald"
