@@ -284,7 +284,7 @@ export const productPhases: ProductPhase[] = [
   {
     num: 3,
     title: { en: "Practice Layer", fa: "لایه تمرین" },
-    current: true,
+    done: true,
     items: [
       { en: "Per-resource personal notes (localStorage)", fa: "یادداشت شخصی برای هر منبع (localStorage)" },
       { en: "Daily challenge mode with hints, answers and streaks", fa: "حالت چالش روزانه با راهنما، پاسخ و استریک" },
@@ -296,10 +296,11 @@ export const productPhases: ProductPhase[] = [
   {
     num: 4,
     title: { en: "Community & Polish", fa: "انجمن و پالایش" },
+    current: true,
     items: [
-      { en: "Contribution system for new high-quality resources", fa: "سیستم مشارکت برای منابع جدید باکیفیت" },
+      { en: "Spaced-repetition review deck with SM-2-style scheduling", fa: "دسته مرور فاصله‌دار با زمان‌بندی سبک اس‌ام-۲" },
+      { en: "Contribution system with JSON / Markdown export for new resources", fa: "سیستم مشارکت با خروجی JSON / Markdown برای منابع جدید" },
       { en: "User feedback on resource quality and difficulty", fa: "بازخورد کاربران درباره کیفیت و سختی منابع" },
-      { en: "Spaced-repetition mode for key concepts", fa: "حالت مرور با فاصله‌گذاری برای مفاهیم کلیدی" },
       { en: "Improved Persian content coverage and orthography checks", fa: "پوشش بهتر محتوای فارسی و بررسی املا" },
       { en: "Optional user accounts for syncing progress", fa: "حساب کاربری اختیاری برای همگام‌سازی پیشرفت" },
     ],

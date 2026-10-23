@@ -5,6 +5,8 @@ import { DirectionProvider } from "@radix-ui/react-direction";
 import { LanguageProvider, useLanguage } from "@/lib/language-context";
 import { LibraryProvider } from "@/lib/library-context";
 import { DailyProvider } from "@/lib/daily-context";
+import { SrsProvider } from "@/lib/srs-context";
+import { ContribProvider } from "@/lib/contrib-context";
 
 /**
  * Radix primitives (Tooltip, Menu, Dialog…) read direction from context
@@ -32,7 +34,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <LanguageProvider>
         <LibraryProvider>
           <DailyProvider>
-            <RadixDirection>{children}</RadixDirection>
+            <SrsProvider>
+              <ContribProvider>
+                <RadixDirection>{children}</RadixDirection>
+              </ContribProvider>
+            </SrsProvider>
           </DailyProvider>
         </LibraryProvider>
       </LanguageProvider>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Bookmark, Flame, House, LibraryBig, Map, Menu, Zap } from "lucide-react";
+import { Bookmark, Brain, Flame, House, LibraryBig, Map, Menu, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -14,6 +14,7 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import { useLanguage } from "@/lib/language-context";
 import { useLibrary } from "@/lib/library-context";
 import { useDaily } from "@/lib/daily-context";
+import { useSrs } from "@/lib/srs-context";
 import type { DictKey } from "@/lib/i18n";
 import type { View } from "@/components/app-shell";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ const NAV_ITEMS: { key: View; icon: typeof House; labelKey: DictKey }[] = [
   { key: "resources", icon: LibraryBig, labelKey: "nav.resources" },
   { key: "roadmap", icon: Map, labelKey: "nav.roadmap" },
   { key: "daily", icon: Flame, labelKey: "nav.daily" },
+  { key: "review", icon: Brain, labelKey: "nav.review" },
   { key: "library", icon: Bookmark, labelKey: "nav.library" },
 ];
 
@@ -35,6 +37,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
   const { t } = useLanguage();
   const { bookmarkCount } = useLibrary();
   const { currentStreak } = useDaily();
+  const { dueCount } = useSrs();
 
   const go = (next: View) => () => onNavigate(next);
 
@@ -53,6 +56,16 @@ export function Header({ view, onNavigate }: HeaderProps) {
       >
         <Flame className="size-3" aria-hidden="true" />
         {currentStreak}
+      </span>
+    ) : null;
+
+  const dueBadge = (show: boolean) =>
+    show ? (
+      <span
+        title={t("review.stat.due")}
+        className="ms-0.5 inline-grid min-w-5 place-items-center rounded-full bg-emerald-500/15 px-1.5 text-[11px] font-bold leading-5 text-emerald-600 dark:text-emerald-400"
+      >
+        {dueCount}
       </span>
     ) : null;
 
@@ -107,6 +120,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
                 {t(labelKey)}
                 {key === "library" ? countBadge(bookmarkCount > 0) : null}
                 {key === "daily" ? streakBadge(currentStreak > 0) : null}
+                {key === "review" ? dueBadge(dueCount > 0) : null}
               </Button>
             );
           })}
@@ -154,6 +168,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
                         {t(labelKey)}
                         {key === "library" ? countBadge(bookmarkCount > 0) : null}
                         {key === "daily" ? streakBadge(currentStreak > 0) : null}
+                        {key === "review" ? dueBadge(dueCount > 0) : null}
                       </Button>
                     </SheetTrigger>
                   ))}

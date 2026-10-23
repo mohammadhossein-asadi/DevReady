@@ -12,10 +12,20 @@ import { ResourcesView } from "@/components/views/resources-view";
 import { RoadmapView } from "@/components/views/roadmap-view";
 import { LibraryView } from "@/components/views/library-view";
 import { DailyView } from "@/components/views/daily-view";
+import { ReviewView } from "@/components/views/review-view";
+import { ContributeView } from "@/components/views/contribute-view";
 import { ResourceDetailView } from "@/components/views/resource-detail-view";
 import { getCategory } from "@/lib/data/resources";
 
-export type View = "home" | "resources" | "roadmap" | "library" | "daily" | "resource";
+export type View =
+  | "home"
+  | "resources"
+  | "roadmap"
+  | "library"
+  | "daily"
+  | "review"
+  | "contribute"
+  | "resource";
 
 interface HashState {
   view: View;
@@ -43,6 +53,8 @@ function parseHash(): HashState {
   if (segment === "roadmap") return { view: "roadmap", category: "", name: "" };
   if (segment === "library") return { view: "library", category: "", name: "" };
   if (segment === "daily") return { view: "daily", category: "", name: "" };
+  if (segment === "review") return { view: "review", category: "", name: "" };
+  if (segment === "contribute") return { view: "contribute", category: "", name: "" };
   if (segment === "resource") {
     const cat = a && getCategory(a) ? a : "";
     let name = "";
@@ -94,9 +106,13 @@ export function AppShell() {
             ? "#/library"
             : next === "daily"
               ? "#/daily"
-              : nextCategory
-                ? `#/resources/${nextCategory}`
-                : "#/resources";
+              : next === "review"
+                ? "#/review"
+                : next === "contribute"
+                  ? "#/contribute"
+                  : nextCategory
+                    ? `#/resources/${nextCategory}`
+                    : "#/resources";
 
     if (window.location.hash === target) {
       // Same-hash navigation doesn't fire `hashchange` — just scroll up.
@@ -132,6 +148,8 @@ export function AppShell() {
         {view === "roadmap" && <RoadmapView />}
         {view === "library" && <LibraryView onNavigate={navigate} />}
         {view === "daily" && <DailyView />}
+        {view === "review" && <ReviewView />}
+        {view === "contribute" && <ContributeView />}
         {view === "resource" && (
           <ResourceDetailView categoryId={category} name={name} />
         )}

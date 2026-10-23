@@ -21,6 +21,9 @@ interface ResourceCardProps {
   categoryId: string;
   /** Show the category name chip (used by the library view). */
   showCategory?: boolean;
+  /** Root element. "li" (default) for <ul> grids; "div" when the caller
+   * already wraps the card in its own list item (library view). */
+  as?: "li" | "div";
   className?: string;
 }
 
@@ -28,6 +31,7 @@ export function ResourceCard({
   resource,
   categoryId,
   showCategory = false,
+  as = "li",
   className,
 }: ResourceCardProps) {
   const { t, lang } = useLanguage();
@@ -122,7 +126,7 @@ export function ResourceCard({
 
   if (link) {
     return (
-      <SpotlightCard as="li" className={cn(classes, "list-none")}>
+      <SpotlightCard as={as} className={cn(classes, as === "li" && "list-none")}>
         <a
           href={link}
           target="_blank"
@@ -136,7 +140,7 @@ export function ResourceCard({
   }
 
   return (
-    <SpotlightCard as="li" className={classes}>
+    <SpotlightCard as={as} className={classes}>
       {body}
     </SpotlightCard>
   );

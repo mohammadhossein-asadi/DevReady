@@ -3,6 +3,7 @@
 import { useState } from "react";
 import {
   Bookmark,
+  Brain,
   CircleDot,
   CircleCheckBig,
   Compass,
@@ -33,6 +34,7 @@ import {
 import { ResourceCard } from "@/components/resource-card";
 import { useLanguage } from "@/lib/language-context";
 import { useLibrary } from "@/lib/library-context";
+import { masteryOf, useSrs, type Mastery, type SrsCard } from "@/lib/srs-context";
 import {
   refOf,
   resourceHref,
@@ -44,7 +46,14 @@ import type { DictKey } from "@/lib/i18n";
 import type { View } from "@/components/app-shell";
 import { cn } from "@/lib/utils";
 
-type TabValue = "bookmarks" | "doing" | "done" | "notes";
+type TabValue = "bookmarks" | "doing" | "done" | "notes" | "review";
+
+const MASTERY_LABEL: Record<Mastery, "review.mastery.learning" | "review.mastery.familiar" | "review.mastery.confident" | "review.mastery.mastered"> = {
+  learning: "review.mastery.learning",
+  familiar: "review.mastery.familiar",
+  confident: "review.mastery.confident",
+  mastered: "review.mastery.mastered",
+};
 
 const EMPTY_STATES: Record<
   TabValue,
@@ -58,15 +67,56 @@ const EMPTY_STATES: Record<
   doing: { icon: CircleDot, titleKey: "lib.empty.doing.title", descKey: "lib.empty.doing.desc" },
   done: { icon: CircleCheckBig, titleKey: "lib.empty.done.title", descKey: "lib.empty.done.desc" },
   notes: { icon: NotebookPen, titleKey: "lib.empty.notes.title", descKey: "lib.empty.notes.desc" },
+  review: { icon: Brain, titleKey: "lib.empty.review.title", descKey: "lib.empty.review.desc" },
 };
+
+/** Due + mastery meta line under a deck card in the Review tab. */
+function ReviewMeta({
+  keyOf,
+  cardOf,
+  today,
+}: {
+  keyOf: string;
+  cardOf: (key: string) => SrsCard | undefined;
+  today: string;
+}) {
+  const { t, isFa } = useLanguage();
+  const card = cardOf(keyOf);
+  if (!card) return null;
+  const mastery = masteryOf(card.interval);
+  const isDue = card.due <= today;
+  const dueLabel = isDue
+    ? t("review.due.today")
+    : t("lib.review.meta.due", {
+        when: new Intl.DateTimeFormat(isFa ? "fa-IR" : "en-US", {
+          dateStyle: "medium",
+          timeZone: "UTC",
+        }).format(new Date(`${card.due}T12:00:00Z`)),
+      });
+  return (
+    <a
+      href="#/review"
+      className="rounded-lg border border-dashed bg-muted/30 px-3 py-2 text-xs leading-relaxed text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+    >
+      <span className="mb-1 flex items-center gap-1.5 font-semibold text-foreground">
+        <Brain className="size-3 text-primary" aria-hidden="true" />
+        {t("lib.review.meta.mastery", { level: t(MASTERY_LABEL[mastery]) })}
+      </span>
+      <span className={cn(isDue && "font-semibold text-amber-600 dark:text-amber-400")}>
+        {dueLabel}
+      </span>
+    </a>
+  );
+}
 
 /**
  * My Library — bookmarks and study progress, persisted in localStorage.
  * Tabs are controlled so the summary chips can jump between them.
  */
 export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?: string) => void }) {
-  const { t, num, lang } = useLanguage();
+  const { t, num, lang, isFa } = useLanguage();
   const { data, bookmarkCount, doingCount, doneCount, notesCount, hasData, resetAll } = useLibrary();
+  const { cards: deckCards, cardOf, today } = useSrs();
   const [tab, setTab] = useState<TabValue>("bookmarks");
 
   const bookmarkRefs = data.bookmarks
@@ -78,6 +128,10 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
     .sort((a, b) => (b[1]?.updatedAt ?? 0) - (a[1]?.updatedAt ?? 0))
     .map(([key]) => refOf(key))
     .filter((r): r is ResourceRef => Boolean(r));
+  // Deck cards arrive due-first from the SRS context; resolve to refs.
+  const reviewRefs = deckCards
+    .map((card) => refOf(card.key))
+    .filter((r): r is ResourceRef => Boolean(r));
 
   // Ceil so the first completed resource already reads as 1% (round would show 0%).
   const percent = totalResources > 0 ? Math.min(100, Math.ceil((doneCount / totalResources) * 100)) : 0;
@@ -87,13 +141,15 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
     doing: doingRefs,
     done: doneRefs,
     notes: noteRefs,
+    review: reviewRefs,
   };
 
-  const chips: { value: TabValue; icon: typeof Bookmark; count: number; labelKey: "lib.tab.bookmarks" | "lib.tab.doing" | "lib.tab.done" | "lib.tab.notes" }[] = [
+  const chips: { value: TabValue; icon: typeof Bookmark; count: number; labelKey: "lib.tab.bookmarks" | "lib.tab.doing" | "lib.tab.done" | "lib.tab.notes" | "lib.tab.review" }[] = [
     { value: "bookmarks", icon: Bookmark, count: bookmarkCount, labelKey: "lib.tab.bookmarks" },
     { value: "doing", icon: CircleDot, count: doingCount, labelKey: "lib.tab.doing" },
     { value: "done", icon: CircleCheckBig, count: doneCount, labelKey: "lib.tab.done" },
     { value: "notes", icon: NotebookPen, count: notesCount, labelKey: "lib.tab.notes" },
+    { value: "review", icon: Brain, count: deckCards.length, labelKey: "lib.tab.review" },
   ];
 
   return (
@@ -122,7 +178,7 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3" role="group" aria-label={t("lib.title")}>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5 sm:gap-3" role="group" aria-label={t("lib.title")}>
             {chips.map(({ value, icon: Icon, count, labelKey }) => (
               <button
                 key={value}
@@ -167,19 +223,20 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
           ))}
         </TabsList>
 
-        {(["bookmarks", "doing", "done", "notes"] as TabValue[]).map((value) => {
+        {(["bookmarks", "doing", "done", "notes", "review"] as TabValue[]).map((value) => {
           const refs = lists[value];
           const empty = EMPTY_STATES[value];
           return (
             <TabsContent key={value} value={value} className="mt-6">
               {refs.length > 0 ? (
-                <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {refs.map(({ key, resource, category }) => (
-                    <li key={key} className="flex flex-col gap-2">
+                    <div key={key} className="flex flex-col gap-2">
                       <ResourceCard
                         resource={resource}
                         categoryId={category.id}
                         showCategory
+                        as="div"
                         className="flex-1"
                       />
                       {value === "notes" ? (
@@ -201,9 +258,12 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
                           </span>
                         </a>
                       ) : null}
-                    </li>
+                      {value === "review" ? (
+                        <ReviewMeta keyOf={key} cardOf={cardOf} today={today} />
+                      ) : null}
+                    </div>
                   ))}
-                </ul>
+                </div>
               ) : (
                 <div className="rounded-xl border border-dashed p-10 text-center">
                   <span className="mx-auto grid size-12 place-items-center rounded-xl bg-muted">
@@ -216,10 +276,12 @@ export function LibraryView({ onNavigate }: { onNavigate: (view: View, category?
                   <Button
                     variant="outline"
                     className="mt-5 min-h-11 gap-2"
-                    onClick={() => onNavigate("resources")}
+                    onClick={() =>
+                      value === "review" ? onNavigate("review") : onNavigate("resources")
+                    }
                   >
                     <Compass className="size-4" aria-hidden="true" />
-                    {t("lib.empty.cta")}
+                    {value === "review" ? t("lib.review.cta") : t("lib.empty.cta")}
                   </Button>
                 </div>
               )}

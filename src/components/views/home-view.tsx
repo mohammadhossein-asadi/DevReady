@@ -4,6 +4,7 @@ import {
   ArrowRight,
   BookOpenCheck,
   Bookmark,
+  Brain,
   CircleCheckBig,
   CircleDot,
   Compass,
@@ -11,6 +12,7 @@ import {
   LibraryBig,
   Search,
   Target,
+  Trophy,
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,6 +27,7 @@ import { HUE_CHIP } from "@/components/views/resources-view";
 import { useLanguage } from "@/lib/language-context";
 import { useLibrary } from "@/lib/library-context";
 import { useDaily } from "@/lib/daily-context";
+import { useSrs } from "@/lib/srs-context";
 import {
   categories,
   totalResources,
@@ -224,6 +227,66 @@ function DailyWidget({ onNavigate }: { onNavigate: (view: View, category?: strin
   );
 }
 
+/** Spaced repetition teaser — Phase 4 discovery + jump-off point. */
+function ReviewWidget({ onNavigate }: { onNavigate: (view: View, category?: string) => void }) {
+  const { t, num, isFa } = useLanguage();
+  const { dueCount, totalCount, cards, today, masteredCount } = useSrs();
+
+  const nextDue =
+    totalCount > 0 && dueCount === 0 && today && cards[0]
+      ? new Intl.DateTimeFormat(isFa ? "fa-IR" : "en-US", {
+          dateStyle: "medium",
+          timeZone: "UTC",
+        }).format(new Date(`${cards[0].due}T12:00:00Z`))
+      : "";
+
+  const statusText =
+    dueCount > 0
+      ? t("home.review.due", { n: num(dueCount) })
+      : totalCount > 0 && nextDue
+        ? t("home.review.next", { n: num(totalCount), date: nextDue })
+        : t("home.review.empty");
+
+  return (
+    <section aria-labelledby="review-widget-title" className="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+      <SpotlightCard className="rounded-2xl">
+        <div className="flex flex-col gap-5 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0 flex-1">
+            <h2
+              id="review-widget-title"
+              className="flex items-center gap-2 text-lg font-bold tracking-tight"
+            >
+              <Brain className="size-5 text-primary" aria-hidden="true" />
+              {t("home.review.title")}
+              {masteredCount > 0 ? (
+                <Badge
+                  variant="outline"
+                  className="gap-1 border-emerald-600/30 text-xs text-emerald-700 dark:border-emerald-400/30 dark:text-emerald-400"
+                >
+                  <Trophy className="size-3" aria-hidden="true" />
+                  {num(masteredCount)}
+                </Badge>
+              ) : null}
+            </h2>
+            <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-muted-foreground">
+              {statusText}
+            </p>
+          </div>
+
+          <Button
+            variant={dueCount > 0 ? "default" : "outline"}
+            className="min-h-11 shrink-0 gap-2"
+            onClick={() => onNavigate("review")}
+          >
+            <Brain className="size-4" aria-hidden="true" />
+            {dueCount > 0 ? t("home.review.cta") : t("home.review.open")}
+          </Button>
+        </div>
+      </SpotlightCard>
+    </section>
+  );
+}
+
 export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: string) => void }) {
   const { t, num, isFa } = useLanguage();
 
@@ -301,6 +364,9 @@ export function HomeView({ onNavigate }: { onNavigate: (view: View, category?: s
 
       {/* ============ Daily challenge (Phase 3) ============ */}
       <DailyWidget onNavigate={onNavigate} />
+
+      {/* ============ Spaced repetition (Phase 4) ============ */}
+      <ReviewWidget onNavigate={onNavigate} />
 
       {/* ============ Featured marquee ============ */}
       <section aria-labelledby="featured-title" className="border-b bg-muted/20 py-8">

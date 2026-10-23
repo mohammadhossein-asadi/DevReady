@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ResourceCard } from "@/components/resource-card";
 import { BookmarkButton } from "@/components/bookmark-button";
+import { ReviewDeckButton } from "@/components/review-deck-button";
 import { StatusPicker } from "@/components/status-picker";
 import { NoteEditor } from "@/components/note-editor";
 import { ICONS } from "@/components/views/home-view";
@@ -184,6 +185,12 @@ export function ResourceDetailView({
           </p>
           <div className="mt-3">
             <StatusPicker id={key} />
+          </div>
+        </div>
+
+        <div className="mt-5 border-t pt-5">
+          <div className="max-w-md">
+            <ReviewDeckButton id={key} />
           </div>
         </div>
 

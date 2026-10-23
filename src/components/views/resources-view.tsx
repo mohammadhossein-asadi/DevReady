@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Check, Search, SlidersHorizontal, X } from "lucide-react";
+import { Check, ChevronRight, Plus, Search, SlidersHorizontal, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -114,6 +114,14 @@ export function ResourcesView({
           {t("res.title")}
         </h1>
         <p className="mt-3 leading-relaxed text-muted-foreground">{t("res.subtitle")}</p>
+        <a
+          href="#/contribute"
+          className="mt-3 inline-flex min-h-9 items-center gap-1.5 rounded-lg px-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          <Plus className="size-4" aria-hidden="true" />
+          {t("res.suggest")}
+          <ChevronRight className="size-4 rtl:rotate-180" aria-hidden="true" />
+        </a>
       </header>
 
       {/* Controls */}
@@ -244,6 +252,14 @@ export function ResourcesView({
           <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
             {t("res.empty.desc")}
           </p>
+          <a
+            href="#/contribute"
+            className="mt-4 inline-flex min-h-9 items-center gap-1.5 rounded-lg px-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            <Plus className="size-4" aria-hidden="true" />
+            {t("res.suggest")}
+            <ChevronRight className="size-4 rtl:rotate-180" aria-hidden="true" />
+          </a>
         </div>
       )}
     </section>
