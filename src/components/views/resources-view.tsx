@@ -22,6 +22,11 @@ const HUE_CHIP: Record<Hue, string> = {
   orange: "bg-orange-500/10 text-orange-700 dark:text-orange-400",
   lime: "bg-lime-500/10 text-lime-700 dark:text-lime-400",
   pink: "bg-pink-500/10 text-pink-700 dark:text-pink-400",
+  cyan: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-400",
+  sky: "bg-sky-500/10 text-sky-700 dark:text-sky-400",
+  indigo: "bg-indigo-500/10 text-indigo-700 dark:text-indigo-400",
+  red: "bg-red-500/10 text-red-700 dark:text-red-400",
+  fuchsia: "bg-fuchsia-500/10 text-fuchsia-700 dark:text-fuchsia-400",
 };
 
 export { HUE_CHIP };

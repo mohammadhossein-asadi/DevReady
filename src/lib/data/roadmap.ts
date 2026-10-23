@@ -306,13 +306,25 @@ export const productPhases: ProductPhase[] = [
   {
     num: 5,
     title: { en: "Accounts & Signals", fa: "حساب کاربری و سیگنال‌ها" },
-    current: true,
+    done: true,
     items: [
       { en: "Difficulty voting on every resource with community consensus badges", fa: "رأی‌دهی سختی برای هر منبع با نشان اجماع جامعه" },
       { en: "Optional account (email + scrypt-hashed password, 30-day sessions)", fa: "حساب کاربری اختیاری (ایمیل + گذرواژه هش‌شده با scrypt، نشست ۳۰ روزه)" },
       { en: "Private cloud sync of bookmarks, progress, notes, review deck, suggestions and votes", fa: "همگام‌سازی ابری خصوصی نشان‌ها، وضعیت مطالعه، یادداشت‌ها، کارت‌های مرور، پیشنهادها و رأی‌ها" },
       { en: "Merge-safe conflict resolution with debounced auto-sync across devices", fa: "حل تعارض امن با ادغام و همگام‌سازی خودکار بین دستگاه‌ها" },
       { en: "Privacy-first posture: the whole app keeps working without an account", fa: "اولویت حریم خصوصی: کل برنامه بدون حساب کاربری هم کار می‌کند" },
+    ],
+  },
+  {
+    num: 6,
+    title: { en: "Content Expansion", fa: "گسترش محتوا" },
+    current: true,
+    items: [
+      { en: "12 new categories: frameworks, languages/platforms, AI & ML, computer science, cyber security, management, game dev, design, blockchain, best practices, soft skills, interview essentials", fa: "۱۲ دسته جدید: فریم‌ورک‌ها، زبان‌ها/پلتفرم‌ها، هوش مصنوعی و یادگیری ماشین، علوم کامپیوتر، امنیت سایبری، مدیریت، توسعه بازی، طراحی، بلاکچین، بهترین شیوه‌ها، مهارت‌های نرم و اصول مصاحبه" },
+      { en: "Soft-skills track: communication, negotiation, feedback, teamwork and interview English for Persian speakers", fa: "مسیر مهارت‌های نرم: ارتباط، مذاکره، بازخورد، کار تیمی و انگلیسی مصاحبه برای فارسی‌زبانان" },
+      { en: "Interview-essentials track: resumes, portfolios, LinkedIn, salary negotiation and job-hunt tooling", fa: "مسیر اصول مصاحبه: رزومه، پورتفولیو، لینکدین، مذاکره حقوق و ابزارهای جست‌وجوی کار" },
+      { en: "Deeper DevOps, Mobile and Databases catalogs (+ Android/iOS, SRE, SQL practice platforms)", fa: "کاتالوگ‌های عمیق‌تر دواپس، موبایل و پایگاه داده (+ اندروید/iOS، SRE و پلتفرم‌های تمرین SQL)" },
+      { en: "Catalog now spans 32 categories — every listed interview area covered", fa: "کاتالوگ اکنون ۳۲ دسته دارد — همه حوزه‌های مصاحبه پوشش داده شده است" },
     ],
   },
 ];

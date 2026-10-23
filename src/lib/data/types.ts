@@ -36,7 +36,19 @@ export type CategoryIcon =
   | "smartphone"
   | "sparkles"
   | "layers"
-  | "cpu";
+  | "cpu"
+  | "boxes"
+  | "code2"
+  | "brainCircuit"
+  | "graduation"
+  | "lockKeyhole"
+  | "briefcase"
+  | "gamepad"
+  | "palette"
+  | "blocks"
+  | "listChecks"
+  | "heartHandshake"
+  | "rocket";
 
 export type Hue =
   | "emerald"
@@ -46,7 +58,12 @@ export type Hue =
   | "rose"
   | "orange"
   | "lime"
-  | "pink";
+  | "pink"
+  | "cyan"
+  | "sky"
+  | "indigo"
+  | "red"
+  | "fuchsia";
 
 export interface Category {
   id: string;

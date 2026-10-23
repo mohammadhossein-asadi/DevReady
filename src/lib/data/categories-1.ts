@@ -155,8 +155,8 @@ export const categoriesPart1: Category[] = [
       fa: "راند‌های ماشین‌کدینگ و طراحی سیستم فرانت‌اند — ویجت‌ها، جدول‌های داده و الگوهای UX.",
     },
     practiceNote: {
-      en: "Recommended practice topics: Autocomplete, data tables with sorting/filtering, pagination, infinite scroll, accessible modals & dialogs, complex multi-step forms, notification systems, loading/error/empty states, virtualized lists, drag-and-drop interfaces, and real-time collaborative UI patterns.",
-      fa: "موضوعات پیشنهادی تمرین: اتوکامپلیت، جدول داده با مرتب‌سازی/فیلتر، صفحه‌بندی، اسکرول بی‌نهایت، مودال و دیالوگِ دسترس‌پذیر، فرم‌های چندمرحله‌ای پیچیده، سیستم اعلان‌ها، حالت‌های بارگذاری/خطا/خالی، لیست‌های مجازی‌سازی‌شده، رابط‌های درگ‌اند‌دراپ و الگوهای UI همکاری بلادرنگ.",
+      en: "Autocomplete, data tables with sorting/filtering, pagination, infinite scroll, accessible modals & dialogs, complex multi-step forms, notification systems, loading/error/empty states, virtualized lists, drag-and-drop interfaces, and real-time collaborative UI patterns.",
+      fa: "اتوکامپلیت، جدول داده با مرتب‌سازی/فیلتر، صفحه‌بندی، اسکرول بی‌نهایت، مودال و دیالوگِ دسترس‌پذیر، فرم‌های چندمرحله‌ای پیچیده، سیستم اعلان‌ها، حالت‌های بارگذاری/خطا/خالی، لیست‌های مجازی‌سازی‌شده، رابط‌های درگ‌اند‌دراپ و الگوهای UI همکاری بلادرنگ.",
     },
     resources: [
       { name: "GreatFrontEnd — Frontend System Design", url: "https://www.greatfrontend.com" },
@@ -238,6 +238,13 @@ export const categoriesPart1: Category[] = [
       { name: "SQLZoo — Interactive SQL Tutorial", url: "https://sqlzoo.net" },
       { name: "PostgreSQL Exercises", url: "https://pgexercises.com" },
       { name: "DB Fiddle — SQL Playground", url: "https://www.db-fiddle.com" },
+      { name: "MySQL Tutorial — mysqltutorial.org", url: "https://www.mysqltutorial.org" },
+      { name: "Mode SQL Tutorial", url: "https://mode.com/sql-tutorial" },
+      { name: "DataLemur — SQL Interview Questions", url: "https://datalemur.com" },
+      { name: "StrataScratch — SQL & Data Practice", url: "https://www.stratascratch.com" },
+      { name: "SQLite — Documentation", url: "https://www.sqlite.org/docs" },
+      { name: "ClickHouse — Documentation", url: "https://clickhouse.com/docs" },
+      { name: "GeeksforGeeks — DBMS Notes", url: "https://www.geeksforgeeks.org/dbms" },
     ],
   },
   {

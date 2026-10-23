@@ -14,12 +14,12 @@ export const dict = {
     "brand.taglineFull": "Bilingual Web Development Interview Prep",
 
     // Hero
-    "hero.badge": "Phase 5 · Accounts & Signals",
+    "hero.badge": "32 Categories · Accounts & Signals",
     "hero.title1": "Walk into your",
     "hero.title2": "web dev interview",
     "hero.title3": "ready.",
     "hero.subtitle":
-      "A curated, bilingual library of {count}+ high-quality resources for Frontend, Backend, Mobile, System Design, Algorithms, Security and Behavioral rounds — in English and فارسی.",
+      "A curated, bilingual library of {count}+ high-quality resources across 32 categories — from Frontend, Backend and System Design to AI & ML, Cyber Security, Game Dev, Blockchain, Soft Skills and every interview essential — in English and فارسی.",
     "hero.cta1": "Explore resources",
     "hero.cta2": "View roadmap",
 
@@ -446,12 +446,12 @@ export const dict = {
     "brand.taglineFull": "پلتفرم دوزبانه آمادگی مصاحبه توسعه وب",
 
     // Hero
-    "hero.badge": "فاز ۵ · حساب کاربری و سیگنال‌ها",
+    "hero.badge": "۳۲ دسته · حساب کاربری و سیگنال‌ها",
     "hero.title1": "برای مصاحبه",
     "hero.title2": "توسعه وب،",
     "hero.title3": "آماده برو.",
     "hero.subtitle":
-      "کتابخانه‌ای منتخب و دوزبانه از بیش از {count} منبع باکیفیت برای راند‌های فرانت‌اند، بک‌اند، موبایل، طراحی سیستم، الگوریتم، امنیت و مصاحبه رفتاری — به انگلیسی و فارسی.",
+      "کتابخانه‌ای منتخب و دوزبانه از بیش از {count} منبع باکیفیت در ۳۲ دسته — از فرانت‌اند، بک‌اند و طراحی سیستم تا هوش مصنوعی، امنیت سایبری، توسعه بازی، بلاکچین، مهارت‌های نرم و اصول مصاحبه — به انگلیسی و فارسی.",
     "hero.cta1": "مشاهده منابع",
     "hero.cta2": "نقشه راه",
 

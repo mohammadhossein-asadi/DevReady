@@ -17,8 +17,8 @@ export const categoriesPart3: Category[] = [
       fa: "ریکت نیتیو، اکسپو، فلاتر و PWA — برای توسعه‌دهندگان وبی که مصاحبه‌هایشان به موبایل یا تجربه‌های اپ‌مانند هم می‌رسد.",
     },
     practiceNote: {
-      en: "Recommended practice topics: offline-first data layers, deep links & app navigation, permission flows, adaptive layouts for tablets, push notifications, app-shell caching with service workers, and bridging native modules in React Native.",
-      fa: "موضوعات پیشنهادی تمرین: لایه داده آفلاین‌اول، دیپ‌لینک و ناوبری اپ، جریان‌های دسترسی، چیدمان تطبیقی برای تبلت، نوتیفیکیشن پوش، کش app-shell با سرویس‌ورکر و پل زدن ماژول‌های نیتیو در ریکت نیتیو.",
+      en: "offline-first data layers, deep links & app navigation, permission flows, adaptive layouts for tablets, push notifications, app-shell caching with service workers, and bridging native modules in React Native.",
+      fa: "لایه داده آفلاین‌اول، دیپ‌لینک و ناوبری اپ، جریان‌های دسترسی، چیدمان تطبیقی برای تبلت، نوتیفیکیشن پوش، کش app-shell با سرویس‌ورکر و پل زدن ماژول‌های نیتیو در ریکت نیتیو.",
     },
     resources: [
       { name: "React Native — Official Docs", url: "https://reactnative.dev" },
@@ -39,6 +39,14 @@ export const categoriesPart3: Category[] = [
       { name: "PWA Interview Questions — InterviewBit", url: "https://www.interviewbit.com/pwa-interview-questions" },
       { name: "Flutter Interview Questions — GeeksforGeeks", url: "https://www.geeksforgeeks.org/flutter-interview-questions" },
       { name: "Awesome React Native", url: "https://github.com/jondot/awesome-react-native" },
+      { name: "Android Developers — Guides", url: "https://developer.android.com/guide" },
+      { name: "Apple — iOS Developer Documentation", url: "https://developer.apple.com/documentation" },
+      { name: "SwiftUI — Documentation", url: "https://developer.apple.com/documentation/swiftui" },
+      { name: "Jetpack Compose — Documentation", url: "https://developer.android.com/jetpack/compose" },
+      { name: "Kotlin Multiplatform", url: "https://www.jetbrains.com/kotlin-multiplatform" },
+      { name: "Tamagui — Universal UI", url: "https://tamagui.dev" },
+      { name: "React Native Testing Library", url: "https://callstack.github.io/react-native-testing-library" },
+      { name: "Android Interview Questions (MindOrks)", url: "https://github.com/MindOrks/Android-Interview-Questions" },
     ],
   },
   {
@@ -51,8 +59,8 @@ export const categoriesPart3: Category[] = [
       fa: "لایه جدید مصاحبه‌ها: دستیارهای کدنویسی هوش مصنوعی، مهندسی پرامپت، مبانی RAG و ساخت قابلیت‌های مبتنی بر LLM.",
     },
     practiceNote: {
-      en: "Recommended practice topics: effective prompting for code review & refactoring, grounding LLM output with retrieval (RAG), streaming completions in the UI, structured outputs (JSON mode), cost/latency trade-offs, evaluation of model answers, and when NOT to use an LLM.",
-      fa: "موضوعات پیشنهادی تمرین: پرامپت‌نویسی مؤثر برای بازبینی و بازآرایی کد، اتصال خروجی LLM به دانش بازیابی‌شده (RAG)، استریم پاسخ‌ها در UI، خروجی ساختاریافته (JSON mode)، توازن هزینه/تأخیر، ارزیابی پاسخ مدل و اینکه چه زمانی نباید از LLM استفاده کرد.",
+      en: "effective prompting for code review & refactoring, grounding LLM output with retrieval (RAG), streaming completions in the UI, structured outputs (JSON mode), cost/latency trade-offs, evaluation of model answers, and when NOT to use an LLM.",
+      fa: "پرامپت‌نویسی مؤثر برای بازبینی و بازآرایی کد، اتصال خروجی LLM به دانش بازیابی‌شده (RAG)، استریم پاسخ‌ها در UI، خروجی ساختاریافته (JSON mode)، توازن هزینه/تأخیر، ارزیابی پاسخ مدل و اینکه چه زمانی نباید از LLM استفاده کرد.",
     },
     resources: [
       { name: "Prompt Engineering Guide", url: "https://www.promptingguide.ai" },
@@ -85,8 +93,8 @@ export const categoriesPart3: Category[] = [
       fa: "پایتون، جاوا، دات‌نت، PHP، گو و روبی — مستندات و بانک‌های سوال برای تیم‌هایی که استک‌شان جاوااسکریپت نیست.",
     },
     practiceNote: {
-      en: "Recommended practice topics: ORM vs raw SQL trade-offs, request lifecycle in your stack, dependency injection, middleware/pipeline patterns, connection pooling, background jobs & queues, and idiomatic error handling per language.",
-      fa: "موضوعات پیشنهادی تمرین: توازن ORM و SQL خام، چرخه حیات درخواست در استک شما، تزریق وابستگی، الگوهای میل‌ور/پایپ‌لاین، کانکشن پولینگ، کارهای پس‌زمینه و صف‌ها و مدیریت خطای اصیل در هر زبان.",
+      en: "ORM vs raw SQL trade-offs, request lifecycle in your stack, dependency injection, middleware/pipeline patterns, connection pooling, background jobs & queues, and idiomatic error handling per language.",
+      fa: "توازن ORM و SQL خام، چرخه حیات درخواست در استک شما، تزریق وابستگی، الگوهای میل‌ور/پایپ‌لاین، کانکشن پولینگ، کارهای پس‌زمینه و صف‌ها و مدیریت خطای اصیل در هر زبان.",
     },
     resources: [
       { name: "Python — Official Tutorial", url: "https://docs.python.org/3/tutorial" },
@@ -121,8 +129,8 @@ export const categoriesPart3: Category[] = [
       fa: "مرورگر واقعاً چطور کار می‌کند: پایپ‌لاین رندر، V8 و جمع‌آوری زباله، شبکه و مبانی علوم کامپیوتر پشت سوال‌های سخت.",
     },
     practiceNote: {
-      en: "Recommended practice topics: parse → style → layout → paint → composite pipeline, main-thread long tasks & INP, how the JIT compiles hot code, memory leaks in the DOM, TCP/TLS/QUIC handshake, HTTP caching layers, and endianness/encoding basics.",
-      fa: "موضوعات پیشنهادی تمرین: پایپ‌لاین parse تا style تا layout تا paint تا composite، تسک‌های طولانی نخ اصلی و INP، کامپایل کد داغ توسط JIT، نشت حافظه در DOM، هندشیک TCP/TLS/QUIC، لایه‌های کش HTTP و مبانی انکودینگ و اندیanness.",
+      en: "parse → style → layout → paint → composite pipeline, main-thread long tasks & INP, how the JIT compiles hot code, memory leaks in the DOM, TCP/TLS/QUIC handshake, HTTP caching layers, and endianness/encoding basics.",
+      fa: "پایپ‌لاین parse تا style تا layout تا paint تا composite، تسک‌های طولانی نخ اصلی و INP، کامپایل کد داغ توسط JIT، نشت حافظه در DOM، هندشیک TCP/TLS/QUIC، لایه‌های کش HTTP و مبانی انکودینگ و اندیanness.",
     },
     resources: [
       { name: "How Browsers Work — web.dev", url: "https://web.dev/howbrowserswork" },
