@@ -7,6 +7,8 @@ import { LibraryProvider } from "@/lib/library-context";
 import { DailyProvider } from "@/lib/daily-context";
 import { SrsProvider } from "@/lib/srs-context";
 import { ContribProvider } from "@/lib/contrib-context";
+import { AuthProvider } from "@/lib/auth-context";
+import { VotesProvider } from "@/lib/votes-context";
 
 /**
  * Radix primitives (Tooltip, Menu, Dialog…) read direction from context
@@ -36,7 +38,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <DailyProvider>
             <SrsProvider>
               <ContribProvider>
-                <RadixDirection>{children}</RadixDirection>
+                <AuthProvider>
+                  <VotesProvider>
+                    <RadixDirection>{children}</RadixDirection>
+                  </VotesProvider>
+                </AuthProvider>
               </ContribProvider>
             </SrsProvider>
           </DailyProvider>

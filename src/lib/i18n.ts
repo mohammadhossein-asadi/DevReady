@@ -14,7 +14,7 @@ export const dict = {
     "brand.taglineFull": "Bilingual Web Development Interview Prep",
 
     // Hero
-    "hero.badge": "Phase 4 · Retention & Community",
+    "hero.badge": "Phase 5 · Accounts & Signals",
     "hero.title1": "Walk into your",
     "hero.title2": "web dev interview",
     "hero.title3": "ready.",
@@ -315,8 +315,93 @@ export const dict = {
     "road.product.current": "Current",
     "road.product.done": "Shipped",
     "road.product.intro":
-      "How DevReady itself evolves — Phase 4 (Retention & Community) is what you are looking at now.",
+      "How DevReady itself evolves — Phase 5 (Accounts & Signals) is what you are looking at now.",
     "road.phases": "Phase {n}",
+
+    // Difficulty voting (Phase 5)
+    "votes.title": "How hard is this resource?",
+    "votes.hint": "Rate it in one click — it helps other learners calibrate.",
+    "votes.level.easy": "Easy",
+    "votes.level.medium": "Medium",
+    "votes.level.hard": "Hard",
+    "votes.yours": "Your vote",
+    "votes.clear": "Click again to remove your vote",
+    "votes.none": "No community votes yet — be the first to rate it.",
+    "votes.total": "{n} community votes",
+    "votes.consensus": "The community calls it {level}",
+    "votes.consensusTitle": "{level} per {n} votes",
+    "votes.localNote": "Saved in this browser.",
+    "votes.sharedNote": "Shared with the community.",
+    "votes.signIn": "Sign in to share your vote",
+
+    // Optional account & sync (Phase 5)
+    "nav.account": "Account",
+    "acct.title": "Account & sync",
+    "acct.subtitle":
+      "Optional — DevReady works fully without an account. Connect one to mirror your bookmarks, progress, notes, review deck, suggestions and difficulty votes across devices.",
+    "acct.tab.signIn": "Sign in",
+    "acct.tab.register": "Create account",
+    "acct.email": "Email",
+    "acct.password": "Password",
+    "acct.name": "Display name (optional)",
+    "acct.signIn.cta": "Sign in",
+    "acct.register.cta": "Create account",
+    "acct.register.terms":
+      "By creating an account you store your email plus the study data listed here on this site's own database — nothing is shared with third parties.",
+    "acct.what.title": "What syncs to your account",
+    "acct.what.bookmarks": "Bookmarks",
+    "acct.what.progress": "Study progress & daily streaks",
+    "acct.what.notes": "Personal notes",
+    "acct.what.review": "Spaced-repetition review deck",
+    "acct.what.votes": "Difficulty votes",
+    "acct.what.contribs": "Resource suggestions",
+    "acct.privacy.title": "Privacy first",
+    "acct.privacy.body":
+      "Passwords are stored as salted scrypt hashes — never readable. Sessions use bearer tokens that are only kept as SHA-256 hashes server-side. You can export or wipe everything at any time, and the whole app keeps working without an account.",
+    "acct.profile.fallbackName": "Learner",
+    "acct.memberSince": "Since {date}",
+    "acct.signedInDot": "Account connected — sync available",
+    "acct.sync.title": "Cloud sync",
+    "acct.sync.auto": "Auto-sync",
+    "acct.sync.last": "Last synced {when}",
+    "acct.sync.never": "Never synced yet — press “Sync now” to start.",
+    "acct.sync.now": "Sync now",
+    "acct.sync.restore": "Restore from cloud",
+    "acct.sync.overwrite": "Overwrite cloud",
+    "acct.sync.overwriteTitle": "Replace the cloud copy with this device?",
+    "acct.sync.overwriteDesc":
+      "The stored cloud snapshot will be replaced by exactly what this browser holds now. Other devices will receive this state on their next sync.",
+    "acct.sync.mergeNote":
+      "Syncing merges both sides instead of overwriting: bookmarks and completed days are combined, newer notes and review cards win, and conflicting study statuses resolve to the further state. “Restore from cloud” pulls without pushing; “Overwrite cloud” replaces the cloud copy with this device.",
+    "acct.data.title": "Data on this device",
+    "acct.data.bookmarks": "Bookmarks",
+    "acct.data.progress": "In progress",
+    "acct.data.notes": "Notes",
+    "acct.data.review": "Review cards",
+    "acct.data.votes": "Votes cast",
+    "acct.data.contribs": "Suggestions",
+    "acct.danger.title": "Danger zone",
+    "acct.signOut": "Sign out",
+    "acct.delete": "Delete account",
+    "acct.delete.title": "Delete your account?",
+    "acct.delete.desc":
+      "This permanently removes your account, its cloud snapshot and your community difficulty votes. The data in this browser is untouched.",
+    "acct.danger.note":
+      "Signing out keeps everything on this device. Deleting the account removes only the cloud copy — your browser data stays.",
+    "acct.cancel": "Cancel",
+
+    // Auth & sync errors (Phase 5)
+    "auth.err.invalid_email": "That email address doesn’t look right.",
+    "auth.err.weak_password": "Password must be at least 8 characters.",
+    "auth.err.email_taken": "An account with this email already exists.",
+    "auth.err.invalid_credentials": "Email or password is incorrect.",
+    "auth.err.name_long": "Display name is too long (max 80 characters).",
+    "auth.err.network":
+      "Couldn’t reach the server — check your connection and try again.",
+    "auth.err.expired": "Your session expired — please sign in again.",
+    "sync.err.network":
+      "Sync couldn’t reach the server — your data is safe on this device.",
+    "sync.err.too_large": "Your data is too large to sync right now.",
 
     // Footer
     "footer.desc":
@@ -361,7 +446,7 @@ export const dict = {
     "brand.taglineFull": "پلتفرم دوزبانه آمادگی مصاحبه توسعه وب",
 
     // Hero
-    "hero.badge": "فاز ۴ · ماندگاری و انجمن",
+    "hero.badge": "فاز ۵ · حساب کاربری و سیگنال‌ها",
     "hero.title1": "برای مصاحبه",
     "hero.title2": "توسعه وب،",
     "hero.title3": "آماده برو.",
@@ -661,8 +746,93 @@ export const dict = {
     "road.product.current": "فعلی",
     "road.product.done": "ارسال‌شده",
     "road.product.intro":
-      "روند تکامل خودِ DevReady — فاز ۴ (ماندگاری و انجمن) همان چیزی است که اکنون می‌بینید.",
+      "روند تکامل خودِ DevReady — فاز ۵ (حساب کاربری و سیگنال‌ها) همان چیزی است که اکنون می‌بینید.",
     "road.phases": "فاز {n}",
+
+    // Difficulty voting (Phase 5)
+    "votes.title": "این منبع چقدر سخت است؟",
+    "votes.hint": "با یک کلیک مشخص کنید — به بقیه برای سنجش سطح کمک می‌کند.",
+    "votes.level.easy": "آسان",
+    "votes.level.medium": "متوسط",
+    "votes.level.hard": "سخت",
+    "votes.yours": "رأی شما",
+    "votes.clear": "برای حذف رأی دوباره کلیک کنید",
+    "votes.none": "هنوز رأی اجتماعی ثبت نشده — اولین نفر باشید.",
+    "votes.total": "{n} رأی اجتماعی",
+    "votes.consensus": "نظر جامعه: {level}",
+    "votes.consensusTitle": "{level} در {n} رأی",
+    "votes.localNote": "در همین مرورگر ذخیره می‌شود.",
+    "votes.sharedNote": "با جامعه به اشتراک گذاشته شد.",
+    "votes.signIn": "برای ثبت رأی در آمار جامعه وارد شوید",
+
+    // Optional account & sync (Phase 5)
+    "nav.account": "حساب کاربری",
+    "acct.title": "حساب کاربری و همگام‌سازی",
+    "acct.subtitle":
+      "اختیاری — DevReady بدون حساب کاربری هم کامل کار می‌کند. با ساخت حساب، نشان‌ها، وضعیت مطالعه، یادداشت‌ها، کارت‌های مرور، پیشنهادها و رأی‌های سختی‌تان بین دستگاه‌ها همگام می‌شود.",
+    "acct.tab.signIn": "ورود",
+    "acct.tab.register": "ساخت حساب",
+    "acct.email": "ایمیل",
+    "acct.password": "گذرواژه",
+    "acct.name": "نام نمایشی (اختیاری)",
+    "acct.signIn.cta": "ورود",
+    "acct.register.cta": "ساخت حساب",
+    "acct.register.terms":
+      "با ساخت حساب، ایمیل و داده‌های مطالعه‌ای که در همین صفحه فهرست شده در پایگاه‌دادهٔ همین سایت ذخیره می‌شود — هیچ چیزی با شخص ثالث به اشتراک گذاشته نمی‌شود.",
+    "acct.what.title": "چه چیزهایی با حساب شما همگام می‌شود",
+    "acct.what.bookmarks": "نشان‌ها",
+    "acct.what.progress": "وضعیت مطالعه و استریک روزانه",
+    "acct.what.notes": "یادداشت‌های شخصی",
+    "acct.what.review": "دسته مرور فاصله‌دار",
+    "acct.what.votes": "رأی‌های سختی",
+    "acct.what.contribs": "منابع پیشنهادی",
+    "acct.privacy.title": "اول حریم خصوصی",
+    "acct.privacy.body":
+      "گذرواژه‌ها به‌صورت هش scrypt با نمک تصادفی ذخیره می‌شوند — هرگز قابل خواندن نیستند. نشست‌ها با توکن نگهبان کار می‌کنند که سرور فقط هش SHA-256 آن‌ها را نگه می‌دارد. هر زمان می‌توانید همه‌چیز را پاک کنید و کل برنامه بدون حساب هم کار می‌کند.",
+    "acct.profile.fallbackName": "یادگیرنده",
+    "acct.memberSince": "از {date}",
+    "acct.signedInDot": "حساب متصل است — همگام‌سازی فعال",
+    "acct.sync.title": "همگام‌سازی ابری",
+    "acct.sync.auto": "همگام‌سازی خودکار",
+    "acct.sync.last": "آخرین همگام‌سازی {when}",
+    "acct.sync.never": "هنوز همگام‌سازی نشده — «همگام‌سازی اکنون» را بزنید.",
+    "acct.sync.now": "همگام‌سازی اکنون",
+    "acct.sync.restore": "بازیابی از ابر",
+    "acct.sync.overwrite": "بازنویسی ابر",
+    "acct.sync.overwriteTitle": "نسخهٔ ابری با همین دستگاه جایگزین شود؟",
+    "acct.sync.overwriteDesc":
+      "نسخهٔ ذخیره‌شدهٔ ابری دقیقاً با همان چیزی که همین مرورگر الان دارد جایگزین می‌شود. دستگاه‌های دیگر در همگام‌سازی بعدی همین وضعیت را دریافت می‌کنند.",
+    "acct.sync.mergeNote":
+      "همگام‌سازی به‌جای بازنویسی، دو سمت را ترکیب می‌کند: نشان‌ها و روزهای انجام‌شده یکی می‌شوند، یادداشت‌ها و کارت‌های مرور تازه‌تر برنده می‌شوند و وضعیت‌های مطالعهٔ متناقض به وضعیت جلوتر می‌روند. «بازیابی از ابر» فقط می‌کشد و چیزی نمی‌فرستد؛ «بازنویسی ابر» نسخهٔ ابری را با همین دستگاه جایگزین می‌کند.",
+    "acct.data.title": "داده‌های همین دستگاه",
+    "acct.data.bookmarks": "نشان",
+    "acct.data.progress": "در حال مطالعه",
+    "acct.data.notes": "یادداشت",
+    "acct.data.review": "کارت مرور",
+    "acct.data.votes": "رأی سختی",
+    "acct.data.contribs": "پیشنهاد",
+    "acct.danger.title": "بخش حساس",
+    "acct.signOut": "خروج از حساب",
+    "acct.delete": "حذف حساب",
+    "acct.delete.title": "حساب کاربری حذف شود؟",
+    "acct.delete.desc":
+      "حساب شما، نسخهٔ ابری داده‌ها و رأی‌های سختی‌تان در آمار جامعه برای همیشه حذف می‌شود. داده‌های همین مرورگر دست‌نخورده می‌مانند.",
+    "acct.danger.note":
+      "خروج از حساب، همه‌چیز را روی همین دستگاه نگه می‌دارد. حذف حساب فقط نسخهٔ ابری را پاک می‌کند — داده‌های مرورگر شما می‌ماند.",
+    "acct.cancel": "انصراف",
+
+    // Auth & sync errors (Phase 5)
+    "auth.err.invalid_email": "ایمیل واردشده معتبر به نظر نمی‌رسد.",
+    "auth.err.weak_password": "گذرواژه باید حداقل ۸ نویسه باشد.",
+    "auth.err.email_taken": "با این ایمیل قبلاً حساب ساخته شده است.",
+    "auth.err.invalid_credentials": "ایمیل یا گذرواژه نادرست است.",
+    "auth.err.name_long": "نام نمایشی بیش از حد طولانی است (حداکثر ۸۰ نویسه).",
+    "auth.err.network":
+      "اتصال به سرور ممکن نشد — اتصال اینترنت را بررسی کنید و دوباره تلاش کنید.",
+    "auth.err.expired": "نشست شما منقضی شده — لطفاً دوباره وارد شوید.",
+    "sync.err.network":
+      "همگام‌سازی به سرور نرسید — داده‌هایتان روی همین دستگاه امن است.",
+    "sync.err.too_large": "حجم داده‌های شما برای همگام‌سازی بیش از حد است.",
 
     // Footer
     "footer.desc":

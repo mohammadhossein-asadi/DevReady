@@ -1,6 +1,16 @@
 "use client";
 
-import { Bookmark, Brain, Flame, House, LibraryBig, Map, Menu, Zap } from "lucide-react";
+import {
+  Bookmark,
+  Brain,
+  CircleUserRound,
+  Flame,
+  House,
+  LibraryBig,
+  Map,
+  Menu,
+  Zap,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -15,6 +25,7 @@ import { useLanguage } from "@/lib/language-context";
 import { useLibrary } from "@/lib/library-context";
 import { useDaily } from "@/lib/daily-context";
 import { useSrs } from "@/lib/srs-context";
+import { useAuth } from "@/lib/auth-context";
 import type { DictKey } from "@/lib/i18n";
 import type { View } from "@/components/app-shell";
 import { cn } from "@/lib/utils";
@@ -38,6 +49,7 @@ export function Header({ view, onNavigate }: HeaderProps) {
   const { bookmarkCount } = useLibrary();
   const { currentStreak } = useDaily();
   const { dueCount } = useSrs();
+  const { isSignedIn } = useAuth();
 
   const go = (next: View) => () => onNavigate(next);
 
@@ -129,6 +141,28 @@ export function Header({ view, onNavigate }: HeaderProps) {
         {/* Controls */}
         <div className="flex items-center gap-2 md:ms-3 ms-auto md:ms-auto">
           <div className="ms-auto flex items-center gap-2">
+            {/* Account */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={go("account")}
+              aria-label={t("nav.account")}
+              aria-current={view === "account" ? "page" : undefined}
+              className={cn(
+                "relative size-9 sm:size-10",
+                view === "account"
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <CircleUserRound className="size-5" aria-hidden="true" />
+              {isSignedIn ? (
+                <span
+                  title={t("acct.signedInDot")}
+                  className="absolute end-1.5 top-1.5 size-2 rounded-full border-2 border-background bg-emerald-500"
+                />
+              ) : null}
+            </Button>
             <LanguageSwitcher />
             <ThemeToggle />
             {/* Mobile menu */}
@@ -172,6 +206,27 @@ export function Header({ view, onNavigate }: HeaderProps) {
                       </Button>
                     </SheetTrigger>
                   ))}
+                </nav>
+                <nav aria-label={t("nav.account")} className="border-t px-2 pb-4 pt-2">
+                  <SheetTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      onClick={go("account")}
+                      aria-current={view === "account" ? "page" : undefined}
+                      className={cn(
+                        "min-h-11 w-full justify-start gap-3",
+                        view === "account"
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground"
+                      )}
+                    >
+                      <CircleUserRound className="size-4" aria-hidden="true" />
+                      {t("nav.account")}
+                      {isSignedIn ? (
+                        <span className="ms-auto size-2 rounded-full bg-emerald-500" aria-hidden="true" />
+                      ) : null}
+                    </Button>
+                  </SheetTrigger>
                 </nav>
               </SheetContent>
             </Sheet>

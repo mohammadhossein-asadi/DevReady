@@ -296,13 +296,23 @@ export const productPhases: ProductPhase[] = [
   {
     num: 4,
     title: { en: "Community & Polish", fa: "انجمن و پالایش" },
-    current: true,
+    done: true,
     items: [
       { en: "Spaced-repetition review deck with SM-2-style scheduling", fa: "دسته مرور فاصله‌دار با زمان‌بندی سبک اس‌ام-۲" },
       { en: "Contribution system with JSON / Markdown export for new resources", fa: "سیستم مشارکت با خروجی JSON / Markdown برای منابع جدید" },
-      { en: "User feedback on resource quality and difficulty", fa: "بازخورد کاربران درباره کیفیت و سختی منابع" },
-      { en: "Improved Persian content coverage and orthography checks", fa: "پوشش بهتر محتوای فارسی و بررسی املا" },
-      { en: "Optional user accounts for syncing progress", fa: "حساب کاربری اختیاری برای همگام‌سازی پیشرفت" },
+      { en: "Improved Persian content coverage", fa: "پوشش بهتر محتوای فارسی" },
+    ],
+  },
+  {
+    num: 5,
+    title: { en: "Accounts & Signals", fa: "حساب کاربری و سیگنال‌ها" },
+    current: true,
+    items: [
+      { en: "Difficulty voting on every resource with community consensus badges", fa: "رأی‌دهی سختی برای هر منبع با نشان اجماع جامعه" },
+      { en: "Optional account (email + scrypt-hashed password, 30-day sessions)", fa: "حساب کاربری اختیاری (ایمیل + گذرواژه هش‌شده با scrypt، نشست ۳۰ روزه)" },
+      { en: "Private cloud sync of bookmarks, progress, notes, review deck, suggestions and votes", fa: "همگام‌سازی ابری خصوصی نشان‌ها، وضعیت مطالعه، یادداشت‌ها، کارت‌های مرور، پیشنهادها و رأی‌ها" },
+      { en: "Merge-safe conflict resolution with debounced auto-sync across devices", fa: "حل تعارض امن با ادغام و همگام‌سازی خودکار بین دستگاه‌ها" },
+      { en: "Privacy-first posture: the whole app keeps working without an account", fa: "اولویت حریم خصوصی: کل برنامه بدون حساب کاربری هم کار می‌کند" },
     ],
   },
 ];

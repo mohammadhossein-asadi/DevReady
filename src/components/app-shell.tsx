@@ -14,6 +14,7 @@ import { LibraryView } from "@/components/views/library-view";
 import { DailyView } from "@/components/views/daily-view";
 import { ReviewView } from "@/components/views/review-view";
 import { ContributeView } from "@/components/views/contribute-view";
+import { AccountView } from "@/components/views/account-view";
 import { ResourceDetailView } from "@/components/views/resource-detail-view";
 import { getCategory } from "@/lib/data/resources";
 
@@ -25,6 +26,7 @@ export type View =
   | "daily"
   | "review"
   | "contribute"
+  | "account"
   | "resource";
 
 interface HashState {
@@ -55,6 +57,7 @@ function parseHash(): HashState {
   if (segment === "daily") return { view: "daily", category: "", name: "" };
   if (segment === "review") return { view: "review", category: "", name: "" };
   if (segment === "contribute") return { view: "contribute", category: "", name: "" };
+  if (segment === "account") return { view: "account", category: "", name: "" };
   if (segment === "resource") {
     const cat = a && getCategory(a) ? a : "";
     let name = "";
@@ -110,9 +113,11 @@ export function AppShell() {
                 ? "#/review"
                 : next === "contribute"
                   ? "#/contribute"
-                  : nextCategory
-                    ? `#/resources/${nextCategory}`
-                    : "#/resources";
+                  : next === "account"
+                    ? "#/account"
+                    : nextCategory
+                      ? `#/resources/${nextCategory}`
+                      : "#/resources";
 
     if (window.location.hash === target) {
       // Same-hash navigation doesn't fire `hashchange` — just scroll up.
@@ -150,6 +155,7 @@ export function AppShell() {
         {view === "daily" && <DailyView />}
         {view === "review" && <ReviewView />}
         {view === "contribute" && <ContributeView />}
+        {view === "account" && <AccountView />}
         {view === "resource" && (
           <ResourceDetailView categoryId={category} name={name} />
         )}

@@ -1,8 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// DevReady Phase 5 — optional accounts + difficulty votes.
+// Everything works without an account; these tables only serve the
+// opt-in sync (`/api/sync`) and community vote aggregates (`/api/votes`).
 
 generator client {
   provider = "prisma-client-js"
@@ -13,20 +11,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Account {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  /// scrypt hash in `salt:hash` hex form — never the password itself.
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  sessions     Session[]
+  snapshot     Snapshot?
+  votes        Vote[]
+}
+
+model Session {
   id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
+  /// SHA-256 of the bearer token — the raw token only ever lives client-side.
+  tokenHash String   @unique
+  accountId String
+  account   Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([accountId])
+}
+
+/// One cloud snapshot per account: the JSON payload of the five local stores
+/// (library, daily, srs, contribs, votes). Merge happens client-side.
+model Snapshot {
+  accountId String  @id
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  payload   String
+  /// Client-reported device label of the last writer (best effort).
+  device    String?
   updatedAt DateTime @updatedAt
 }
 
-model Post {
+/// One difficulty vote per account per resource key
+/// (`<catId>·<name>·<url>` — the same key scheme as the local stores).
+model Vote {
   id        String   @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  authorId  String
-  createdAt DateTime @default(now())
+  accountId String
+  account   Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  key       String
+  /// "easy" | "medium" | "hard"
+  level     String
   updatedAt DateTime @updatedAt
+
+  @@unique([accountId, key])
+  @@index([key])
 }

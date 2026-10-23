@@ -17,6 +17,7 @@ export function Footer({ onNavigate }: { onNavigate: (view: View) => void }) {
     { key: "review", label: t("nav.review") },
     { key: "library", label: t("nav.library") },
     { key: "contribute", label: t("contrib.title") },
+    { key: "account", label: t("nav.account") },
   ];
 
   return (

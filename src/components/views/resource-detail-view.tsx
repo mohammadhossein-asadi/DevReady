@@ -14,6 +14,7 @@ import { ResourceCard } from "@/components/resource-card";
 import { BookmarkButton } from "@/components/bookmark-button";
 import { ReviewDeckButton } from "@/components/review-deck-button";
 import { StatusPicker } from "@/components/status-picker";
+import { DifficultyVote } from "@/components/difficulty-vote";
 import { NoteEditor } from "@/components/note-editor";
 import { ICONS } from "@/components/views/home-view";
 import { useLanguage } from "@/lib/language-context";
@@ -186,6 +187,10 @@ export function ResourceDetailView({
           <div className="mt-3">
             <StatusPicker id={key} />
           </div>
+        </div>
+
+        <div className="mt-5 border-t pt-5">
+          <DifficultyVote id={key} />
         </div>
 
         <div className="mt-5 border-t pt-5">

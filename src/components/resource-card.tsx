@@ -6,6 +6,7 @@ import { SpotlightCard } from "@/components/aceternity/spotlight-card";
 import { BookmarkButton } from "@/components/bookmark-button";
 import { useLanguage } from "@/lib/language-context";
 import { useLibrary } from "@/lib/library-context";
+import { useVotes, type VoteLevel } from "@/lib/votes-context";
 import {
   domainOf,
   getCategory,
@@ -13,7 +14,15 @@ import {
   resourceKeyOf,
   type Resource,
 } from "@/lib/data/resources";
+import type { DictKey } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+
+/** Community difficulty consensus → badge colors. */
+const CONSENSUS_STYLES: Record<VoteLevel, string> = {
+  easy: "border-emerald-600/30 text-emerald-700 dark:border-emerald-400/30 dark:text-emerald-400",
+  medium: "border-amber-600/30 text-amber-700 dark:border-amber-400/30 dark:text-amber-400",
+  hard: "border-rose-600/30 text-rose-700 dark:border-rose-400/30 dark:text-rose-400",
+};
 
 interface ResourceCardProps {
   resource: Resource;
@@ -36,12 +45,14 @@ export function ResourceCard({
 }: ResourceCardProps) {
   const { t, lang } = useLanguage();
   const { statusOf } = useLibrary();
+  const { consensusOf } = useVotes();
   const key = resourceKeyOf(categoryId, resource);
   const detailHref = resourceHref(categoryId, resource);
   const domain = domainOf(resource.url);
   const link = resource.url;
   const category = getCategory(categoryId);
   const status = statusOf(key);
+  const consensus = consensusOf(key);
   const detailsLabel = t("a11y.details");
 
   const body = (
@@ -90,6 +101,18 @@ export function ResourceCard({
           >
             <Languages className="size-3" aria-hidden="true" />
             {t("res.badge.fa")}
+          </Badge>
+        ) : null}
+        {consensus ? (
+          <Badge
+            variant="outline"
+            className={cn("text-[11px]", CONSENSUS_STYLES[consensus.level])}
+            title={t("votes.consensusTitle", {
+              level: t(`votes.level.${consensus.level}` as DictKey),
+              n: consensus.total,
+            })}
+          >
+            {t(`votes.level.${consensus.level}` as DictKey)} · {consensus.total}
           </Badge>
         ) : null}
         {status === "done" ? (
