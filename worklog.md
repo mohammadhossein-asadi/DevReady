@@ -181,3 +181,22 @@ Stage Summary:
 - Catalog expanded 20 → 32 categories and 386 → 636 resources; every area the user listed is now covered, plus the two new human-layer categories (soft-skills, interview-essentials) they explicitly asked for.
 - New files: src/lib/data/categories-4.ts, scripts/check-catalog.mjs. Edited: types.ts, resources.ts, categories-1/2/3.ts (enrichment + practiceNote prefix fix), home-view.tsx (icons), resources-view.tsx (hues), roadmap.ts (Phase 5 done / Phase 6 current), i18n.ts (hero badge + subtitle EN/FA).
 - All prior localStorage contracts untouched — bookmarks/notes/votes/review keys derive from resourceKeyOf, so existing user data remains valid for the new resources too.
+
+---
+Task ID: 6 (master-plan)
+Agent: Main agent (Z.ai)
+Task: Produce the DevReady Product & Growth Master Plan as a professional Word document per the user's detailed strategy-brief prompt.
+
+Work Log:
+- Loaded docx skill + full reference chain (SKILL.md, routes/create.md, docx-js-core.md, design-system.md, common-rules.md, toc.md, scenes/report.md).
+- Verified competitor pricing via web search (GreatFrontEnd $39/mo, $120/yr, $180 lifetime; NeetCode Pro $119/yr, $297 lifetime; roadmap.sh free; October 2026).
+- Set 10-section outline via Outline tool; skipped AskUserQuestion (user brief explicitly pinned audience/style/length + continuation instruction forbade further questions).
+- Generated 2 matplotlib charts (impact-effort scatter, retention target curve) with GO-1 accent + Morandi palette, 200 DPI.
+- Built modular generation scripts in /home/z/my-project/scripts/devready-plan/: helpers.js (Profile A English fonts, Horizontal-Only tables, callouts, figures), cover.js (Recipe R1 + GO-1, width-aware English calcTitleLayout, calcCoverSpacing), 5 content modules (~10.5k words, 20 tables, 2 figures), generate.js (3-section architecture: cover margin-0 / TOC Roman / body Arabic start=1), postprocess.py (pgNumType cleanup + footer PAGE \* ROMAN / \* arabic patches).
+- Fixed issues found by verification: image-size v2 API change; missing h3 import; removed redundant PageBreak after TOC (blank-page rule); unified cell line spacing to 312; fixed skill script's duplicate first TOC entry (fix-toc.py: split merged PAGEREF run, cache result, drop duplicate plain entry); widened 7 table columns to stop mid-word header wraps.
+- Pipeline: generate -> add_toc_placeholders --auto -> postprocess -> fix-toc -> postcheck. Final postcheck 9/9, 0 errors, 0 warnings. LibreOffice PDF render (33 pages) visually verified: cover, TOC, body typography, tables, Persian keyword cells, charts, callouts.
+
+Stage Summary:
+- Deliverable: /home/z/my-project/download/DevReady_Product_Growth_Master_Plan.docx (336.5 KB, 33 pages, 10 chapters, 20 tables, 2 figures, bilingual-aware EN content with Persian SEO terms).
+- All scripts persisted for future edits (regenerate: node generate.js + the 3 python post-steps).
+- DevReady web app untouched; this task was document creation only (Phase 5 difficulty voting + account sync remain open product work).
