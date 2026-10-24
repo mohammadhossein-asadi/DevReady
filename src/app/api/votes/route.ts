@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { accountFromRequest } from "@/lib/server/auth";
+import { rateLimit, clientKey } from "@/lib/server/rate-limit";
 
 const LEVELS = new Set(["easy", "medium", "hard"]);
 const MAX_KEY_CHARS = 512;
@@ -42,6 +43,8 @@ export async function GET(request: Request) {
 /** PUT /api/votes — cast, change or clear (level: null) the signed-in user's
  * vote for one resource key. Returns the fresh aggregate for that key. */
 export async function PUT(request: Request) {
+  const rl = rateLimit(clientKey(request, "votes:put"), 60, 60_000);
+  if (!rl.ok) return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   const account = await accountFromRequest(request);
   if (!account) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { accountFromRequest } from "@/lib/server/auth";
+import { rateLimit, clientKey } from "@/lib/server/rate-limit";
 
 const MAX_PAYLOAD_CHARS = 2_000_000; // ~2 MB of JSON — far above real usage.
 
@@ -22,6 +23,8 @@ export async function GET(request: Request) {
 
 /** PUT /api/sync — store this device's payload as the cloud snapshot. */
 export async function PUT(request: Request) {
+  const rl = rateLimit(clientKey(request, "sync:put"), 30, 60_000);
+  if (!rl.ok) return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   const account = await accountFromRequest(request);
   if (!account) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });

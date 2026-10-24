@@ -15,6 +15,7 @@ model Account {
   id           String    @id @default(cuid())
   email        String    @unique
   name         String?
+  role         String    @default("user")
   /// scrypt hash in `salt:hash` hex form — never the password itself.
   passwordHash String
   createdAt    DateTime  @default(now())
@@ -47,9 +48,26 @@ model Snapshot {
   updatedAt DateTime @updatedAt
 }
 
-/// One difficulty vote per account per resource key
-/// (`<catId>·<name>·<url>` — the same key scheme as the local stores).
-model Vote {
+/// Community contribution queue (Phase 7). Signed-in users submit resources;
+/// submissions are public-readable and moderated by status.
+model Submission {
+  id         String   @id @default(cuid())
+  accountId  String?
+  title      String
+  url        String
+  categoryId String
+  language   String
+  kind       String
+  level      String?
+  desc       String
+  author     String?
+  status     String   @default("queued")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([status])
+  @@index([categoryId])
+}
   id        String   @id @default(cuid())
   accountId String
   account   Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)

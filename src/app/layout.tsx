@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "DevReady — Web Development Interview Prep",
   description:
     "A modern, bilingual (English / فارسی) platform for preparing for Web Development interviews — Frontend, Backend, Full-Stack, System Design, Algorithms, Security, and Behavioral rounds.",
+  manifest: "/manifest.json",
   keywords: [
     "web development",
     "interview prep",
@@ -36,9 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
-        <Providers>{children}</Providers>
-      </body>
+<body className="min-h-screen bg-background font-sans text-foreground antialiased">
+  <Providers>{children}</Providers>
+  <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}` }} />
+</body>
     </html>
   );
 }

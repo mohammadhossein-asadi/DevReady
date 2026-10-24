@@ -8,8 +8,13 @@ import {
   pruneExpiredSessions,
   SESSION_DAYS,
 } from "@/lib/server/auth";
+import { rateLimit, clientKey } from "@/lib/server/rate-limit";
 
 export async function POST(request: Request) {
+  const rl = rateLimit(clientKey(request, "auth:login"), 10, 60_000);
+  if (!rl.ok) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429, headers: { "Retry-After": String(Math.ceil((rl.resetAt - Date.now()) / 1000)) } });
+  }
   let body: unknown;
   try {
     body = await request.json();

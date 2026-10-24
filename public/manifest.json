@@ -1,0 +1,12 @@
+{
+  "name": "DevReady",
+  "short_name": "DevReady",
+  "description": "Bilingual web dev interview prep",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "icons": [
+    { "src": "/logo.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
