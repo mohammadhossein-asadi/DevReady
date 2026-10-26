@@ -1,64 +1,64 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-node_modules
+# Dependencies
+/node_modules/
 /.pnp
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+/.yarn/*
+!/.yarn/patches/
+!/.yarn/plugins/
+!/.yarn/releases/
+!/.yarn/versions/
 
-# testing
-/coverage
-
-# next.js
+# Build output
 /.next/
 /out/
+/build/
+/dist/
 
-# production
-/build
+# Test output and caches
+/coverage/
+/test-results/
+/playwright-report/
+/.turbo/
+/.cache/
 
-# misc
-.DS_Store
-*.pem
-Thumbs.db
+# Environment files (keep the example template)
+/.env*
+!/.env.example
+
+# Logs and debug output
 *.log
-*.local
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-local-*
-.claude
-.z-ai-config
-.kilo
-*.log
-dev.log
 dev.out.log
-test
-prompt
-
 server.log
-# Skills directory
+
+# Local databases and SQLite sidecars
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+
+# Local deployment and tool configuration
+/.vercel/
+/.claude
+/.z-ai-config
+/.kilo
 /skills/
+/local-*
+
+# TypeScript
+*.tsbuildinfo
+/next-env.d.ts
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+*.pem
+/.idea/
+/.vscode/
+*.swp
+*.swo
